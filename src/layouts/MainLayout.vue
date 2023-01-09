@@ -273,9 +273,9 @@ const linksList = [
     link: 'https://awesome.quasar.dev',
   },
 ];
-/*
+
 localStorage.setItem('data', JSON.stringify(ThepostList));
-*/
+
 const branches = [
   'Français ',
   'Allemand',
