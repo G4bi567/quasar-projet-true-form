@@ -32,7 +32,7 @@
             src="~assets/logo_variante.png"
           />
           Forum Csud
-          {{ writeComment }}
+          {{ login }}
         </q-toolbar-title>
         <q-btn
           @click="writeCommentMode()"
@@ -116,10 +116,7 @@
     >
     </q-drawer>
 
-    <q-page-container
-      style="background-color: #181818"
-      v-show="login.name == ''"
-    >
+    <q-page-container style="background-color: #181818" v-show="login == false">
       <Login @logInFinished="TurnoffLogInPage()" />
     </q-page-container>
     <q-page-container
@@ -313,7 +310,8 @@ localStorage.setItem(
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
 const writeComment = ref(false);
-const login = ref(localStorage.getItem('profil'));
+
+const login = ref(localStorage.getItem('profil') === null ? false : true);
 
 const pp_profil_img = localStorage.getItem('pp_profil');
 
@@ -328,7 +326,7 @@ function writeCommentMode() {
   writeComment.value = !writeComment.value;
 }
 function logoutaccount() {
-  localStorage.setItem('profil', '');
+  localStorage.setItem('profil', null);
   login.value = false;
 }
 
