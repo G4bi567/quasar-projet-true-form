@@ -32,7 +32,6 @@
             src="~assets/logo_variante.png"
           />
           Forum Csud
-          {{ login }}
         </q-toolbar-title>
         <q-btn
           @click="writeCommentMode()"
