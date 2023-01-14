@@ -17,7 +17,6 @@
     </div>
     <div>
       <PostLayer
-        
         v-for="post in thePostList.data"
         :key="post.title"
         v-bind="post"

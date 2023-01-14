@@ -7,15 +7,15 @@
         style="margin: 10px"
         outlined
         dark
-        v-model="NewLogin.mail"
-        label="email"
+        v-model="NewLogin.name"
+        label="name "
       />
       <q-input
         style="margin: 10px"
         outlined
         dark
-        v-model="NewLogin.name"
-        label="name "
+        v-model="NewLogin.mail"
+        label="email"
       />
       <q-input
         style="margin: 10px"
@@ -35,7 +35,7 @@
         unelevated
         rounded
         color="primary"
-        label="Connect"
+        label="Log in"
       />
     </div>
   </div>
@@ -55,6 +55,5 @@ function loginVariable(NewLogin) {
   NewLogin.name = '';
   NewLogin.mail = '';
   NewLogin.password = '';
-
 }
 </script>
