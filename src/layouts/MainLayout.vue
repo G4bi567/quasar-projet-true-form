@@ -12,10 +12,6 @@
 
         <q-tabs align="left">
           <q-route-tab to="" label="Home Page" />
-          <!--
-          <q-route-tab to="/Two" label="Page Two" />
-          <q-route-tab to="/Three" label="Page Three" />
-          -->
         </q-tabs>
 
         <q-toolbar-title>
@@ -96,7 +92,9 @@
       bordered
     >
       <q-list>
-        <q-item-label header>hahahaahah </q-item-label>
+        <q-item-label header
+          >Ceci sera utilisé pour accéder à des pages de branches</q-item-label
+        >
 
         <EssentialLink
           v-for="link in essentialLinks"

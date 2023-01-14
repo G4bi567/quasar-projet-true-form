@@ -7,6 +7,8 @@
         width: 350px;
         border-radius: 20px;
         background-color: #1e252b;
+        font-size: 500%;
+
         color: white;
         padding: 5px 10px;
       "
