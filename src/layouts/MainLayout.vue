@@ -11,14 +11,10 @@
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
         <q-tabs align="left">
-          <q-route-tab to="" label="Home Page" />
-          <!--
-          <q-route-tab to="/Two" label="Page Two" />
-          <q-route-tab to="/Three" label="Page Three" />
-          -->
+          <q-route-tab to="/" label="Home Page" />
         </q-tabs>
 
-        <q-toolbar-title>
+        <q-toolbar-title style="margin-left: 29%">
           <img
             bg-color="white"
             vertical-middle
@@ -28,11 +24,9 @@
               padding: 5px 10px;
               border-radius: 10px;
             "
-            class="logo"
             src="~assets/logo_variante.png"
           />
-          Forum Csud
-          {{ writeComment }}
+          Forum CSUD
         </q-toolbar-title>
         <q-btn
           @click="writeCommentMode()"
@@ -94,16 +88,13 @@
       v-model="leftDrawerOpen"
       side="left"
       behavior="normal"
+      style="margin-left: 40px"
       bordered
     >
       <q-list>
-        <q-item-label header>hahahaahah </q-item-label>
-
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        <q-item-label header
+          >Ceci sera utilisé pour accéder à des pages de branches</q-item-label
+        >
       </q-list>
     </q-drawer>
 
@@ -114,12 +105,15 @@
       behavior="normal"
       elevated
     >
+      <q-list>
+        <q-item-label header
+          >Ceci sera utilisé pour mettre des liens utiles pour les
+          élèves</q-item-label
+        >
+      </q-list>
     </q-drawer>
 
-    <q-page-container
-      style="background-color: #181818"
-      v-show="login.name == ''"
-    >
+    <q-page-container style="background-color: #181818" v-show="login == false">
       <Login @logInFinished="TurnoffLogInPage()" />
     </q-page-container>
     <q-page-container
@@ -136,144 +130,74 @@
     </q-page-container>
   </q-layout>
 </template>
-<style>
-.logo {
-  height: 30px;
-}
-</style>
+
 <script setup>
 import { ref, reactive } from 'vue';
 import EssentialLink from 'components/EssentialLink.vue';
 import createPost from 'components/CreatePost.vue';
 import Login from 'pages/LogInPage.vue';
-
 import { date } from 'quasar';
+
 const ThepostList = reactive([
   {
-    title: 'Probleme dfrancais',
-    date: '29 octobre 2022',
-    name: 'jonathan',
-    description: 'ahahahaah, je comprendss pas ca',
-    branche: 'fr',
+    title: 'Problème de grammaire et de syntaxe',
+    date: '29-11-22',
+    name: 'Jonathan',
+    description:
+      'Bonjour à tous, je voudrais savoir comment je pourrais améliorer ma grammaire et les formulation de mes pharses. Car je perds très souvent des points à causes de ça, mais je ne sais pas comment y remédier. Merci pour vos futurs réponses. ',
+    branche: 'Français',
     pp_profil:
       'https://th.bing.com/th/id/R.5a537e0b861eb2177ae056f26c87c097?rik=OaqK6FPDWti%2f4g&riu=http%3a%2f%2fwww.magicalmaths.org%2fwp-content%2fuploads%2f2012%2f11%2fmaths_image.jpg&ehk=Ef%2fTZg08YV4z5c1PxaQy1rYcsmjGbiEAxH3L6ifAk3o%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1',
     id: 1,
     comment: [
       {
-        title: 'Probleme dfrancais',
-        date: '29 octobre 2022',
-        name: 'jonathan',
-        description: 'ahahahaah, je comprendss pas ca',
-        branche: 'fr',
+        date: '30-11-22',
+        name: 'François',
+        description:
+          "Salut, je comprends ce que tu dis, ce que j'ai fait c'est d'écrire très souvent et de donner les feuilles à ton professeur de langue afin qu'il corrige(je suis sûr il le fera)",
         pp_profil:
-          'https://th.bing.com/th/id/R.5a537e0b861eb2177ae056f26c87c097?rik=OaqK6FPDWti%2f4g&riu=http%3a%2f%2fwww.magicalmaths.org%2fwp-content%2fuploads%2f2012%2f11%2fmaths_image.jpg&ehk=Ef%2fTZg08YV4z5c1PxaQy1rYcsmjGbiEAxH3L6ifAk3o%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1',
+          'https://th.bing.com/th/id/OIP.yxV37VJ70Fy4_GyhctJprwHaJX?pid=ImgDet&rs=1',
         id: 1,
         comment: [
           {
-            title: 'Probleme dfrancais',
-            date: '29 octobre 2022',
-            name: 'jonathan',
-            description: 'ahahahaah, je comprendss pas ca',
+            date: '30-11-22',
+            name: 'Steve',
+            description:
+              'Je voudrais juste rajouter que tu peux demander aussi des cours supplémentaires pour revoir les erreurs que tu comprends pas dans tes rédactions.',
             branche: 'fr',
             pp_profil:
-              'https://th.bing.com/th/id/R.5a537e0b861eb2177ae056f26c87c097?rik=OaqK6FPDWti%2f4g&riu=http%3a%2f%2fwww.magicalmaths.org%2fwp-content%2fuploads%2f2012%2f11%2fmaths_image.jpg&ehk=Ef%2fTZg08YV4z5c1PxaQy1rYcsmjGbiEAxH3L6ifAk3o%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1',
+              'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg',
             id: 1,
             comment: [],
           },
         ],
       },
       {
-        title: 'probleme de maths',
-        date: '29 octobre 2022',
-        description: 'Bonjour, je comprendss pas ca',
-        branche: 'fr',
+        date: '29-11-22',
+        description:
+          'Salut, je te dirais de repérer les erreurs que tu fais dans tes évaluations, et après tu vas lire les règles de celle-ci.',
         pp_profil:
-          'https://th.bing.com/th/id/R.5a537e0b861eb2177ae056f26c87c097?rik=OaqK6FPDWti%2f4g&riu=http%3a%2f%2fwww.magicalmaths.org%2fwp-content%2fuploads%2f2012%2f11%2fmaths_image.jpg&ehk=Ef%2fTZg08YV4z5c1PxaQy1rYcsmjGbiEAxH3L6ifAk3o%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1',
+          'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg',
         id: 2,
         name: 'jonathan',
-        comment: [],
-      },
-      {
-        title: 'probleme de maths',
-        date: '29 octobre 20sss22',
-        branche: 'fr',
-        description: 'Bonjour, je comprendss pas ca',
-        pp_profil:
-          'https://th.bing.com/th/id/R.5a537e0b861eb2177ae056f26c87c097?rik=OaqK6FPDWti%2f4g&riu=http%3a%2f%2fwww.magicalmaths.org%2fwp-content%2fuploads%2f2012%2f11%2fmaths_image.jpg&ehk=Ef%2fTZg08YV4z5c1PxaQy1rYcsmjGbiEAxH3L6ifAk3o%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1',
-        name: 'jonathan',
-        id: 3,
         comment: [],
       },
     ],
   },
   {
-    title: 'probleme de maths',
-    date: '29 octobre 2022',
-    description: 'Bonjour, je comprendss pas ca',
-    branche: 'fr',
+    title: 'Résolution de problèmes',
+    date: '22-11-22',
+    description:
+      "Bonjour, ça fait longtemps j'ai un problème avec les résolutions de problèmes en Maths, car je ne vois pas où commencer, quoi utiliser... etc. Merci de votre aide",
+    branche: 'Mathématiques',
     pp_profil:
       'https://th.bing.com/th/id/R.5a537e0b861eb2177ae056f26c87c097?rik=OaqK6FPDWti%2f4g&riu=http%3a%2f%2fwww.magicalmaths.org%2fwp-content%2fuploads%2f2012%2f11%2fmaths_image.jpg&ehk=Ef%2fTZg08YV4z5c1PxaQy1rYcsmjGbiEAxH3L6ifAk3o%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1',
     id: 2,
-    name: 'jonathan',
-    comment: [],
-  },
-  {
-    title: 'probleme de maths',
-    date: '29 octobre 20sss22',
-    branche: 'fr',
-    description: 'Bonjour, je comprendss pas ca',
-    pp_profil:
-      'https://th.bing.com/th/id/R.5a537e0b861eb2177ae056f26c87c097?rik=OaqK6FPDWti%2f4g&riu=http%3a%2f%2fwww.magicalmaths.org%2fwp-content%2fuploads%2f2012%2f11%2fmaths_image.jpg&ehk=Ef%2fTZg08YV4z5c1PxaQy1rYcsmjGbiEAxH3L6ifAk3o%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1',
-    name: 'jonathan',
-    id: 3,
+    name: 'Joel',
     comment: [],
   },
 ]);
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev',
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework',
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev',
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev',
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev',
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev',
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev',
-  },
-];
-
+// à désactiver si beoin d'ajouter/supprimer des posts ou commentaires
 localStorage.setItem('data', JSON.stringify(ThepostList));
 
 const branches = [
@@ -307,13 +231,14 @@ localStorage.setItem('date', date.formatDate(timeStamp, 'DD-MM-YYYY'));
 
 localStorage.setItem(
   'pp_profil',
-  'https://th.bing.com/th/id/R.5a537e0b861eb2177ae056f26c87c097?rik=OaqK6FPDWti%2f4g&riu=http%3a%2f%2fwww.magicalmaths.org%2fwp-content%2fuploads%2f2012%2f11%2fmaths_image.jpg&ehk=Ef%2fTZg08YV4z5c1PxaQy1rYcsmjGbiEAxH3L6ifAk3o%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1'
+  'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg'
 );
 
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
 const writeComment = ref(false);
-const login = ref(localStorage.getItem('profil'));
+
+const login = ref(localStorage.getItem('profil') === null ? false : true);
 
 const pp_profil_img = localStorage.getItem('pp_profil');
 
@@ -328,7 +253,7 @@ function writeCommentMode() {
   writeComment.value = !writeComment.value;
 }
 function logoutaccount() {
-  localStorage.setItem('profil', '');
+  localStorage.setItem('profil', null);
   login.value = false;
 }
 

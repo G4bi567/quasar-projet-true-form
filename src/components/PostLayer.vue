@@ -45,7 +45,7 @@
         <h5 style="width: 90%; margin: 7px 0px 13px 0px; word-wrap: break-word">
           {{ title }}
         </h5>
-        <div style="width: 95%; word-wrap: break-word">
+        <div style="width: 95%; margin-left: 5px; word-wrap: break-word">
           <p v-html="description"></p>
         </div>
       </div>

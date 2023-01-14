@@ -127,4 +127,7 @@ function addPost(NewPost) {
   NewPost.qeditor = '';
   NewPost.model = '';
 }
+// pour l'instant avec les outils utilisés
+// je ne peux pas supprimer les commentaires dans les comemntaires
+// mais avec une base de données, ceci sera possible
 </script>
