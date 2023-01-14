@@ -11,10 +11,10 @@
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
         <q-tabs align="left">
-          <q-route-tab to="" label="Home Page" />
+          <q-route-tab to="/" label="Home Page" />
         </q-tabs>
 
-        <q-toolbar-title>
+        <q-toolbar-title style="margin-left: 31">
           <img
             bg-color="white"
             vertical-middle
@@ -24,7 +24,6 @@
               padding: 5px 10px;
               border-radius: 10px;
             "
-            class="logo"
             src="~assets/logo_variante.png"
           />
           Forum Csud
@@ -130,11 +129,7 @@
     </q-page-container>
   </q-layout>
 </template>
-<style>
-.logo {
-  height: 30px;
-}
-</style>
+
 <script setup>
 import { ref, reactive } from 'vue';
 import EssentialLink from 'components/EssentialLink.vue';
