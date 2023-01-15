@@ -59,9 +59,6 @@
           external-label
           vertical-actions-align="left"
           color="none"
-          style="
-            bg-image: url('https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg');
-          "
           direction="down"
           :hide-label="hideLabels"
         >
