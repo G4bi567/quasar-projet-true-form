@@ -133,7 +133,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
-import EssentialLink from 'components/EssentialLink.vue';
+
 import createPost from 'components/CreatePost.vue';
 import Login from 'pages/LogInPage.vue';
 import { date } from 'quasar';
