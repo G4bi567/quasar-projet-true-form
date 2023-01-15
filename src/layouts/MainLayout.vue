@@ -133,7 +133,6 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
-
 import createPost from 'components/CreatePost.vue';
 import Login from 'pages/LogInPage.vue';
 import { date } from 'quasar';
@@ -197,7 +196,8 @@ const ThepostList = reactive([
     comment: [],
   },
 ]);
-// à désactiver si beoin d'ajouter/supprimer des posts ou commentaires
+
+// à désactiver si besoin d'ajouter/supprimer des posts ou commentaires
 localStorage.setItem('data', JSON.stringify(ThepostList));
 
 const branches = [
