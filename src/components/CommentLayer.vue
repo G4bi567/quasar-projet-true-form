@@ -129,7 +129,7 @@
           color="primary"
           icon="mail"
           icon-right="send"
-          label="On Left and Right"
+          label="ne fonctionne pas encore"
         />
       </div>
       <div v-if="comment.length" style="margin: 0px 0px 10px 20px">

@@ -20,19 +20,18 @@
             <q-item-label style="color: white">{{ name }}</q-item-label>
           </q-item-section>
         </q-item>
-        
-          <q-item-section side>
-            <q-btn-dropdown color="primary">
-              <q-list>
-                <q-item clickable v-close-popup @click="onItemClick(id)">
-                  <q-item-section>
-                    <q-item-label>Supprimer</q-item-label>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </q-btn-dropdown>
-          </q-item-section>
 
+        <q-item-section side>
+          <q-btn-dropdown color="primary">
+            <q-list>
+              <q-item clickable v-close-popup @click="onItemClick(id)">
+                <q-item-section>
+                  <q-item-label>Supprimer</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-btn-dropdown>
+        </q-item-section>
       </div>
       <div style="margin: 7px 0px 10px 10px">
         <q-btn
@@ -149,7 +148,7 @@
           color="primary"
           icon="mail"
           icon-right="send"
-          label="Envoyez"
+          label="ne fonctionne pas encore"
           @click="addComment(qeditor, id)"
         />
         <div v-if="comment.length" style="margin: 20px">
@@ -198,7 +197,7 @@ function insertBranche(branche) {
 }
 
 const qeditor = ref('');
-
+// ne fonctionne pas encore
 function addComment(qeditor, id) {
   let oldItems = JSON.parse(localStorage.getItem('data')).filter(
     (post) => post.id == id
