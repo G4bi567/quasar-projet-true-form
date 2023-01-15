@@ -2,28 +2,33 @@
   <head> </head>
   <div style="color: white">
     <div style="padding: 0px 10px 0px 0px">
-      <q-item clickable v-ripple @click="insertName(name)" to="/person">
-        <q-item-section side>
-          <q-avatar rounded size="30px">
-            <img :src="pp_profil" />
-          </q-avatar>
-        </q-item-section>
-        <q-item-section>
-          <q-item-label>{{ name }}</q-item-label>
-        </q-item-section>
+      <div class="row justify-between">
+        <q-item clickable v-ripple @click="insertName(name)" to="/person">
+          <q-item-section side>
+            <q-avatar rounded size="30px">
+              <img :src="pp_profil" />
+            </q-avatar>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>{{ name }}</q-item-label>
+          </q-item-section>
+        </q-item>
+
         <q-item-section side>
           {{ date }}
           <q-btn-dropdown color="primary">
             <q-list>
-              <q-item clickable v-close-popup @click="onItemClick(id, comment)">
+              <q-item clickable v-close-popup>
                 <q-item-section>
-                  <q-item-label>Supprimer</q-item-label>
+                  <q-item-label
+                    >Supprimer (Pas utilisable pour le moment)</q-item-label
+                  >
                 </q-item-section>
               </q-item>
             </q-list>
           </q-btn-dropdown>
         </q-item-section>
-      </q-item>
+      </div>
 
       <div style="margin-bottom: 0px 10px">
         <h7>
@@ -143,12 +148,7 @@ const datapost = ref(localStorage.getItem('data'));
 function commentOn() {
   commentView.value = !commentView.value;
 }
-function onItemClick(id, comment) {
-  var oldItems = JSON.parse(localStorage.getItem('data'));
-  const index = oldItems.findIndex((ThepostList) => ThepostList.id === id);
-  oldItems.splice(index, 1);
-  localStorage.setItem('data', JSON.stringify(oldItems));
-}
+
 const props = defineProps({
   title: String,
   name: String,

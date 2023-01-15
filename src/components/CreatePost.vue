@@ -132,13 +132,7 @@ function addPost(NewPost) {
   let oldItems = JSON.parse(localStorage.getItem('data'));
   let index = Math.max(...oldItems.map((o) => o.id));
   index++;
-  alert(1);
-  alert(JSON.parse(localStorage.getItem('profil')).name);
-  alert(localStorage.getItem('date'));
-  alert(NewPost.qeditor);
-  alert(localStorage.getItem('pp_profil'));
-  alert(index);
-  alert(NewPost.model);
+
   oldItems.unshift({
     title: NewPost.title_probl,
     name: JSON.parse(localStorage.getItem('profil')).name,
@@ -149,11 +143,10 @@ function addPost(NewPost) {
     branche: NewPost.model,
     comment: [],
   });
-  alert(2);
+
   localStorage.setItem('data', JSON.stringify(oldItems));
   NewPost.title_probl = '';
   NewPost.qeditor = '';
   NewPost.model = '';
-  alert(3);
 }
 </script>

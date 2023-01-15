@@ -61,7 +61,7 @@
       "
     >
       <q-btn @click="commentOn" icon="fa-regular fa-comment" />
-      <div v-show="commentView">
+      <div v-show="commentView" style="margin-top: 10px">
         <q-editor
           dark
           v-model="qeditor"
@@ -143,10 +143,11 @@
           }"
         />
         <q-btn
+          style="margin-top: 10px"
           color="primary"
           icon="mail"
           icon-right="send"
-          label="On Left and Right"
+          label="Pas utilisable pour l'instant"
         />
         <div v-if="comment.length" style="margin: 20px">
           <CommentLayer v-for="co in comment" :key="co.id" v-bind="co" />
@@ -159,6 +160,10 @@
 <script setup>
 import { defineProps, reactive, ref } from 'vue';
 import CommentLayer from 'components/CommentLayer.vue';
+
+// pour l'instant avec les outils utilisés
+// je ne peux pas ajouter/supprimer les commentaires dans les comemntaires
+// mais avec une base de données, ceci sera possible
 
 const commentView = ref(false);
 const datapost = ref(localStorage.getItem('data'));
