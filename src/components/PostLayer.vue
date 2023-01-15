@@ -148,6 +148,7 @@
           icon="mail"
           icon-right="send"
           label="Pas utilisable pour l'instant"
+          @click="addComment(qeditor, id)"
         />
         <div v-if="comment.length" style="margin: 20px">
           <CommentLayer v-for="co in comment" :key="co.id" v-bind="co" />
@@ -193,5 +194,26 @@ function insertName(name) {
 
 function insertBranche(branche) {
   localStorage.setItem('branche_research', branche);
+}
+
+const qeditor = ref('');
+
+function addComment(qeditor, id) {
+  let oldItems = JSON.parse(localStorage.getItem('data')).filter(
+    (post) => post.id == id
+  );
+  alert(oldItems.comment);
+  oldItems.comment.unshift({
+    name: JSON.parse(localStorage.getItem('profil')).name,
+    date: localStorage.getItem('date'),
+    description: qeditor,
+    pp_profil: localStorage.getItem('pp_profil'),
+    comment: [],
+  });
+  alert(2);
+  localStorage.setItem('data', JSON.stringify(oldItems));
+  NewPost.title_probl = '';
+  NewPost.qeditor = '';
+  NewPost.model = '';
 }
 </script>

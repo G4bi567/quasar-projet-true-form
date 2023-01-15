@@ -197,7 +197,7 @@ const ThepostList = reactive([
 ]);
 
 // à désactiver si besoin d'ajouter/supprimer des posts ou commentaires
-localStorage.setItem('data', JSON.stringify(ThepostList));
+//localStorage.setItem('data', JSON.stringify(ThepostList));
 
 const branches = [
   'Français ',
