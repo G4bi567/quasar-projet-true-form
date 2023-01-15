@@ -132,6 +132,7 @@ function addPost(NewPost) {
   let oldItems = JSON.parse(localStorage.getItem('data'));
   let index = Math.max(...oldItems.map((o) => o.id));
   index++;
+  
   oldItems.unshift({
     title: NewPost.title_probl,
     name: JSON.parse(localStorage.getItem('profil')).name,
