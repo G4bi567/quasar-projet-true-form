@@ -20,17 +20,19 @@
             <q-item-label style="color: white">{{ name }}</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item-section side>
-          <q-btn-dropdown color="primary">
-            <q-list>
-              <q-item clickable v-close-popup @click="onItemClick(id)">
-                <q-item-section>
-                  <q-item-label>Supprimer</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-btn-dropdown>
-        </q-item-section>
+        
+          <q-item-section side>
+            <q-btn-dropdown color="primary">
+              <q-list>
+                <q-item clickable v-close-popup @click="onItemClick(id)">
+                  <q-item-section>
+                    <q-item-label>Supprimer</q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-btn-dropdown>
+          </q-item-section>
+
       </div>
       <div style="margin: 7px 0px 10px 10px">
         <q-btn
@@ -147,7 +149,7 @@
           color="primary"
           icon="mail"
           icon-right="send"
-          label="Pas utilisable pour l'instant"
+          label="Envoyez"
           @click="addComment(qeditor, id)"
         />
         <div v-if="comment.length" style="margin: 20px">
@@ -165,7 +167,6 @@ import CommentLayer from 'components/CommentLayer.vue';
 // pour l'instant avec les outils utilisés
 // je ne peux pas ajouter/supprimer les commentaires dans les comemntaires
 // mais avec une base de données, ceci sera possible
-
 const commentView = ref(false);
 const datapost = ref(localStorage.getItem('data'));
 function commentOn() {
@@ -202,7 +203,7 @@ function addComment(qeditor, id) {
   let oldItems = JSON.parse(localStorage.getItem('data')).filter(
     (post) => post.id == id
   );
-  alert(oldItems.comment);
+
   oldItems.comment.unshift({
     name: JSON.parse(localStorage.getItem('profil')).name,
     date: localStorage.getItem('date'),
@@ -210,7 +211,7 @@ function addComment(qeditor, id) {
     pp_profil: localStorage.getItem('pp_profil'),
     comment: [],
   });
-  alert(2);
+
   localStorage.setItem('data', JSON.stringify(oldItems));
   NewPost.title_probl = '';
   NewPost.qeditor = '';
