@@ -29,17 +29,20 @@ import { defineComponent, reactive, ref } from 'vue';
 import PostLayer from 'components/PostLayer.vue';
 import { useCommentStore } from 'stores/comment.js';
 
+//permet d'accéder au store
 const CommentStore = useCommentStore();
 
+//importer la liste des commentaires
 CommentStore.loadComments('localStorage');
 
-const current = ref(1);
-
+//permet de savoir le nombre de pages disponible
 const paginationnumber = reactive({
   index: 1 + Math.floor(CommentStore.commentsList.length / 5),
 });
 
+//création de variable des 
 const problem = ref();
+const current = ref(1);
 
 function pagination(current) {
   problem.value = CommentStore.commentsList.slice(

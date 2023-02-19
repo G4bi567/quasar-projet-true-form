@@ -24,7 +24,11 @@
         <q-item-section side>
           <q-btn-dropdown color="primary">
             <q-list>
-              <q-item clickable v-close-popup @click="onItemClick(id)">
+              <q-item
+                clickable
+                v-close-popup
+                @click="CommentStore.deleteComment(id, 'localStorage')"
+              >
                 <q-item-section>
                   <q-item-label>Supprimer</q-item-label>
                 </q-item-section>
@@ -162,12 +166,16 @@
 <script setup>
 import { defineProps, reactive, ref } from 'vue';
 import CommentLayer from 'components/CommentLayer.vue';
+import { useCommentStore } from 'stores/comment.js';
+
+//permet d'accéder au store
+const CommentStore = useCommentStore();
 
 // pour l'instant avec les outils utilisés
 // je ne peux pas ajouter/supprimer les commentaires dans les comemntaires
 // mais avec une base de données, ceci sera possible
 const commentView = ref(false);
-const datapost = ref(localStorage.getItem('data'));
+
 function commentOn() {
   commentView.value = !commentView.value;
 }
