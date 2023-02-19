@@ -136,69 +136,6 @@ import createPost from 'components/CreatePost.vue';
 import Login from 'pages/LogInPage.vue';
 import { date } from 'quasar';
 
-const ThepostList = reactive([
-  {
-    title: 'Problème de grammaire et de syntaxe',
-    date: '29-11-22',
-    name: 'Jonathan',
-    description:
-      'Bonjour à tous, je voudrais savoir comment je pourrais améliorer ma grammaire et les formulation de mes pharses. Car je perds très souvent des points à causes de ça, mais je ne sais pas comment y remédier. Merci pour vos futurs réponses. ',
-    branche: 'Français',
-    pp_profil:
-      'https://th.bing.com/th/id/R.5a537e0b861eb2177ae056f26c87c097?rik=OaqK6FPDWti%2f4g&riu=http%3a%2f%2fwww.magicalmaths.org%2fwp-content%2fuploads%2f2012%2f11%2fmaths_image.jpg&ehk=Ef%2fTZg08YV4z5c1PxaQy1rYcsmjGbiEAxH3L6ifAk3o%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1',
-    id: 1,
-    comment: [
-      {
-        date: '30-11-22',
-        name: 'François',
-        description:
-          "Salut, je comprends ce que tu dis, ce que j'ai fait c'est d'écrire très souvent et de donner les feuilles à ton professeur de langue afin qu'il corrige(je suis sûr il le fera)",
-        pp_profil:
-          'https://th.bing.com/th/id/OIP.yxV37VJ70Fy4_GyhctJprwHaJX?pid=ImgDet&rs=1',
-        id: 1,
-        comment: [
-          {
-            date: '30-11-22',
-            name: 'Steve',
-            description:
-              'Je voudrais juste rajouter que tu peux demander aussi des cours supplémentaires pour revoir les erreurs que tu comprends pas dans tes rédactions.',
-            branche: 'fr',
-            pp_profil:
-              'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg',
-            id: 1,
-            comment: [],
-          },
-        ],
-      },
-      {
-        date: '29-11-22',
-        description:
-          'Salut, je te dirais de repérer les erreurs que tu fais dans tes évaluations, et après tu vas lire les règles de celle-ci.',
-        pp_profil:
-          'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg',
-        id: 2,
-        name: 'jonathan',
-        comment: [],
-      },
-    ],
-  },
-  {
-    title: 'Résolution de problèmes',
-    date: '22-11-22',
-    description:
-      "Bonjour, ça fait longtemps j'ai un problème avec les résolutions de problèmes en Maths, car je ne vois pas où commencer, quoi utiliser... etc. Merci de votre aide",
-    branche: 'Mathématiques',
-    pp_profil:
-      'https://th.bing.com/th/id/R.5a537e0b861eb2177ae056f26c87c097?rik=OaqK6FPDWti%2f4g&riu=http%3a%2f%2fwww.magicalmaths.org%2fwp-content%2fuploads%2f2012%2f11%2fmaths_image.jpg&ehk=Ef%2fTZg08YV4z5c1PxaQy1rYcsmjGbiEAxH3L6ifAk3o%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1',
-    id: 2,
-    name: 'Joel',
-    comment: [],
-  },
-]);
-
-// à désactiver si besoin d'ajouter/supprimer des posts ou commentaires
-localStorage.setItem('data', JSON.stringify(ThepostList));
-
 const branches = [
   'Français ',
   'Allemand',
