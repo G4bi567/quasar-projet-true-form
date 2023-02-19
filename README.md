@@ -4,3 +4,4 @@
 
 Si vous souhaitez ajouter des posts ou en supprimer, veuillez supprimer le code à la ligne 200 dans ~layouts/MainLayout.vue
 
+yarn install && npm run dev
