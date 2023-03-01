@@ -4,11 +4,7 @@
       <h1 class="row justify-center text-center align-center">Récents</h1>
     </div>
     <div>
-      <PostLayer
-        v-for="post in CommentStore.commentsList"
-        :key="post.title"
-        v-bind="post"
-      />
+      <PostLayer v-for="post in UpdatedList" :key="post.title" v-bind="post" />
 
       <q-pagination
         v-on="pagination(current)"
@@ -40,12 +36,12 @@ const paginationnumber = reactive({
   index: 1 + Math.floor(CommentStore.commentsList.length / 5),
 });
 
-//création de variable des 
-const problem = ref();
+//création de variable des
+const UpdatedList = ref();
 const current = ref(1);
 
 function pagination(current) {
-  problem.value = CommentStore.commentsList.slice(
+  UpdatedList.value = CommentStore.commentsList.slice(
     (current - 1) * 5,
     current * 5
   );

@@ -110,6 +110,7 @@
         label="Envoyez"
         @click="
           CommentStore.addComment(NewPost, 'localStorage'),
+            resetNewPost(NewPost),
             $emit(`finished`, id)
         "
       />
@@ -124,8 +125,8 @@ import { useCommentStore } from 'stores/comment.js';
 //permet d'accéder au store
 const CommentStore = useCommentStore();
 
-function resetNewPost() {
-  NewPost = reactive({
+function resetNewPost(NewPost) {
+  NewPost = {
     title: '',
     branche: '',
     description: '',
@@ -134,7 +135,7 @@ function resetNewPost() {
     date: '',
     pp_profil: '',
     comment: [],
-  });
+  };
 }
 const branches = JSON.parse(localStorage.getItem('Branches'));
 
