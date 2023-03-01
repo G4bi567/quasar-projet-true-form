@@ -116,7 +116,7 @@ export const useCommentStore = defineStore('commentStore', {
         }
       }
 
-      this.commentsList.push({ ...comment });
+      this.commentsList.unshift({ ...comment });
 
       if (location === 'localStorage') {
         localStorage.setItem(
