@@ -4,7 +4,7 @@
       <q-input
         outlined
         dark
-        v-model="NewPost.title_probl"
+        v-model="NewPost.title"
         color="white"
         text-color="white"
         label-color="white"
@@ -14,7 +14,7 @@
     <q-select
       dark
       filled
-      v-model="NewPost.model"
+      v-model="NewPost.branche"
       :options="branches"
       label="Filled"
     />
@@ -22,7 +22,7 @@
       <h5 style="color: white">Décrivez votre problème:</h5>
       <q-editor
         dark
-        v-model="NewPost.qeditor"
+        v-model="NewPost.description"
         :dense="$q.screen.lt.md"
         :toolbar="[
           [
@@ -109,8 +109,8 @@
         icon-right="send"
         label="Envoyez"
         @click="
-          addPost(NewPost);
-          $emit(`finished`, id);
+          CommentStore.addComment(NewPost, 'localStorage'),
+            $emit(`finished`, id)
         "
       />
     </div>
@@ -119,20 +119,41 @@
 
 <script setup>
 import { reactive } from 'vue';
+import { useCommentStore } from 'stores/comment.js';
 
+//permet d'accéder au store
+const CommentStore = useCommentStore();
+
+function resetNewPost() {
+  NewPost = reactive({
+    title: '',
+    branche: '',
+    description: '',
+    name: '',
+    id: '',
+    date: '',
+    pp_profil: '',
+    comment: [],
+  });
+}
 const branches = JSON.parse(localStorage.getItem('Branches'));
 
 const NewPost = reactive({
-  title_probl: '',
-  qeditor: '',
-  model: '',
+  title: '',
+  branche: '',
+  description: '',
+  name: '',
+  id: '',
+  date: '',
+  pp_profil: '',
+  comment: [],
 });
 
 function addPost(NewPost) {
   let oldItems = JSON.parse(localStorage.getItem('data'));
   let index = Math.max(...oldItems.map((o) => o.id));
   index++;
-  
+
   oldItems.unshift({
     title: NewPost.title_probl,
     name: JSON.parse(localStorage.getItem('profil')).name,
