@@ -12,6 +12,11 @@ const { configure } = require('quasar/wrappers');
 
 module.exports = configure(function (/* ctx */) {
   return {
+    htmlVariables: {
+    title: "Création d'un forum d'entraide pour les étudiants du Collège du Sud",
+    some: {
+      prop: 'my-prop'
+    },
     eslint: {
       // fix: true,
       // include = [],
