@@ -18,13 +18,6 @@ Install Git
 https://git-scm.com/download/win
 
 
-Install yarn and run a server
-
-https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable
-
-```bash
-yarn install && npm run dev
-```
 Install and run quasar
 ```bash
 npm i -g @quasar/cli && quasar dev
