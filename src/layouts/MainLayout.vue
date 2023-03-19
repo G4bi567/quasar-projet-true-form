@@ -113,22 +113,24 @@
         >
       </q-list>
     </q-drawer>
-
     <q-page-container style="background-color: #181818" v-show="login == false">
       <Login @logInFinished="TurnoffLogInPage()" />
     </q-page-container>
+    <!-- première partie,si login est false, (login est une variable qui est false si il n'y a aucune donnée sur l'utilisateur), puis si c'est false affiche une page afin de pouvoir fournir les données-->
     <q-page-container
       style="background-color: #181818"
       v-show="writeComment == false"
     >
       <router-view @logout="logoutaccount()" />
     </q-page-container>
+      <!-- deuxième partie,si writeComment est false, (writeComment est une variable qui est false s'il y a pas de demande pour écrire une publication), comme c'est false cela affiche la page des publications récentes, c'est à dire la page principale du site-->
     <q-page-container
       style="background-color: #181818"
       v-show="writeComment == true"
     >
       <createPost v-model="newPost" @finished="writeCommentMode()" />
     </q-page-container>
+     <!-- troisième partie,si writeComment est true, (writeComment est une variable qui est true s'il y a une demande pour écrire une publication), comme c'est true cela affiche une page afin de pouvoir publier notre question ou problème-->
   </q-layout>
 </template>
 

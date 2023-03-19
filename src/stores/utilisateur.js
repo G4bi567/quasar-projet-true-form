@@ -1,22 +1,27 @@
 import { defineStore } from 'pinia';
 import { date } from 'quasar';
 
-export const useCommentStore = defineStore('commentStore', {
+export const useUserStore = defineStore('userStore', {
   state: () => ({
-    commentsList: [],
+    NewLogin: {
+      name: '',
+      mail: '',
+      password: '',
+    },
   }),
 
   actions: {
-    async loadComments(location) {
-    
-    },
+    async loadComments(location) {},
 
-    async addComment(comment, location) {
-     
-    },
+    async addComment(comment, location) {},
 
-    deleteComment(id, location) {
-     
+    loginVariable(NewLogin, location) {
+      if (location === 'localStorage') {
+        localStorage.setItem('profil', JSON.stringify(NewLogin));
+        NewLogin.name = '';
+        NewLogin.mail = '';
+        NewLogin.password = '';
+      }
     },
   },
 });

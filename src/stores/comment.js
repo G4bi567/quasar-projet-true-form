@@ -154,6 +154,7 @@ export const useCommentStore = defineStore('commentStore', {
       }
     },
     resetComment(location) {
+      // Suppression db/localStorage
       if (location === 'localStorage') {
         localStorage.removeItem('data');
       }

@@ -7,21 +7,21 @@
         style="margin: 10px"
         outlined
         dark
-        v-model="NewLogin.name"
+        v-model="UserStore.NewLogin.name"
         label="name "
       />
       <q-input
         style="margin: 10px"
         outlined
         dark
-        v-model="NewLogin.mail"
+        v-model="UserStore.NewLogin.mail"
         label="email"
       />
       <q-input
         style="margin: 10px"
         outlined
         dark
-        v-model="NewLogin.password"
+        v-model="UserStore.NewLogin.password"
         label="password"
         type="password"
       />
@@ -29,7 +29,7 @@
     <div class="flex flex-center" style="margin: 10px">
       <q-btn
         @click="
-          loginVariable(NewLogin);
+          UserStore.loginVariable(NewLogin, 'localStorage');
           $emit(`logInFinished`);
         "
         unelevated
@@ -43,6 +43,10 @@
 
 <script setup>
 import { reactive } from 'vue';
+import { useUserStore } from 'stores/utilisateur.js';
+
+//permet d'accéder au store
+const UserStore = useUserStore();
 
 const NewLogin = reactive({
   name: '',
