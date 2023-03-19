@@ -29,7 +29,7 @@
     <div class="flex flex-center" style="margin: 10px">
       <q-btn
         @click="
-          UserStore.loginVariable(NewLogin, 'localStorage');
+          UserStore.loginVariable(UserStore.NewLogin, 'localStorage');
           $emit(`logInFinished`);
         "
         unelevated

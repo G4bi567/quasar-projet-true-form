@@ -123,14 +123,14 @@
     >
       <router-view @logout="logoutaccount()" />
     </q-page-container>
-      <!-- deuxième partie,si writeComment est false, (writeComment est une variable qui est false s'il y a pas de demande pour écrire une publication), comme c'est false cela affiche la page des publications récentes, c'est à dire la page principale du site-->
+    <!-- deuxième partie,si writeComment est false, (writeComment est une variable qui est false s'il y a pas de demande pour écrire une publication), comme c'est false cela affiche la page des publications récentes, c'est à dire la page principale du site-->
     <q-page-container
       style="background-color: #181818"
       v-show="writeComment == true"
     >
       <createPost v-model="newPost" @finished="writeCommentMode()" />
     </q-page-container>
-     <!-- troisième partie,si writeComment est true, (writeComment est une variable qui est true s'il y a une demande pour écrire une publication), comme c'est true cela affiche une page afin de pouvoir publier notre question ou problème-->
+    <!-- troisième partie,si writeComment est true, (writeComment est une variable qui est true s'il y a une demande pour écrire une publication), comme c'est true cela affiche une page afin de pouvoir publier notre question ou problème-->
   </q-layout>
 </template>
 

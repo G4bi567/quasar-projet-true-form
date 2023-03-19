@@ -18,9 +18,12 @@ export const useUserStore = defineStore('userStore', {
     loginVariable(NewLogin, location) {
       if (location === 'localStorage') {
         localStorage.setItem('profil', JSON.stringify(NewLogin));
-        NewLogin.name = '';
-        NewLogin.mail = '';
-        NewLogin.password = '';
+        alert(1);
+        NewLogin = {
+          name: '',
+          mail: '',
+          password: '',
+        };
       }
     },
   },
