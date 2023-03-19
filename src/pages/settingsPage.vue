@@ -2,16 +2,21 @@
   <div class="q-pa-md">
     <div class="flew row" style="color: white">
       <div class="column items-start" style="height: 150px">
-        <div class="col">
+        <div class="col, margin-top: 30">
+          <q-btn style="width: 150px; background: secondary" label="Profil" />
+        </div>
+        <div class="col,margin-top: 30">
           <q-btn
-            style="margin: 0; width: 150px; background: secondary"
-            label="Profil"
+            @click="CommentStore.resetComment('localStorage')"
+            style="width: 150px; background: secondary"
+            label="reset publications"
+            to="/"
           />
         </div>
-        <div class="col">
+        <div class="col,margin-top: 30">
           <q-btn
             @click="$emit(`logout`)"
-            style="width: 150px; margin: 0; background: secondary"
+            style="width: 150px; background: secondary"
             label="Se déconnecter"
             to="/"
           />
@@ -25,4 +30,7 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useCommentStore } from 'stores/comment.js';
+const CommentStore = useCommentStore();
+</script>

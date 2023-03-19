@@ -34,6 +34,7 @@
           icon-right="fa-solid fa-pencil"
           label="Une question"
         />
+        <!-- 
         <q-input
           dark
           dense
@@ -52,6 +53,7 @@
             />
           </template>
         </q-input>
+        -->
 
         <q-fab
           v-model="fab2"

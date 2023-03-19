@@ -149,10 +149,13 @@ export const useCommentStore = defineStore('commentStore', {
 
       // Suppression db/localStorage
       if (location === 'localStorage') {
-        localStorage.removeItem('data');
-        localStorage.setItem('data', JSON.stringify(this.commentsList));
       } else {
         //Suppression dans le backend en utilisant une API
+      }
+    },
+    resetComment(location) {
+      if (location === 'localStorage') {
+        localStorage.removeItem('data');
       }
     },
   },
