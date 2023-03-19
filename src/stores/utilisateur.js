@@ -1,16 +1,22 @@
 import { defineStore } from 'pinia';
 import { date } from 'quasar';
 
-export const useUserStore = defineStore('userStore', {
+export const useCommentStore = defineStore('commentStore', {
   state: () => ({
     commentsList: [],
   }),
 
   actions: {
-    async loadComments(location) {},
+    async loadComments(location) {
+    
+    },
 
-    async addComment(comment, location) {},
+    async addComment(comment, location) {
+     
+    },
 
-    deleteComment(id, location) {},
+    deleteComment(id, location) {
+     
+    },
   },
 });

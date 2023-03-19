@@ -4,7 +4,6 @@ import { date } from 'quasar';
 export const useCommentStore = defineStore('commentStore', {
   state: () => ({
     commentsList: [],
-    writeComment: ref(false),
   }),
 
   actions: {
@@ -155,10 +154,6 @@ export const useCommentStore = defineStore('commentStore', {
       } else {
         //Suppression dans le backend en utilisant une API
       }
-    },
-
-    writeCommentMode() {
-      this.commentsList = !this.commentsList;
     },
   },
 });
