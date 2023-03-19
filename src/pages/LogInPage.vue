@@ -47,17 +47,4 @@ import { useUserStore } from 'stores/utilisateur.js';
 
 //permet d'accéder au store
 const UserStore = useUserStore();
-
-const NewLogin = reactive({
-  name: '',
-  mail: '',
-  password: '',
-});
-
-function loginVariable(NewLogin) {
-  localStorage.setItem('profil', JSON.stringify(NewLogin));
-  NewLogin.name = '';
-  NewLogin.mail = '';
-  NewLogin.password = '';
-}
 </script>
