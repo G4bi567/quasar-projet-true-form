@@ -8,20 +8,22 @@ Install node.js
 
 https://nodejs.org/en/download/
 
-Verify the installation
-```bash
-node -v
-```
+
 
 Install Git
 
 https://git-scm.com/download/win
 
+Verify the installation of node.js
+```bash
+node -v
+```
 
 Install and run quasar
 ```bash
 npm i -g @quasar/cli && quasar dev
 ```
+
 ## Usage
 
 Explain the usage...

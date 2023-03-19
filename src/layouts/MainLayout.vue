@@ -111,7 +111,6 @@
         >
       </q-list>
     </q-drawer>
-
     <q-page-container style="background-color: #181818" v-show="login == false">
       <Login @logInFinished="TurnoffLogInPage()" />
     </q-page-container>
@@ -172,18 +171,19 @@ localStorage.setItem(
 
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
-const writeComment = ref(false);
-
-const login = ref(localStorage.getItem('profil') === null ? false : true);
-
-const pp_profil_img = localStorage.getItem('pp_profil');
-
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
 function toggleRightDrawer() {
   rightDrawerOpen.value = !rightDrawerOpen.value;
 }
+
+const login = ref(localStorage.getItem('profil') === null ? false : true);
+
+const pp_profil_img = localStorage.getItem('pp_profil');
+
+const writeComment = ref(false);
+//mettre dans comment
 
 function writeCommentMode() {
   writeComment.value = !writeComment.value;
