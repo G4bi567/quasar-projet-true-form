@@ -11,10 +11,6 @@ export const useUserStore = defineStore('userStore', {
   }),
 
   actions: {
-    async loadComments(location) {},
-
-    async addComment(comment, location) {},
-
     loginVariable(NewLogin, location) {
       if (location === 'localStorage') {
         localStorage.setItem('profil', JSON.stringify(NewLogin));

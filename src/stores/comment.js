@@ -115,14 +115,10 @@ export const useCommentStore = defineStore('commentStore', {
           }
         }
       }
-
       this.commentsList.unshift({ ...comment });
 
       if (location === 'localStorage') {
-        localStorage.setItem(
-          'data',
-          JSON.stringify(this.commentsList.concat([comment]))
-        );
+        localStorage.setItem('data', JSON.stringify(this.commentsList));
       } else {
         // Sauvegarder dans le backend
         // Utilisation de fetch pour aller récupérer les données du backend à l'aide d'une API

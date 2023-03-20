@@ -150,25 +150,4 @@ const NewPost = reactive({
   comment: [],
 });
 
-function addPost(NewPost) {
-  let oldItems = JSON.parse(localStorage.getItem('data'));
-  let index = Math.max(...oldItems.map((o) => o.id));
-  index++;
-
-  oldItems.unshift({
-    title: NewPost.title_probl,
-    name: JSON.parse(localStorage.getItem('profil')).name,
-    date: localStorage.getItem('date'),
-    description: NewPost.qeditor,
-    pp_profil: localStorage.getItem('pp_profil'),
-    id: index,
-    branche: NewPost.model,
-    comment: [],
-  });
-
-  localStorage.setItem('data', JSON.stringify(oldItems));
-  NewPost.title_probl = '';
-  NewPost.qeditor = '';
-  NewPost.model = '';
-}
 </script>
