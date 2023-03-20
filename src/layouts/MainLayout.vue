@@ -71,6 +71,7 @@
             to="/settings"
             icon="settings"
             label="settings"
+            @click="exitWriteCommentMode"
           />
         </q-fab>
         <q-btn
@@ -192,6 +193,11 @@ function toggleRightDrawer() {
 function writeCommentMode() {
   writeComment.value = !writeComment.value;
 }
+
+function exitWriteCommentMode() {
+  writeComment.value = false;
+}
+
 function logoutaccount() {
   localStorage.setItem('profil', null);
   login.value = false;
