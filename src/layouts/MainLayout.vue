@@ -11,7 +11,11 @@
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
         <q-tabs align="left">
-          <q-route-tab to="/" label="Home Page" />
+          <q-route-tab
+            to="/"
+            @click="exitWriteCommentMode()"
+            label="Home Page"
+          />
         </q-tabs>
 
         <q-toolbar-title style="margin-left: 29%">
@@ -24,7 +28,7 @@
               padding: 5px 10px;
               border-radius: 10px;
             "
-            src="~assets/logo_variante.png"
+            src="https://collegedusud.ch/wp-content/uploads/2017/11/logo_variante.png"
           />
           Forum CSUD
         </q-toolbar-title>
@@ -71,7 +75,7 @@
             to="/settings"
             icon="settings"
             label="settings"
-            @click="exitWriteCommentMode"
+            @click="exitWriteCommentMode()"
           />
         </q-fab>
         <q-btn
