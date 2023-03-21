@@ -1,7 +1,12 @@
 <template>
   <div>
-    <div>
+    <div v-show="CommentStore.filteroption == null">
       <h1 class="row justify-center text-center align-center">Récents</h1>
+    </div>
+    <div v-show="CommentStore.filteroption !== null">
+      <h1 class="row justify-center text-center align-center">
+        {{ CommentStore.filteroption }}
+      </h1>
     </div>
     <div>
       <PostLayer v-for="post in UpdatedList" :key="post.title" v-bind="post" />
@@ -21,7 +26,6 @@
 
 <script setup>
 import { defineComponent, reactive, ref } from 'vue';
-
 import PostLayer from 'components/PostLayer.vue';
 import { useCommentStore } from 'stores/comment.js';
 
@@ -41,10 +45,36 @@ const UpdatedList = ref();
 const current = ref(1);
 
 function pagination(current) {
-  UpdatedList.value = CommentStore.commentsList.slice(
-    (current - 1) * 5,
-    current * 5
-  );
+  if (CommentStore.filteroption == null) {
+    UpdatedList.value = CommentStore.commentsList.slice(
+      (current - 1) * 5,
+      current * 5
+    );
+    paginationnumber.index =
+      1 + Math.floor(CommentStore.commentsList.length / 5);
+  } else if (CommentStore.filteroptiontype == 'branche') {
+    UpdatedList.value = CommentStore.commentsList
+      .filter((post) => post.branche == CommentStore.filteroption)
+      .slice((current - 1) * 5, current * 5);
+    paginationnumber.index =
+      1 +
+      Math.floor(
+        CommentStore.commentsList.filter(
+          (post) => post.branche == CommentStore.filteroption
+        ).length / 5
+      );
+  } else {
+    UpdatedList.value = CommentStore.commentsList
+      .filter((post) => post.name == CommentStore.filteroption)
+      .slice((current - 1) * 5, current * 5);
+    paginationnumber.index =
+      1 +
+      Math.floor(
+        CommentStore.commentsList.filter(
+          (post) => post.name == CommentStore.filteroption
+        ).length / 5
+      );
+  }
 }
 </script>
 

@@ -10,7 +10,14 @@
   >
     <div style="padding: 5px 10px">
       <div class="row justify-between">
-        <q-item clickable v-ripple @click="insertName(name)" to="/person">
+        <q-item
+          clickable
+          v-ripple
+          @click="
+            filterVariable(name);
+            definetypefiltername();
+          "
+        >
           <q-item-section side>
             <q-avatar rounded size="30px">
               <img :src="pp_profil" />
@@ -43,9 +50,11 @@
           outline
           color="white"
           rounded
-          @click="insertBranche(branche)"
+          @click="
+            filterVariable(branche);
+            definetypefilterbr();
+          "
           :label="branche"
-          to="/branche"
         />
         <h5 style="width: 90%; margin: 7px 0px 13px 0px; word-wrap: break-word">
           {{ title }}
@@ -196,12 +205,14 @@ const props = defineProps({
   branche: String,
 });
 
-function insertName(name) {
-  localStorage.setItem('name_research', name);
+function filterVariable(variable) {
+  CommentStore.filteroption = variable;
 }
-
-function insertBranche(branche) {
-  localStorage.setItem('branche_research', branche);
+function definetypefilterbr() {
+  CommentStore.filteroptiontype = 'branche';
+}
+function definetypefiltername() {
+  CommentStore.filteroptiontype = 'name';
 }
 
 const qeditor = ref('');

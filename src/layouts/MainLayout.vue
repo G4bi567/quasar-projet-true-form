@@ -11,11 +11,7 @@
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
         <q-tabs align="left">
-          <q-route-tab
-            to="/"
-            @click="exitWriteCommentMode()"
-            label="Home Page"
-          />
+          <q-route-tab to="/" @click="ResetMode()" label="Home Page" />
         </q-tabs>
 
         <q-toolbar-title style="margin-left: 29%">
@@ -144,7 +140,13 @@ import { ref, reactive } from 'vue';
 import createPost from 'components/CreatePost.vue';
 import Login from 'pages/LogInPage.vue';
 import { date } from 'quasar';
+import { useUserStore } from 'stores/utilisateur.js';
+import { useCommentStore } from 'stores/comment.js';
 
+//permet d'accéder au store
+const CommentStore = useCommentStore();
+//permet d'accéder au store
+const UserStore = useUserStore();
 const branches = [
   'Français ',
   'Allemand',
@@ -198,8 +200,9 @@ function writeCommentMode() {
   writeComment.value = !writeComment.value;
 }
 
-function exitWriteCommentMode() {
+function ResetMode() {
   writeComment.value = false;
+  CommentStore.filteroption = null;
 }
 
 function logoutaccount() {
@@ -208,6 +211,9 @@ function logoutaccount() {
 }
 
 function TurnoffLogInPage() {
-  login.value = true;
+  if (localStorage.getItem('profil') !== 'null') {
+    alert('ouiiiiiiii');
+    login.value = true;
+  }
 }
 </script>

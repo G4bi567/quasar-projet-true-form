@@ -4,6 +4,8 @@ import { date } from 'quasar';
 export const useCommentStore = defineStore('commentStore', {
   state: () => ({
     commentsList: [],
+    filteroption: null,
+    filteroptiontype:null,
   }),
 
   actions: {

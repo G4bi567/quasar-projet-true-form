@@ -25,21 +25,22 @@
         type="password"
       />
     </div>
-    <div class="text-white" v-show="notcompleted.value">
-      Il manque une entrée
-    </div>
+
     <div class="flex flex-center" style="margin: 10px">
       <q-btn
-        @click="controlTheValues()"
+        @click="
+          controlTheValues();
+          $emit(`logInFinished`);
+        "
         unelevated
         rounded
         color="primary"
         label="Log in"
       />
     </div>
-  </div>
-  <div class="text-white" v-show="notcompleted.value == true">
-    Il manque une entrée
+    <div v-show="notcompleted == true" class="text-white">
+      Il manque une entrée
+    </div>
   </div>
 </template>
 
@@ -62,8 +63,8 @@ function controlTheValues() {
   ) {
     alert(333);
     notcompleted.value = false;
+    alert(2);
     UserStore.loginVariable(UserStore.NewLogin, 'localStorage');
-    $emit(`logInFinished`);
   }
 }
 </script>
