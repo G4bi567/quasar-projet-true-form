@@ -85,7 +85,7 @@
       />
       <q-btn
         v-if="title !== undefined"
-        @click="alert(1)"
+        @click="alertee"
         icon="fa-regular fa-heart"
       />
 
@@ -204,6 +204,9 @@ const CommentStore = useCommentStore();
 // je ne peux pas ajouter/supprimer les commentaires dans les comemntaires
 // mais avec une base de données, ceci sera possible
 const commentView = ref(false);
+function alertee() {
+  alert('aletrtetetet');
+}
 
 function commentOn() {
   commentView.value = !commentView.value;

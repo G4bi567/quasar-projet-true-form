@@ -3,7 +3,11 @@
     <div v-show="CommentStore.filteroption == null">
       <h1 class="row justify-center text-center align-center">Récents</h1>
     </div>
-    {{ UserStore.followed }}
+    {{
+      CommentStore.commentsList.filter(
+        (post) => UserStore.followed.indexOf(post.id) >= 0
+      )
+    }}
     <div v-show="CommentStore.filteroption !== null">
       <h1 class="row justify-center text-center align-center">
         {{ CommentStore.filteroption }}
@@ -80,13 +84,13 @@ function pagination(current) {
       );
   } else if (CommentStore.filteroptiontype == 'follow') {
     UpdatedList.value = CommentStore.commentsList
-      .filter((post) => post.id in UserStore.followed)
+      .filter((post) => UserStore.followed.indexOf(post.id) >= 0)
       .slice((current - 1) * 5, current * 5);
     paginationnumber.index =
       1 +
       Math.floor(
         CommentStore.commentsList.filter(
-          (post) => post.id in UserStore.followed
+          (post) => UserStore.followed.indexOf(post.id) >= 0
         ).length / 5
       );
   }
