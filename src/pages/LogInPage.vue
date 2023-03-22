@@ -53,17 +53,15 @@ const UserStore = useUserStore();
 const notcompleted = ref(false);
 
 function controlTheValues() {
-  alert(notcompleted.value);
   notcompleted.value = true;
-  alert(notcompleted.value);
+
   if (
     UserStore.NewLogin.name !== '' &&
     UserStore.NewLogin.mail !== '' &&
     UserStore.NewLogin.password !== ''
   ) {
-    alert(333);
     notcompleted.value = false;
-    alert(2);
+
     UserStore.loginVariable(UserStore.NewLogin, 'localStorage');
   }
 }

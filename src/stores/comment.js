@@ -4,6 +4,7 @@ import { date } from 'quasar';
 export const useCommentStore = defineStore('commentStore', {
   state: () => ({
     commentsList: [],
+    commentstomodify: [],
     filteroption: null,
     filteroptiontype: null,
   }),
@@ -143,12 +144,39 @@ export const useCommentStore = defineStore('commentStore', {
       comment.date = date.formatDate(Date.now(), 'DD-MM-YYYY');
       comment.pp_profil = localStorage.getItem('pp_profil');
       comment.comment = [];
-
-      localStorage.setItem(
-        'f',
-        JSON.stringify(this.commentsList.filter((post) => post.id == id))
-      );
-      alert(1);
+      localStorage.setItem('d', JSON.stringify(this.commentsList[id - 1]));
+      this.commentstomodify = this.commentsList[id - 1].comment;
+      var maxId = 0;
+      comment.id = maxId;
+      if (this.commentstomodify.length !== 0) {
+        let maxId = -1;
+        for (let i = 0; i < this.commentstomodify.length; i++) {
+          console.log(this.commentstomodify[i].id);
+          if (this.commentstomodify[i].id === null) {
+            this.commentstomodify[i].id = 0;
+          }
+          if (this.commentstomodify[i].id >= maxId) {
+            maxId = parseInt(this.commentstomodify[i].id);
+            comment.id = maxId + 1;
+          }
+        }
+      }
+      this.commentsList[id - 1].comment.unshift(comment);
+      if (location === 'localStorage') {
+        localStorage.setItem('data', JSON.stringify(this.commentsList));
+      } else {
+        // Sauvegarder dans le backend
+        // Utilisation de fetch pour aller récupérer les données du backend à l'aide d'une API
+        // try {
+        //     await fetch('https://your-backend-url.com/comments', {
+        //         method: 'POST',
+        //         headers: { 'Content-Type': 'application/json' },
+        //         body: JSON.stringify(comment),
+        //     })
+        // } catch (error) {
+        //     console.error(error)
+        // }
+      }
     },
     deleteComment(id, location) {
       // Suppression locale
