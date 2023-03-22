@@ -5,7 +5,7 @@ export const useCommentStore = defineStore('commentStore', {
   state: () => ({
     commentsList: [],
     filteroption: null,
-    filteroptiontype:null,
+    filteroptiontype: null,
   }),
 
   actions: {
@@ -135,7 +135,49 @@ export const useCommentStore = defineStore('commentStore', {
         // }
       }
     },
+    async addComment2(id, description, listComment, location) {
+      // Mise à jour état local (il ne faudra plus utiliser le localStorage pour la photo de profi et le profil mais il faudra créer un autre store 'user')
+      comment = comment.name = JSON.parse(localStorage.getItem('profil')).name;
+      comment.date = date.formatDate(Date.now(), 'DD-MM-YYYY');
+      comment.pp_profil = localStorage.getItem('pp_profil');
 
+      // comment.id = Math.max.apply(Math, this.commentsList.map(function(object) { return object.id; }))+1;
+      // if (!comment.id){
+      //   comment.id = 0;
+      // }
+      var maxId = 0;
+      comment.id = maxId;
+      if (this.commentsList.length !== 0) {
+        let maxId = -1;
+        for (let i = 0; i < this.commentsList.length; i++) {
+          console.log(this.commentsList[i].id);
+          if (this.commentsList[i].id === null) {
+            this.commentsList[i].id = 0;
+          }
+          if (this.commentsList[i].id >= maxId) {
+            maxId = parseInt(this.commentsList[i].id);
+            comment.id = maxId + 1;
+          }
+        }
+      }
+      this.commentsList.unshift({ ...comment });
+
+      if (location === 'localStorage') {
+        localStorage.setItem('data', JSON.stringify(this.commentsList));
+      } else {
+        // Sauvegarder dans le backend
+        // Utilisation de fetch pour aller récupérer les données du backend à l'aide d'une API
+        // try {
+        //     await fetch('https://your-backend-url.com/comments', {
+        //         method: 'POST',
+        //         headers: { 'Content-Type': 'application/json' },
+        //         body: JSON.stringify(comment),
+        //     })
+        // } catch (error) {
+        //     console.error(error)
+        // }
+      }
+    },
     deleteComment(id, location) {
       // Suppression locale
       let index = this.commentsList

@@ -29,6 +29,12 @@
           Forum CSUD
         </q-toolbar-title>
         <q-btn
+          to="klfj"
+          color="secondary"
+          icon-right="fa-solid fa-pencil"
+          label="U'"
+        />
+        <q-btn
           @click="writeCommentMode()"
           color="secondary"
           icon-right="fa-solid fa-pencil"

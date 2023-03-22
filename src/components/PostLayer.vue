@@ -83,6 +83,7 @@
         @click="commentOn"
         icon="fa-regular fa-comment"
       />
+
       <div v-show="commentView" style="margin-top: 10px">
         <q-editor
           dark
@@ -107,7 +108,7 @@
               'superscript',
             ],
             ['token', 'hr', 'link', 'custom_btn'],
-            ['print', 'fullscreen'],
+            ['fullscreen'],
             [
               {
                 label: $q.lang.editor.formatting,
@@ -148,7 +149,6 @@
                   'verdana',
                 ],
               },
-              'removeFormat',
             ],
             ['quote', 'unordered', 'ordered', 'outdent', 'indent'],
             ['undo', 'redo'],
@@ -171,17 +171,7 @@
             color="primary"
             icon="mail"
             icon-right="send"
-            label="ne fonctionne pas encore"
-            @click="addComment(qeditor, id)"
-          />
-        </div>
-        <div v-if="title == undefined">
-          <q-btn
-            style="margin-top: 10px"
-            color="primary"
-            icon="mail"
-            icon-right="send"
-            label="ne fonctionne pas encore2"
+            label="Répondre"
             @click="addComment(qeditor, id)"
           />
         </div>
