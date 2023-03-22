@@ -46,6 +46,7 @@
       </div>
       <div style="margin: 7px 0px 10px 10px">
         <q-btn
+          v-if="title !== undefined"
           class="bg-primary"
           outline
           color="white"
@@ -56,7 +57,10 @@
           "
           :label="branche"
         />
-        <h5 style="width: 90%; margin: 7px 0px 13px 0px; word-wrap: break-word">
+        <h5
+          v-if="title !== undefined"
+          style="width: 90%; margin: 7px 0px 13px 0px; word-wrap: break-word"
+        >
           {{ title }}
         </h5>
         <div style="width: 95%; margin-left: 5px; word-wrap: break-word">
@@ -74,7 +78,11 @@
         border-radius: 0px 0px 20px 20px;
       "
     >
-      <q-btn @click="commentOn" icon="fa-regular fa-comment" />
+      <q-btn
+        v-if="title !== undefined"
+        @click="commentOn"
+        icon="fa-regular fa-comment"
+      />
       <div v-show="commentView" style="margin-top: 10px">
         <q-editor
           dark
@@ -156,16 +164,29 @@
             verdana: 'Verdana',
           }"
         />
-        <q-btn
-          style="margin-top: 10px"
-          color="primary"
-          icon="mail"
-          icon-right="send"
-          label="ne fonctionne pas encore"
-          @click="addComment(qeditor, id)"
-        />
+
+        <div v-if="title !== undefined">
+          <q-btn
+            style="margin-top: 10px"
+            color="primary"
+            icon="mail"
+            icon-right="send"
+            label="ne fonctionne pas encore"
+            @click="addComment(qeditor, id)"
+          />
+        </div>
+        <div v-if="title == undefined">
+          <q-btn
+            style="margin-top: 10px"
+            color="primary"
+            icon="mail"
+            icon-right="send"
+            label="ne fonctionne pas encore2"
+            @click="addComment(qeditor, id)"
+          />
+        </div>
         <div v-if="comment.length" style="margin: 20px">
-          <CommentLayer v-for="co in comment" :key="co.id" v-bind="co" />
+          <PostLayer v-for="co in comment" :key="co.id" v-bind="co" />
         </div>
       </div>
     </div>
@@ -174,7 +195,7 @@
 
 <script setup>
 import { defineProps, reactive, ref } from 'vue';
-import CommentLayer from 'components/CommentLayer.vue';
+import PostLayer from 'components/PostLayer.vue';
 import { useCommentStore } from 'stores/comment.js';
 
 //permet d'accéder au store
