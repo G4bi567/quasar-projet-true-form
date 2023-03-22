@@ -2,6 +2,7 @@
   <div>
     <div v-show="CommentStore.filteroption == null">
       <h1 class="row justify-center text-center align-center">Récents</h1>
+      <pre>{{ CommentStore.commentsList }}</pre>
     </div>
     <div v-show="CommentStore.filteroption !== null">
       <h1 class="row justify-center text-center align-center">

@@ -172,7 +172,13 @@
             icon="mail"
             icon-right="send"
             label="Répondre"
-            @click="addComment(qeditor, id)"
+            @click="
+              CommentStore.addComment2(
+                id,
+                qeditor,
+                'localStorage'
+              )
+            "
           />
         </div>
         <div v-if="comment.length" style="margin: 20px">
@@ -198,12 +204,6 @@ const commentView = ref(false);
 
 function commentOn() {
   commentView.value = !commentView.value;
-}
-function onItemClick(id) {
-  var oldItems = JSON.parse(localStorage.getItem('data'));
-  const index = oldItems.findIndex((ThepostList) => ThepostList.id === id);
-  oldItems.splice(index, 1);
-  localStorage.setItem('data', JSON.stringify(oldItems));
 }
 const props = defineProps({
   title: String,

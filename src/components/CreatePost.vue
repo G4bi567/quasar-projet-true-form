@@ -36,7 +36,7 @@
           ],
           ['bold', 'italic', 'strike', 'underline', 'subscript', 'superscript'],
           ['token', 'hr', 'link', 'custom_btn'],
-          ['print', 'fullscreen'],
+          ['fullscreen'],
           [
             {
               label: $q.lang.editor.formatting,
@@ -77,7 +77,6 @@
                 'verdana',
               ],
             },
-            'removeFormat',
           ],
           ['quote', 'unordered', 'ordered', 'outdent', 'indent'],
           ['undo', 'redo'],
@@ -95,14 +94,6 @@
       />
     </div>
     <div class="q-gutter-sm row items-start">
-      <!--
-      <q-uploader
-        url="http://localhost:4444/upload"
-        label="Individual upload"
-        multiple
-        style="max-width: 600px"
-      />
-      -->
       <q-btn
         color="primary"
         icon="mail"
@@ -149,5 +140,4 @@ const NewPost = reactive({
   pp_profil: '',
   comment: [],
 });
-
 </script>

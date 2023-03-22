@@ -152,6 +152,7 @@ import { useCommentStore } from 'stores/comment.js';
 //permet d'accéder au store
 const CommentStore = useCommentStore();
 //permet d'accéder au store
+
 const UserStore = useUserStore();
 const branches = [
   'Français ',
@@ -179,9 +180,6 @@ const branches = [
 
 localStorage.setItem('Branches', JSON.stringify(branches));
 
-const timeStamp = Date.now();
-localStorage.setItem('date', date.formatDate(timeStamp, 'DD-MM-YYYY'));
-
 localStorage.setItem(
   'pp_profil',
   'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg'
@@ -192,8 +190,6 @@ const rightDrawerOpen = ref(false);
 const writeComment = ref(false);
 
 const login = ref(localStorage.getItem('profil') === null ? false : true);
-
-const pp_profil_img = localStorage.getItem('pp_profil');
 
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
@@ -218,7 +214,6 @@ function logoutaccount() {
 
 function TurnoffLogInPage() {
   if (localStorage.getItem('profil') !== 'null') {
-    alert('ouiiiiiiii');
     login.value = true;
   }
 }
