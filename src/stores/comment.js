@@ -4,8 +4,6 @@ import { date } from 'quasar';
 export const useCommentStore = defineStore('commentStore', {
   state: () => ({
     commentsList: [],
-    commentToModify: [],
-    comment: {},
     filteroption: null,
     filteroptiontype: null,
   }),
@@ -145,6 +143,12 @@ export const useCommentStore = defineStore('commentStore', {
       comment.date = date.formatDate(Date.now(), 'DD-MM-YYYY');
       comment.pp_profil = localStorage.getItem('pp_profil');
       comment.comment = [];
+
+      localStorage.setItem(
+        'f',
+        JSON.stringify(this.commentsList.filter((post) => post.id == id))
+      );
+      alert(1);
     },
     deleteComment(id, location) {
       // Suppression locale
