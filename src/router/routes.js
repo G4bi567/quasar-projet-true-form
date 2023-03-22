@@ -11,14 +11,6 @@ const routes = [
         path: 'settings',
         component: () => import('pages/settingsPage.vue'),
       },
-      {
-        path: '/person',
-        component: () => import('pages/personPage.vue'),
-      },
-      {
-        path: '/branche',
-        component: () => import('pages/branchePage.vue'),
-      },
     ],
   },
 

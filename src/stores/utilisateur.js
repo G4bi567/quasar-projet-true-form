@@ -8,7 +8,7 @@ export const useUserStore = defineStore('userStore', {
       mail: '',
       password: '',
     },
-
+    followed: [],
   }),
 
   actions: {

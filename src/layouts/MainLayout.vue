@@ -12,6 +12,7 @@
 
         <q-tabs align="left">
           <q-route-tab to="/" @click="ResetMode()" label="Home Page" />
+          <q-route-tab to="/" @click="followedComments()" label="Suivis" />
         </q-tabs>
 
         <q-toolbar-title style="margin-left: 29%">

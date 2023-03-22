@@ -3,7 +3,7 @@
     <div v-show="CommentStore.filteroption == null">
       <h1 class="row justify-center text-center align-center">Récents</h1>
     </div>
-    {{ CommentStore.commentsList }}
+    {{ UserStore.followed }}
     <div v-show="CommentStore.filteroption !== null">
       <h1 class="row justify-center text-center align-center">
         {{ CommentStore.filteroption }}
@@ -29,7 +29,10 @@
 import { defineComponent, reactive, ref } from 'vue';
 import PostLayer from 'components/PostLayer.vue';
 import { useCommentStore } from 'stores/comment.js';
+import { useUserStore } from 'stores/utilisateur.js';
 
+//permet d'accéder au store
+const UserStore = useUserStore();
 //permet d'accéder au store
 const CommentStore = useCommentStore();
 
@@ -64,7 +67,7 @@ function pagination(current) {
           (post) => post.branche == CommentStore.filteroption
         ).length / 5
       );
-  } else {
+  } else if (CommentStore.filteroptiontype == 'name') {
     UpdatedList.value = CommentStore.commentsList
       .filter((post) => post.name == CommentStore.filteroption)
       .slice((current - 1) * 5, current * 5);
@@ -73,6 +76,17 @@ function pagination(current) {
       Math.floor(
         CommentStore.commentsList.filter(
           (post) => post.name == CommentStore.filteroption
+        ).length / 5
+      );
+  } else if (CommentStore.filteroptiontype == 'follow') {
+    UpdatedList.value = CommentStore.commentsList
+      .filter((post) => post.id in UserStore.followed)
+      .slice((current - 1) * 5, current * 5);
+    paginationnumber.index =
+      1 +
+      Math.floor(
+        CommentStore.commentsList.filter(
+          (post) => post.id in UserStore.followed
         ).length / 5
       );
   }

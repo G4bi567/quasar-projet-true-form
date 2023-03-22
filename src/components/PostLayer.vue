@@ -28,7 +28,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item-section side>
+        <q-item-section side v-if="title !== undefined">
           <q-btn-dropdown color="primary">
             <q-list>
               <q-item
@@ -82,6 +82,11 @@
         v-if="title !== undefined"
         @click="commentOn"
         icon="fa-regular fa-comment"
+      />
+      <q-btn
+        v-if="title !== undefined"
+        @click="alert(1)"
+        icon="fa-regular fa-heart"
       />
 
       <div v-show="commentView" style="margin-top: 10px">
@@ -187,7 +192,11 @@
 import { defineProps, reactive, ref } from 'vue';
 import PostLayer from 'components/PostLayer.vue';
 import { useCommentStore } from 'stores/comment.js';
+import { fasHeartCirclePlus } from '@quasar/extras/fontawesome-v6';
+import { useUserStore } from 'stores/utilisateur.js';
 
+//permet d'accéder au store
+const UserStore = useUserStore();
 //permet d'accéder au store
 const CommentStore = useCommentStore();
 
@@ -199,6 +208,7 @@ const commentView = ref(false);
 function commentOn() {
   commentView.value = !commentView.value;
 }
+
 const props = defineProps({
   title: String,
   name: String,
@@ -220,6 +230,15 @@ function definetypefilterbr() {
 }
 function definetypefiltername() {
   CommentStore.filteroptiontype = 'name';
+}
+function listFollowMake(id) {
+  if (id in UserStore.followed) {
+    UserStore.followed.shift(id);
+    alert(1);
+  } else {
+    UserStore.followed.append(id);
+    alert(2);
+  }
 }
 
 const qeditor = ref('');
