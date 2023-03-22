@@ -5,6 +5,7 @@ export const useCommentStore = defineStore('commentStore', {
   state: () => ({
     commentsList: [],
     commentToModify: [],
+    comment: {},
     filteroption: null,
     filteroptiontype: null,
   }),
@@ -76,7 +77,7 @@ export const useCommentStore = defineStore('commentStore', {
               comment: [],
             },
           ];
-          localStorage.setItem('data', commentsList);
+          localStorage.setItem('data', JSON.stringify(this.commentsList));
         }
       } else {
         // Utilisation de fetch pour aller récupérer les données du backend à l'aide d'une API
@@ -99,6 +100,7 @@ export const useCommentStore = defineStore('commentStore', {
       comment.name = JSON.parse(localStorage.getItem('profil')).name;
       comment.date = date.formatDate(Date.now(), 'DD-MM-YYYY');
       comment.pp_profil = localStorage.getItem('pp_profil');
+      comment.comment = [];
 
       // comment.id = Math.max.apply(Math, this.commentsList.map(function(object) { return object.id; }))+1;
       // if (!comment.id){
@@ -137,56 +139,12 @@ export const useCommentStore = defineStore('commentStore', {
         // }
       }
     },
-    async addComment2(id, description, location) {
+    async addComment2(id, comment, location) {
       // Mise à jour état local (il ne faudra plus utiliser le localStorage pour la photo de profi et le profil mais il faudra créer un autre store 'user')
-      alert(id);
-      commentToModify = commentsList.filter((post) => post.id == id);
-      alert(2);
-      comment = {};
-      comment.description = description;
       comment.name = JSON.parse(localStorage.getItem('profil')).name;
       comment.date = date.formatDate(Date.now(), 'DD-MM-YYYY');
       comment.pp_profil = localStorage.getItem('pp_profil');
       comment.comment = [];
-      alert(2);
-      // comment.id = Math.max.apply(Math, this.commentsList.map(function(object) { return object.id; }))+1;
-      // if (!comment.id){
-      //   comment.id = 0;
-      // }
-
-      var maxId = 0;
-      comment.id = maxId;
-      if (this.commentToModify.comment.length !== 0) {
-        let maxId = -1;
-        for (let i = 0; i < this.commentToModify.comment.length; i++) {
-          console.log(this.commentToModify.comment[i].id);
-          if (this.commentToModify.comment[i].id === null) {
-            this.commentscommentToModifyList.comment[i].id = 0;
-          }
-          if (this.commentToModify.comment[i].id >= maxId) {
-            maxId = parseInt(this.commentToModify.comment[i].id);
-            comment.id = maxId + 1;
-          }
-        }
-      }
-      alert(3);
-      this.commentToModify[id].comment.unshift({ ...comment });
-      alert(4);
-      if (location === 'localStorage') {
-        localStorage.setItem('data', JSON.stringify(this.commentToModify));
-      } else {
-        // Sauvegarder dans le backend
-        // Utilisation de fetch pour aller récupérer les données du backend à l'aide d'une API
-        // try {
-        //     await fetch('https://your-backend-url.com/comments', {
-        //         method: 'POST',
-        //         headers: { 'Content-Type': 'application/json' },
-        //         body: JSON.stringify(comment),
-        //     })
-        // } catch (error) {
-        //     console.error(error)
-        // }
-      }
     },
     deleteComment(id, location) {
       // Suppression locale

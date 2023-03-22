@@ -87,7 +87,7 @@
       <div v-show="commentView" style="margin-top: 10px">
         <q-editor
           dark
-          v-model="qeditor"
+          v-model="NewComment.description"
           :dense="$q.screen.lt.md"
           :toolbar="[
             [
@@ -172,13 +172,7 @@
             icon="mail"
             icon-right="send"
             label="Répondre"
-            @click="
-              CommentStore.addComment2(
-                id,
-                qeditor,
-                'localStorage'
-              )
-            "
+            @click="CommentStore.addComment2(id, NewComment, 'localStorage')"
           />
         </div>
         <div v-if="comment.length" style="margin: 20px">
@@ -215,7 +209,9 @@ const props = defineProps({
   comment: Object,
   branche: String,
 });
-
+const NewComment = reactive({
+  description: '',
+});
 function filterVariable(variable) {
   CommentStore.filteroption = variable;
 }
@@ -227,23 +223,4 @@ function definetypefiltername() {
 }
 
 const qeditor = ref('');
-// ne fonctionne pas encore
-function addComment(qeditor, id) {
-  let oldItems = JSON.parse(localStorage.getItem('data')).filter(
-    (post) => post.id == id
-  );
-
-  oldItems.comment.unshift({
-    name: JSON.parse(localStorage.getItem('profil')).name,
-    date: localStorage.getItem('date'),
-    description: qeditor,
-    pp_profil: localStorage.getItem('pp_profil'),
-    comment: [],
-  });
-
-  localStorage.setItem('data', JSON.stringify(oldItems));
-  NewPost.title_probl = '';
-  NewPost.qeditor = '';
-  NewPost.model = '';
-}
 </script>
