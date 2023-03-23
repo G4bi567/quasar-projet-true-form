@@ -96,8 +96,9 @@
         icon-right="send"
         label="Envoyez"
         @click="
-          CommentStore.addComment(NewPost, 'localStorage'),
-            $emit(`finished`, id)
+          CommentStore.addComment(NewPost, 'localStorage');
+          resetNewPost();
+          $emit(`finished`, id);
         "
       />
     </div>
@@ -112,17 +113,9 @@ import { useCommentStore } from 'stores/comment.js';
 const CommentStore = useCommentStore();
 
 function resetNewPost() {
-  NewPostdefault = {
-    title: '',
-    branche: '',
-    description: '',
-    name: '',
-    id: '',
-    date: '',
-    pp_profil: '',
-    comment: [],
-  };
-// affecter chaque value 
+  NewPost.title = '';
+  NewPost.branche = '';
+  NewPost.description = '';
 }
 const branches = JSON.parse(localStorage.getItem('Branches'));
 
