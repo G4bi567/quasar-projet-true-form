@@ -179,10 +179,7 @@
             icon="mail"
             icon-right="send"
             label="Répondre"
-            @click="
-              CommentStore.addComment2(id, NewComment, 'localStorage');
-              resetComment();
-            "
+            @click="CommentStore.addComment2(id, NewComment, 'localStorage')"
           />
         </div>
         <div v-if="comment.length" style="margin: 20px">
@@ -216,8 +213,10 @@ function alertee() {
 function commentOn() {
   commentView.value = !commentView.value;
 }
-function resetComment() {
-  NewComment.description = '';
+function ResetNewComment() {
+  NewComment = {
+    description: '',
+  };
 }
 const props = defineProps({
   title: String,
@@ -252,6 +251,4 @@ function listFollowMake(id) {
   }
   alert(UserStore.followed);
 }
-
-const qeditor = ref('');
 </script>

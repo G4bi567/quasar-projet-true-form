@@ -12,7 +12,7 @@
 
         <q-tabs align="left">
           <q-route-tab to="/" @click="ResetMode()" label="Home Page" />
-          <q-route-tab @click="followedComments()" label="Suivis" />
+          <q-route-tab to="/" @click="followedComments()" label="Suivis" />
         </q-tabs>
 
         <q-toolbar-title style="margin-left: 29%">
@@ -29,12 +29,6 @@
           />
           Forum CSUD
         </q-toolbar-title>
-        <q-btn
-          to="klfj"
-          color="secondary"
-          icon-right="fa-solid fa-pencil"
-          label="U'"
-        />
         <q-btn
           @click="writeCommentMode()"
           color="secondary"

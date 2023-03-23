@@ -112,7 +112,7 @@ import { useCommentStore } from 'stores/comment.js';
 //permet d'accéder au store
 const CommentStore = useCommentStore();
 
-function resetNewPost(NewPost) {
+function resetNewPost() {
   NewPost = {
     title: '',
     branche: '',

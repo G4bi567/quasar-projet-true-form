@@ -3,11 +3,6 @@
     <div v-show="CommentStore.filteroptiontype === null">
       <h1 class="row justify-center text-center align-center">Récents</h1>
     </div>
-    {{
-      CommentStore.commentsList.filter(
-        (post) => UserStore.followed.indexOf(post.id) >= 0
-      )
-    }}
     <div v-show="CommentStore.filteroptiontype !== null">
       <h1 class="row justify-center text-center align-center">
         {{ CommentStore.filteroption }}
