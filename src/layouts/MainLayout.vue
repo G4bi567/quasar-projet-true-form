@@ -98,9 +98,9 @@
       bordered
     >
       <q-list>
-        <q-item-label header>
-          <ElementList v-for="branche in branches"
-        /></q-item-label>
+        <q-item-label header
+          >Ceci sera utilisé pour accéder à des pages de branches</q-item-label
+        >
       </q-list>
     </q-drawer>
 
@@ -143,7 +143,7 @@
 import { ref, reactive } from 'vue';
 import createPost from 'components/CreatePost.vue';
 import Login from 'pages/LogInPage.vue';
-import ElementList from 'pages/ElementList.vue';
+import { date } from 'quasar';
 import { useUserStore } from 'stores/utilisateur.js';
 import { useCommentStore } from 'stores/comment.js';
 
