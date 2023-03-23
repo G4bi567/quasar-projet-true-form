@@ -220,9 +220,7 @@ function TurnoffLogInPage() {
 }
 
 function followedComments() {
-  alert(1);
   CommentStore.filteroptiontype = 'follow';
   CommentStore.filteroption = 'Suivis';
-  alert(2);
 }
 </script>

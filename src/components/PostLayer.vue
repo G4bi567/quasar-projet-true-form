@@ -209,9 +209,6 @@ const CommentStore = useCommentStore();
 // je ne peux pas ajouter/supprimer les commentaires dans les comemntaires
 // mais avec une base de données, ceci sera possible
 const commentView = ref(false);
-function alertee() {
-  alert('aletrtetetet');
-}
 
 function commentOn() {
   commentView.value = !commentView.value;
@@ -242,14 +239,12 @@ function definetypefiltername() {
   CommentStore.filteroptiontype = 'name';
 }
 function listFollowMake(id) {
-  alert(UserStore.followed.indexOf(id));
   if (UserStore.followed.indexOf(id) >= 0) {
     UserStore.followed.shift(id);
-    alert(1);
+
   } else {
-    alert(2);
+
     UserStore.followed.push(id);
   }
-  alert(UserStore.followed);
 }
 </script>
