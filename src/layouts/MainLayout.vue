@@ -1,5 +1,8 @@
 <template>
-  <q-layout style="box-sizing: border-box" view="hhh LpR fff">
+  <q-layout
+    style="background-color: #181818; box-sizing: border-box"
+    view="hhh LpR fff"
+  >
     <q-header
       reveal
       elevated
@@ -15,7 +18,7 @@
           <q-route-tab to="/" @click="followedComments()" label="Suivis" />
         </q-tabs>
 
-        <q-toolbar-title style="margin-left: 29%">
+        <q-toolbar-title style="text-align: center">
           <img
             bg-color="white"
             vertical-middle

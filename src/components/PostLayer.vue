@@ -179,7 +179,10 @@
             icon="mail"
             icon-right="send"
             label="Répondre"
-            @click="CommentStore.addComment2(id, NewComment, 'localStorage')"
+            @click="
+              CommentStore.addComment2(id, NewComment, 'localStorage');
+              ResetNewComment();
+            "
           />
         </div>
         <div v-if="comment.length" style="margin: 20px">
@@ -214,9 +217,7 @@ function commentOn() {
   commentView.value = !commentView.value;
 }
 function ResetNewComment() {
-  NewComment = {
-    description: '',
-  };
+  NewComment.description = '';
 }
 const props = defineProps({
   title: String,

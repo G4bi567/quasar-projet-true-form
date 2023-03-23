@@ -120,8 +120,9 @@ export const useCommentStore = defineStore('commentStore', {
           }
         }
       }
-      this.commentsList.unshift({ ...comment });
-
+      alert(1);
+      this.commentsList.push({ ...comment });
+      alert(2);
       if (location === 'localStorage') {
         localStorage.setItem('data', JSON.stringify(this.commentsList));
       } else {
@@ -161,7 +162,7 @@ export const useCommentStore = defineStore('commentStore', {
           }
         }
       }
-      this.commentsList[id - 1].comment.unshift(comment);
+      this.commentsList[id - 1].comment.unshift({ ...comment });
       if (location === 'localStorage') {
         localStorage.setItem('data', JSON.stringify(this.commentsList));
       } else {
