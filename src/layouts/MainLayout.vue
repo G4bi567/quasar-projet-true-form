@@ -78,7 +78,7 @@
             to="/settings"
             icon="settings"
             label="settings"
-            @click="exitWriteCommentMode()"
+            @click="ResetMode()"
           />
         </q-fab>
         <q-btn
@@ -155,6 +155,9 @@ const CommentStore = useCommentStore();
 //permet d'accéder au store
 
 const UserStore = useUserStore();
+
+const fab2 = ref(false);
+
 const branches = [
   'Français ',
   'Allemand',

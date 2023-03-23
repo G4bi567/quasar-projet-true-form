@@ -1,16 +1,5 @@
 <template>
   <div class="q-pa-md q-gutter-sm">
-    <div class="q-gutter-md">
-      <q-input
-        outlined
-        dark
-        v-model="NewPost.title"
-        color="white"
-        text-color="white"
-        label-color="white"
-        label="Résumé votre problème"
-      />
-    </div>
     <q-select
       dark
       filled
@@ -18,7 +7,15 @@
       :options="branches"
       label="Branche"
     />
-
+    <q-input
+      outlined
+      dark
+      v-model="NewPost.title"
+      color="white"
+      text-color="white"
+      label-color="white"
+      label="Résumez votre problème"
+    />
     <h5 style="color: white">Décrivez votre problème:</h5>
     <q-editor
       dark
