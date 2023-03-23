@@ -180,7 +180,7 @@
             icon-right="send"
             label="Répondre"
             @click="
-              CommentStore.addComment2(id, NewComment, 'localStorage');
+              CommentStore.addComment(id, NewComment, 'localStorage');
               ResetNewComment();
             "
           />

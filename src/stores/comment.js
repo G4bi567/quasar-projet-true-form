@@ -7,6 +7,7 @@ export const useCommentStore = defineStore('commentStore', {
     commentstomodify: [],
     filteroption: null,
     filteroptiontype: null,
+    isAvailableVar: true,
   }),
 
   actions: {
@@ -93,7 +94,7 @@ export const useCommentStore = defineStore('commentStore', {
       }
     },
 
-    async addComment(comment, location) {
+    async addPost(comment, location) {
       // Mise à jour état local (il ne faudra plus utiliser le localStorage pour la photo de profi et le profil mais il faudra créer un autre store 'user')
 
       comment.name = JSON.parse(localStorage.getItem('profil')).name;
@@ -138,7 +139,7 @@ export const useCommentStore = defineStore('commentStore', {
         // }
       }
     },
-    async addComment2(id, comment, location) {
+    async addComment(id, comment, location) {
       // Mise à jour état local (il ne faudra plus utiliser le localStorage pour la photo de profi et le profil mais il faudra créer un autre store 'user')
       comment.name = JSON.parse(localStorage.getItem('profil')).name;
       comment.date = date.formatDate(Date.now(), 'DD-MM-YYYY');

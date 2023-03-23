@@ -96,11 +96,13 @@
         icon-right="send"
         label="Envoyez"
         @click="
-          CommentStore.addComment(NewPost, 'localStorage');
-          resetNewPost();
-          $emit(`finished`, id);
+          isAvailable(NewPost);
+          $emit(`finished`);
         "
       />
+      <div v-if="CommentStore.isAvailableVar == false">
+        <h7 style="color: white">Il manque au moins une entrée</h7>
+      </div>
     </div>
   </div>
 </template>
@@ -129,6 +131,18 @@ const NewPost = reactive({
   pp_profil: '',
   comment: [],
 });
+function isAvailable(NewPost) {
+  CommentStore.isAvailableVar = false;
+  if (
+    NewPost.title !== '' &&
+    NewPost.branche !== '' &&
+    NewPost.description !== ''
+  ) {
+    CommentStore.isAvailableVar = true;
+    CommentStore.addPost(NewPost, 'localStorage');
+    resetNewPost();
+  }
+}
 </script>
 <style>
 . {

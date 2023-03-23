@@ -98,9 +98,9 @@
       bordered
     >
       <q-list>
-        <q-item-label header
-          >Ceci sera utilisé pour accéder à des pages de branches</q-item-label
-        >
+        <q-item-label header>
+          <ElementList v-for="branche in branches"
+        /></q-item-label>
       </q-list>
     </q-drawer>
 
@@ -133,7 +133,7 @@
       style="background-color: #181818"
       v-show="writeComment == true"
     >
-      <createPost v-model="newPost" @finished="writeCommentMode()" />
+      <createPost @finished="isAvailable()" />
     </q-page-container>
     <!-- troisième partie,si writeComment est true, (writeComment est une variable qui est true s'il y a une demande pour écrire une publication), comme c'est true cela affiche une page afin de pouvoir publier notre question ou problème-->
   </q-layout>
@@ -143,7 +143,7 @@
 import { ref, reactive } from 'vue';
 import createPost from 'components/CreatePost.vue';
 import Login from 'pages/LogInPage.vue';
-import { date } from 'quasar';
+import ElementList from 'pages/ElementList.vue';
 import { useUserStore } from 'stores/utilisateur.js';
 import { useCommentStore } from 'stores/comment.js';
 
@@ -197,6 +197,11 @@ function toggleLeftDrawer() {
 }
 function toggleRightDrawer() {
   rightDrawerOpen.value = !rightDrawerOpen.value;
+}
+function isAvailable() {
+  if (CommentStore.isAvailableVar == true) {
+    writeCommentMode();
+  }
 }
 
 function writeCommentMode() {
