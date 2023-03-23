@@ -6,7 +6,13 @@ Dans ce forum d'aide aux étudiants, les membres peuvent poser des questions rel
 
 ## Installation
 
-Install node.js
+Verify the installation of node.js
+
+```bash
+node -v
+```
+
+If you don't have it, install node.js
 
 https://nodejs.org/en/download/
 
@@ -14,11 +20,6 @@ Install Git
 
 https://git-scm.com/download/win
 
-Verify the installation of node.js
-
-```bash
-node -v
-```
 
 Install and run quasar
 
