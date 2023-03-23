@@ -186,7 +186,7 @@
           />
         </div>
         <div v-if="comment.length" style="margin: 20px">
-          <PostLayer v-for="co in comment" :key="co.id" v-bind="co" />
+          <LayerPostComment v-for="co in comment" :key="co.id" v-bind="co" />
         </div>
       </div>
     </div>
@@ -195,7 +195,7 @@
 
 <script setup>
 import { defineProps, reactive, ref } from 'vue';
-import PostLayer from 'components/PostLayer.vue';
+import LayerPostComment from 'components/LayerPostComment.vue';
 import { useCommentStore } from 'stores/comment.js';
 import { fasHeartCirclePlus } from '@quasar/extras/fontawesome-v6';
 import { useUserStore } from 'stores/utilisateur.js';
@@ -241,9 +241,7 @@ function definetypefiltername() {
 function listFollowMake(id) {
   if (UserStore.followed.indexOf(id) >= 0) {
     UserStore.followed.shift(id);
-
   } else {
-
     UserStore.followed.push(id);
   }
 }

@@ -9,7 +9,11 @@
       </h1>
     </div>
     <div>
-      <PostLayer v-for="post in UpdatedList" :key="post.title" v-bind="post" />
+      <layerPostComment
+        v-for="post in UpdatedList"
+        :key="post.title"
+        v-bind="post"
+      />
 
       <q-pagination
         v-on="pagination(current)"
@@ -26,7 +30,7 @@
 
 <script setup>
 import { defineComponent, reactive, ref } from 'vue';
-import PostLayer from 'components/PostLayer.vue';
+import layerPostComment from 'components/LayerPostComment.vue';
 import { useCommentStore } from 'stores/comment.js';
 import { useUserStore } from 'stores/utilisateur.js';
 
