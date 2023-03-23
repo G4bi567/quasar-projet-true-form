@@ -72,21 +72,23 @@
       </div>
     </div>
     <div
+      v-if="title !== undefined"
       style="
         background-color: #080808;
         padding: 5px 10px;
         border-radius: 0px 0px 20px 20px;
       "
     >
+      <q-btn @click="commentOn" icon="fa-regular fa-comment" />
       <q-btn
-        v-if="title !== undefined"
-        @click="commentOn"
-        icon="fa-regular fa-comment"
+        v-if="UserStore.followed.indexOf(id) < 0"
+        @click="listFollowMake(id)"
+        icon="fa-regular fa-heart"
       />
       <q-btn
-        v-if="title !== undefined"
-        @click="alertee"
-        icon="fa-regular fa-heart"
+        v-if="UserStore.followed.indexOf(id) >= 0"
+        @click="listFollowMake(id)"
+        icon="fa-solid fa-heart"
       />
 
       <div v-show="commentView" style="margin-top: 10px">
@@ -235,13 +237,15 @@ function definetypefiltername() {
   CommentStore.filteroptiontype = 'name';
 }
 function listFollowMake(id) {
-  if (id in UserStore.followed) {
+  alert(UserStore.followed.indexOf(id));
+  if (UserStore.followed.indexOf(id) >= 0) {
     UserStore.followed.shift(id);
     alert(1);
   } else {
-    UserStore.followed.append(id);
     alert(2);
+    UserStore.followed.push(id);
   }
+  alert(UserStore.followed);
 }
 
 const qeditor = ref('');

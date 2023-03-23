@@ -12,7 +12,7 @@
 
         <q-tabs align="left">
           <q-route-tab to="/" @click="ResetMode()" label="Home Page" />
-          <q-route-tab to="/" @click="followedComments()" label="Suivis" />
+          <q-route-tab @click="followedComments()" label="Suivis" />
         </q-tabs>
 
         <q-toolbar-title style="margin-left: 29%">
@@ -205,7 +205,7 @@ function writeCommentMode() {
 
 function ResetMode() {
   writeComment.value = false;
-  CommentStore.filteroption = null;
+  CommentStore.filteroptiontype = null;
 }
 
 function logoutaccount() {
@@ -217,5 +217,12 @@ function TurnoffLogInPage() {
   if (localStorage.getItem('profil') !== 'null') {
     login.value = true;
   }
+}
+
+function followedComments() {
+  alert(1);
+  CommentStore.filteroptiontype = 'follow';
+  CommentStore.filteroption = 'Suivis';
+  alert(2);
 }
 </script>

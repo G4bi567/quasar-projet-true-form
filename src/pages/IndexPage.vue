@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-show="CommentStore.filteroption == null">
+    <div v-show="CommentStore.filteroptiontype === null">
       <h1 class="row justify-center text-center align-center">Récents</h1>
     </div>
     {{
@@ -8,7 +8,7 @@
         (post) => UserStore.followed.indexOf(post.id) >= 0
       )
     }}
-    <div v-show="CommentStore.filteroption !== null">
+    <div v-show="CommentStore.filteroptiontype !== null">
       <h1 class="row justify-center text-center align-center">
         {{ CommentStore.filteroption }}
       </h1>
@@ -53,7 +53,7 @@ const UpdatedList = ref();
 const current = ref(1);
 
 function pagination(current) {
-  if (CommentStore.filteroption == null) {
+  if (CommentStore.filteroptiontype == null) {
     UpdatedList.value = CommentStore.commentsList.slice(
       (current - 1) * 5,
       current * 5
