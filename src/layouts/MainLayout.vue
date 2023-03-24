@@ -94,14 +94,19 @@
       v-model="leftDrawerOpen"
       side="left"
       behavior="normal"
-      style="margin-left: 40px"
       bordered
     >
-      <q-list>
-        <q-item-label header
-          >Ceci sera utilisé pour accéder à des pages de branches</q-item-label
-        >
-      </q-list>
+      <q-scroll-area style="height: 700px; max-width: 300px">
+        <q-item-label header>
+          <div v-for="branche in branches" :key="branche">
+            <q-item clickable to="/" @click="getTo(branche)">
+              <q-item-section>
+                <q-item-label>{{ branche }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </div>
+        </q-item-label>
+      </q-scroll-area>
     </q-drawer>
 
     <q-drawer
@@ -111,12 +116,17 @@
       behavior="normal"
       elevated
     >
-      <q-list>
-        <q-item-label header
-          >Ceci sera utilisé pour mettre des liens utiles pour les
-          élèves</q-item-label
-        >
-      </q-list>
+      <q-scroll-area style="height: 700px; max-width: 300px">
+        <q-item-label header>
+          <div v-for="lien in liensUtiles" :key="lien.title" v-bind="lien">
+            <q-item clickable tag="a" target="_blank" :href="lien.link">
+              <q-item-section>
+                <q-item-label>{{ lien.title }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </div>
+        </q-item-label>
+      </q-scroll-area>
     </q-drawer>
     <q-page-container style="background-color: #181818" v-show="login == false">
       <Login @logInFinished="TurnoffLogInPage()" />
@@ -178,7 +188,16 @@ const branches = [
   'Sciences religieuses ',
   'Education physique ',
 ];
-
+const liensUtiles = [
+  {
+    title: 'Deepl',
+    link: 'https://www.deepl.com/translator',
+  },
+  {
+    title: 'SlideGo',
+    link: 'https://slidesgo.com/',
+  },
+];
 localStorage.setItem('Branches', JSON.stringify(branches));
 
 localStorage.setItem(
@@ -215,6 +234,10 @@ function ResetMode() {
 
 function logoutaccount() {
   localStorage.setItem('profil', null);
+  localStorage.setItem(
+    'pp_profil',
+    'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg'
+  );
   login.value = false;
 }
 
@@ -228,4 +251,14 @@ function followedComments() {
   CommentStore.filteroptiontype = 'follow';
   CommentStore.filteroption = 'Suivis';
 }
+function getTo(title) {
+  CommentStore.filteroption = title;
+  CommentStore.filteroptiontype = 'branche';
+}
 </script>
+<style>
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
+</style>

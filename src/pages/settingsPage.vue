@@ -22,7 +22,23 @@
           />
         </div>
       </div>
-      <div style="margin: 10px">
+      <div style="margin: 10px; max-width: 50%">
+        <q-input
+          outlined
+          dark
+          v-model="newLink"
+          color="white"
+          text-color="white"
+          label-color="white"
+          label="Nouveau lien de photo de profil"
+        />
+        <q-btn
+          color="primary"
+          icon="profi"
+          icon-right="send"
+          label="Envoyez"
+          @click="changePpProfil()"
+        />
         Ici vous pourrez changer votre photo de profil et changer les couleurs
         de votre site
       </div>
@@ -32,5 +48,10 @@
 
 <script setup>
 import { useCommentStore } from 'stores/comment.js';
+import { ref } from 'vue';
 const CommentStore = useCommentStore();
+const newLink = ref('');
+function changePpProfil() {
+  localStorage.setItem('pp_profil', newLink.value);
+}
 </script>
