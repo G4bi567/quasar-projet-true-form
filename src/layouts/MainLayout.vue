@@ -1,6 +1,6 @@
 <template>
   <q-layout class="backgroundTemplate bgColor" view="hhh LpR fff">
-    <q-header reveal elevated class="bg-secondary text-white paddHeader">
+    <q-header reveal elevated class="bg-primary text-white paddHeader">
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
@@ -37,7 +37,7 @@
             color="primary"
             to="/settings"
             icon="settings"
-            label="settings"
+            label="Paramètres"
             @click="ResetMode()"
           />
         </q-fab>
@@ -82,15 +82,15 @@
     <q-page-container class="bgColor" v-show="login == false">
       <Login @logInFinished="TurnoffLogInPage()" />
     </q-page-container>
-    <!-- première partie,si login est false, (login est une variable qui est false si il n'y a aucune donnée sur l'utilisateur), puis si c'est false affiche une page afin de pouvoir fournir les données-->
+    <!--first part, if login is false, (login is a variable that is false if there is no data about the user), then if it is false, it displays a page in order to provide the data-->
     <q-page-container class="bgColor" v-show="writeComment == false">
       <router-view @logout="logoutaccount()" />
     </q-page-container>
-    <!-- deuxième partie,si writeComment est false, (writeComment est une variable qui est false s'il y a pas de demande pour écrire une publication), comme c'est false cela affiche la page des publications récentes, c'est à dire la page principale du site-->
+    <!-- second part, if writeComment is false, (writeComment is a variable that is false if there is no request to write a publication), as it is false it displays the page of recent publications, that means  the main page of the site-->
     <q-page-container class="bgColor" v-show="writeComment == true">
       <createPost @finished="isAvailable()" />
     </q-page-container>
-    <!-- troisième partie,si writeComment est true, (writeComment est une variable qui est true s'il y a une demande pour écrire une publication), comme c'est true cela affiche une page afin de pouvoir publier notre question ou problème-->
+    <!-- third part, if writeComment is true, (writeComment is a variable that is true if there is a request to write a publication), as it is true it displays a page in order to give the data about the problem-->
   </q-layout>
 </template>
 
@@ -227,7 +227,7 @@ function getTo(title) {
   border-radius: 10px;
 }
 .colorTopObjects {
-  background: #484e55;
+  background: #262d34;
 }
 .marginMenu {
   margin: 0px 10px 0px 10px;
