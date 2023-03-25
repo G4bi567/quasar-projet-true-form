@@ -1,11 +1,12 @@
 <template>
   <div class="q-pa-md q-gutter-sm">
     <q-select
+      color="white"
       dark
       filled
       v-model="NewPost.branche"
       :options="branches"
-      label="Branche"
+      label="Choissisez une branche"
     />
     <q-input
       outlined
@@ -16,7 +17,7 @@
       label-color="white"
       label="Résumez votre problème"
     />
-    <h5 style="color: white">Décrivez votre problème:</h5>
+    <p class="text-white">Décrivez votre problème:</p>
     <q-editor
       dark
       v-model="NewPost.description"
@@ -91,7 +92,7 @@
     />
     <div class="q-gutter-sm row items-start">
       <q-btn
-        color="primary"
+        color="secondary"
         icon="mail"
         icon-right="send"
         label="Envoyez"
@@ -101,7 +102,7 @@
         "
       />
       <div v-if="CommentStore.isAvailableVar == false">
-        <h7 style="color: white">Il manque au moins une entrée</h7>
+        <h7 class="text-white">Il manque au moins une entrée</h7>
       </div>
     </div>
   </div>
@@ -114,11 +115,6 @@ import { useCommentStore } from 'stores/comment.js';
 //permet d'accéder au store
 const CommentStore = useCommentStore();
 
-function resetNewPost() {
-  NewPost.title = '';
-  NewPost.branche = '';
-  NewPost.description = '';
-}
 const branches = JSON.parse(localStorage.getItem('Branches'));
 
 const NewPost = reactive({
@@ -131,6 +127,13 @@ const NewPost = reactive({
   pp_profil: '',
   comment: [],
 });
+
+function resetNewPost() {
+  NewPost.title = '';
+  NewPost.branche = '';
+  NewPost.description = '';
+}
+
 function isAvailable(NewPost) {
   CommentStore.isAvailableVar = false;
   if (
@@ -144,7 +147,3 @@ function isAvailable(NewPost) {
   }
 }
 </script>
-<style>
-. {
-}
-</style>

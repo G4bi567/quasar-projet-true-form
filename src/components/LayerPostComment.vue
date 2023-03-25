@@ -1,14 +1,7 @@
 <template>
   <head> </head>
-  <div
-    style="
-      margin: 10px 15px;
-      border-radius: 20px;
-      background-color: #1e252b;
-      color: white;
-    "
-  >
-    <div style="padding: 5px 10px">
+  <div class="generalLayer">
+    <div class="paddLayer">
       <div class="row justify-between">
         <q-item
           clickable
@@ -24,12 +17,12 @@
             </q-avatar>
           </q-item-section>
           <q-item-section>
-            <q-item-label style="color: white">{{ name }}</q-item-label>
+            <q-item-label class="text-white">{{ name }}</q-item-label>
           </q-item-section>
         </q-item>
 
         <q-item-section side v-if="title !== undefined">
-          <q-btn-dropdown color="primary">
+          <q-btn-dropdown color="secondary">
             <q-list>
               <q-item
                 clickable
@@ -44,7 +37,7 @@
           </q-btn-dropdown>
         </q-item-section>
       </div>
-      <div style="margin: 7px 0px 10px 10px">
+      <div class="positionBranche">
         <q-btn
           v-if="title !== undefined"
           class="bg-primary"
@@ -57,13 +50,10 @@
           "
           :label="branche"
         />
-        <h5
-          v-if="title !== undefined"
-          style="width: 90%; margin: 7px 0px 13px 0px; word-wrap: break-word"
-        >
+        <h5 v-if="title !== undefined" class="positionTitle">
           {{ title }}
         </h5>
-        <div style="width: 95%; margin-left: 5px; word-wrap: break-word">
+        <div class="positionDescription">
           <p v-html="description"></p>
         </div>
       </div>
@@ -71,14 +61,7 @@
         {{ date }}
       </div>
     </div>
-    <div
-      v-if="title !== undefined"
-      style="
-        background-color: #080808;
-        padding: 5px 10px;
-        border-radius: 0px 0px 20px 20px;
-      "
-    >
+    <div v-if="title !== undefined" class="bottomBar">
       <q-btn @click="commentOn" icon="fa-regular fa-comment" />
       <q-btn
         v-if="UserStore.followed.indexOf(id) < 0"
@@ -91,7 +74,7 @@
         icon="fa-solid fa-heart"
       />
 
-      <div v-show="commentView" style="margin-top: 10px">
+      <div v-show="commentView" class="positionInputButtonComments">
         <q-editor
           dark
           v-model="NewComment.description"
@@ -174,7 +157,7 @@
 
         <div v-if="title !== undefined">
           <q-btn
-            style="margin-top: 10px"
+            class="positionInputButtonComments"
             color="primary"
             icon="mail"
             icon-right="send"
@@ -185,7 +168,7 @@
             "
           />
         </div>
-        <div v-if="comment.length" style="margin: 20px">
+        <div v-if="comment.length" class="positionInputButtonComments">
           <LayerPostComment v-for="co in comment" :key="co.id" v-bind="co" />
         </div>
       </div>
@@ -246,3 +229,36 @@ function listFollowMake(id) {
   }
 }
 </script>
+
+<style scoped>
+.generalLayer {
+  margin: 10px 15px;
+  border-radius: 20px;
+  background-color: #1e252b;
+  color: white;
+}
+.paddLayer {
+  padding: 5px 10px;
+}
+.positionBranche {
+  margin: 7px 0px 10px 10px;
+}
+.positionTitle {
+  width: 90%;
+  margin: 7px 0px 13px 0px;
+  word-wrap: break-word;
+}
+.positionDescription {
+  width: 95%;
+  margin-left: 5px;
+  word-wrap: break-word;
+}
+.bottomBar {
+  background-color: #080808;
+  padding: 5px 10px;
+  border-radius: 0px 0px 20px 20px;
+}
+.positionInputButtonComments {
+  margin-top: 10px;
+}
+</style>
