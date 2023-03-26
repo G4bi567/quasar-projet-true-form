@@ -9,17 +9,13 @@ export const useUserStore = defineStore('userStore', {
       password: '',
     },
     followed: [],
+    pp_profil: '',
   }),
 
   actions: {
     loginVariable(NewLogin, location) {
       if (location === 'localStorage') {
         localStorage.setItem('profil', JSON.stringify(NewLogin));
-        NewLogin = {
-          name: '',
-          mail: '',
-          password: '',
-        };
       }
     },
   },

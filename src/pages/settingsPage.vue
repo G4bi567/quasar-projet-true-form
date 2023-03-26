@@ -24,6 +24,7 @@
       </div>
       <div style="margin: 10px; max-width: 50%">
         <q-input
+          class="divInput"
           outlined
           dark
           v-model="newLink"
@@ -33,14 +34,13 @@
           label="Nouveau lien de photo de profil"
         />
         <q-btn
+          class="btnEnvoyez"
           color="primary"
           icon="profi"
           icon-right="send"
-          label="Envoyez"
+          label="Envoyer"
           @click="changePpProfil()"
         />
-        Ici vous pourrez changer votre photo de profil et changer les couleurs
-        de votre site
       </div>
     </div>
   </div>
@@ -55,3 +55,12 @@ function changePpProfil() {
   localStorage.setItem('pp_profil', newLink.value);
 }
 </script>
+<style>
+.divInput {
+  margin: 10px;
+  width: 300px;
+}
+.btnEnvoyez {
+  margin-top: 10px;
+}
+</style>

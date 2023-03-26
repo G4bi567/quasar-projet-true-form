@@ -5,7 +5,7 @@
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
         <q-tabs align="left">
-          <q-route-tab to="/" @click="ResetMode()" label="Home Page" />
+          <q-route-tab to="/fffff" @click="ResetMode()" label="Home Page" />
           <q-route-tab to="/" @click="followedComments()" label="Suivis" />
         </q-tabs>
 
@@ -31,7 +31,6 @@
           icon="keyboard_arrow_down"
           direction="down"
         >
-          >
           <q-fab-action
             external-label
             color="primary"
@@ -142,6 +141,22 @@ const liensUtiles = [
     title: 'SlideGo',
     link: 'https://slidesgo.com/',
   },
+  {
+    title: 'CNRTL',
+    link: 'https://www.cnrtl.fr/',
+  },
+  {
+    title: 'DeepL',
+    link: 'https://www.deepl.com/translator',
+  },
+  {
+    title: 'Wolfram|Alpha',
+    link: 'https://www.wolframalpha.com/',
+  },
+  {
+    title: 'Quizlet',
+    link: 'https://quizlet.com',
+  },
 ];
 localStorage.setItem('Branches', JSON.stringify(branches));
 
@@ -183,6 +198,11 @@ function logoutaccount() {
     'pp_profil',
     'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg'
   );
+  CommentStore.NewLogin = {
+    name: '',
+    mail: '',
+    password: '',
+  };
   login.value = false;
 }
 
