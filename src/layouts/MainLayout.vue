@@ -5,7 +5,7 @@
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
         <q-tabs align="left">
-          <q-route-tab to="/fffff" @click="ResetMode()" label="Home Page" />
+          <q-route-tab to="/" @click="ResetMode()" label="Home Page" />
           <q-route-tab to="/" @click="followedComments()" label="Suivis" />
         </q-tabs>
 

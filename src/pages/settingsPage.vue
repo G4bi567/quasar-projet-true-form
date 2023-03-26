@@ -9,7 +9,7 @@
           <q-btn
             @click="CommentStore.resetComment('localStorage')"
             style="width: 150px; background: secondary"
-            label="reset publications"
+            label="Supprimer les publications"
             to="/"
           />
         </div>
