@@ -44,7 +44,7 @@ CommentStore.loadComments('localStorage');
 UserStore.profilload();
 //permet de savoir le nombre de pages disponible
 const paginationnumber = reactive({
-  index: 1 + Math.floor(CommentStore.commentsList.length / 6),
+  index: Math.ceil(CommentStore.commentsList.length / 5),
 });
 
 //création de variable des
@@ -57,30 +57,25 @@ function pagination(current) {
       (current - 1) * 5,
       current * 5
     );
-    paginationnumber.index =
-      1 + Math.floor(CommentStore.commentsList.length / 6);
+    paginationnumber.index = Math.ceil(CommentStore.commentsList.length / 5);
   } else if (CommentStore.filteroptiontype == 'branche') {
     UpdatedList.value = CommentStore.commentsList
       .filter((post) => post.branche == CommentStore.filteroption)
       .slice((current - 1) * 5, current * 5);
-    paginationnumber.index =
-      1 +
-      Math.floor(
-        CommentStore.commentsList.filter(
-          (post) => post.branche == CommentStore.filteroption
-        ).length / 6
-      );
+    paginationnumber.index = Math.ceil(
+      CommentStore.commentsList.filter(
+        (post) => post.branche == CommentStore.filteroption
+      ).length / 5
+    );
   } else if (CommentStore.filteroptiontype == 'name') {
     UpdatedList.value = CommentStore.commentsList
       .filter((post) => post.name == CommentStore.filteroption)
       .slice((current - 1) * 5, current * 5);
-    paginationnumber.index =
-      1 +
-      Math.floor(
-        CommentStore.commentsList.filter(
-          (post) => post.name == CommentStore.filteroption
-        ).length / 6
-      );
+    paginationnumber.index = Math.ceil(
+      CommentStore.commentsList.filter(
+        (post) => post.name == CommentStore.filteroption
+      ).length / 5
+    );
   } else if (CommentStore.filteroptiontype == 'follow') {
     UpdatedList.value = CommentStore.commentsList
       .filter((post) => UserStore.followed.indexOf(post.id) >= 0)
