@@ -94,10 +94,9 @@ export const useCommentStore = defineStore('commentStore', {
       }
     },
 
-    async addPost(comment, location) {
+    async addPost(comment, nameprofil, location) {
       // Mise à jour état local (il ne faudra plus utiliser le localStorage pour la photo de profi et le profil mais il faudra créer un autre store 'user')
-
-      comment.name = CommentStore.NewLogin.name;
+      comment.name = nameprofil;
       comment.date = date.formatDate(Date.now(), 'DD-MM-YYYY');
       comment.pp_profil = localStorage.getItem('pp_profil');
       comment.comment = [];

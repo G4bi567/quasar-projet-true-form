@@ -32,19 +32,13 @@ export const useUserStore = defineStore('userStore', {
       }
     },
     async profilload() {
-      alert(1);
       const newlogin = JSON.parse(localStorage.getItem('profil'));
-      localStorage.setItem('loginvar3', JSON.stringify(newlogin));
-      alert(1);
       if (newlogin == null) {
         this.isLogVar = false;
-        alert(this.isLogVar);
       } else {
-        alert(2);
         this.isLogVar = true;
-        this.NewLogin = JSON.parse(newlogin);
-        alert(1);
-        localStorage.setItem('loginvar5', JSON.stringify(this.NewLogin));
+
+        this.NewLogin = newlogin;
       }
     },
   },

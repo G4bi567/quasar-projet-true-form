@@ -41,7 +41,7 @@ const CommentStore = useCommentStore();
 
 //importer la liste des commentaires
 CommentStore.loadComments('localStorage');
-
+UserStore.profilload();
 //permet de savoir le nombre de pages disponible
 const paginationnumber = reactive({
   index: 1 + Math.floor(CommentStore.commentsList.length / 6),

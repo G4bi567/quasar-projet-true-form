@@ -110,10 +110,14 @@
 
 <script setup>
 import { reactive } from 'vue';
+import { useUserStore } from 'stores/utilisateur.js';
 import { useCommentStore } from 'stores/comment.js';
 
 //permet d'accéder au store
 const CommentStore = useCommentStore();
+//permet d'accéder au store
+
+const UserStore = useUserStore();
 
 const branches = JSON.parse(localStorage.getItem('Branches'));
 
@@ -142,7 +146,8 @@ function isAvailable(NewPost) {
     NewPost.description !== ''
   ) {
     CommentStore.isAvailableVar = true;
-    CommentStore.addPost(NewPost, 'localStorage');
+
+    CommentStore.addPost(NewPost, UserStore.NewLogin.name, 'localStorage');
     resetNewPost();
   }
 }

@@ -107,7 +107,7 @@ const CommentStore = useCommentStore();
 
 const UserStore = useUserStore();
 
-UserStore.profilload();
+
 
 const fabVar = ref(false);
 
