@@ -94,29 +94,22 @@ export const useCommentStore = defineStore('commentStore', {
       }
     },
 
-    async addComment(type, id, comment2, nameprofil, pp_profil, location) {
+    async addComment(type, id, comment, nameprofil, pp_profil, location) {
       // enregistrer les informations personnelles et ajouter des nouvelles informations
-      comment2.name = nameprofil;
-      comment2.date = date.formatDate(Date.now(), 'DD-MM-YYYY');
-      comment2.pp_profil = pp_profil;
-      comment2.comment = [];
+      comment.name = nameprofil;
+      comment.date = date.formatDate(Date.now(), 'DD-MM-YYYY');
+      comment.pp_profil = pp_profil;
+      comment.comment = [];
 
-      // trouver l'index max du commentaire dans la liste des publications
+      //définir la liste sur laquelle on veut ajouter quelquechose
       if (type == 'comment') {
         this.commentstomodify = this.commentsList.filter(
           (post) => post.id == id
         )[0].comment;
-        localStorage.setItem(
-          'profilffdjf',
-          JSON.stringify(this.commentstomodify)
-        );
       } else {
         this.commentstomodify = this.commentsList;
-        localStorage.setItem(
-          'profilffdjf',
-          JSON.stringify(this.commentstomodify)
-        );
       }
+      // trouver l'index max du commentaire dans la liste des publications
       var maxId = 0;
       comment2.id = maxId;
       if (this.commentstomodify.length !== 0) {
@@ -128,7 +121,7 @@ export const useCommentStore = defineStore('commentStore', {
           }
           if (this.commentstomodify[i].id >= maxId) {
             maxId = parseInt(this.commentstomodify[i].id);
-            comment2.id = maxId + 1;
+            comment.id = maxId + 1;
           }
         }
       }
@@ -137,9 +130,9 @@ export const useCommentStore = defineStore('commentStore', {
       if (type == 'comment') {
         this.commentsList
           .filter((post) => post.id == id)[0]
-          .comment.unshift({ ...comment2 });
+          .comment.unshift({ ...comment });
       } else {
-        this.commentsList.unshift({ ...comment2 });
+        this.commentsList.unshift({ ...comment });
       }
 
       if (location === 'localStorage') {
