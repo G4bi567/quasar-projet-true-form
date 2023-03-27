@@ -163,7 +163,7 @@
             icon-right="send"
             label="Répondre"
             @click="
-              CommentStore.addComment(id, NewComment, 'localStorage');
+              CommentStore.addComment(id, NewComment,UserStore.NewLogin.name,UserStore.pp_profil, 'localStorage');
               ResetNewComment();
             "
           />

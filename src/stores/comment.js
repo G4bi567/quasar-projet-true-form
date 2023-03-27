@@ -134,11 +134,11 @@ export const useCommentStore = defineStore('commentStore', {
         // }
       }
     },
-    async addComment(id, comment, location) {
+    async addComment(id, comment, nameprofil, pp_profil, location) {
       // Mise à jour état local (il ne faudra plus utiliser le localStorage pour la photo de profi et le profil mais il faudra créer un autre store 'user')
-      comment.name = JSON.parse(localStorage.getItem('profil')).name;
+      comment.name = nameprofil;
       comment.date = date.formatDate(Date.now(), 'DD-MM-YYYY');
-      comment.pp_profil = localStorage.getItem('pp_profil');
+      comment.pp_profil = pp_profil;
       comment.comment = [];
       localStorage.setItem('d', JSON.stringify(this.commentsList[id - 1]));
       this.commentstomodify = this.commentsList[id - 1].comment;
