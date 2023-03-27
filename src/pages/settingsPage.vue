@@ -15,7 +15,7 @@
         </div>
         <div class="col,margin-top: 30">
           <q-btn
-            @click="$emit(`logout`)"
+            @click="UserStore.logOut('localStorage'), $emit(`logout`)"
             style="width: 150px; background: secondary"
             label="Se déconnecter"
             to="/"
@@ -47,9 +47,16 @@
 </template>
 
 <script setup>
-import { useCommentStore } from 'stores/comment.js';
 import { ref } from 'vue';
+import { useUserStore } from 'stores/utilisateur.js';
+import { useCommentStore } from 'stores/comment.js';
+
+//permet d'accéder au store
 const CommentStore = useCommentStore();
+//permet d'accéder au store
+
+const UserStore = useUserStore();
+
 const newLink = ref('');
 function changePpProfil() {
   localStorage.setItem('pp_profil', newLink.value);

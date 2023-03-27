@@ -78,7 +78,7 @@
         </div>
       </q-item-label>
     </q-drawer>
-    <q-page-container class="bgColor" v-show="login == false">
+    <q-page-container class="bgColor" v-show="UserStore.isLogVar == false">
       <Login @logInFinished="TurnoffLogInPage()" />
     </q-page-container>
     <!--first part, if login is false, (login is a variable that is false if there is no data about the user), then if it is false, it displays a page in order to provide the data-->
@@ -106,6 +106,8 @@ const CommentStore = useCommentStore();
 //permet d'accéder au store
 
 const UserStore = useUserStore();
+
+UserStore.profilload();
 
 const fabVar = ref(false);
 
@@ -170,6 +172,7 @@ const rightDrawerOpen = ref(false);
 const writeComment = ref(false);
 
 const login = ref(localStorage.getItem('profil') === null ? false : true);
+localStorage.setItem('loginvariable', login.value);
 
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;

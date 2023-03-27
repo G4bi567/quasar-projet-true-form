@@ -62,7 +62,7 @@ function controlTheValues() {
   ) {
     notcompleted.value = false;
 
-    UserStore.loginVariable(UserStore.NewLogin, 'localStorage');
+    UserStore.loginVariable('localStorage');
   }
 }
 </script>
