@@ -115,7 +115,6 @@ export const useCommentStore = defineStore('commentStore', {
       if (this.commentstomodify.length !== 0) {
         let maxId = -1;
         for (let i = 0; i < this.commentstomodify.length; i++) {
-          console.log(this.commentstomodify[i].id);
           if (this.commentstomodify[i].id === null) {
             this.commentstomodify[i].id = 0;
           }
