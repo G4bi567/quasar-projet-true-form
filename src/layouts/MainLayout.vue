@@ -164,9 +164,6 @@ const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
 const writeComment = ref(false);
 
-const login = ref(localStorage.getItem('profil') === null ? false : true);
-localStorage.setItem('loginvariable', login.value);
-
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }

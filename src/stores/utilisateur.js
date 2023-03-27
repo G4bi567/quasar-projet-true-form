@@ -34,13 +34,11 @@ export const useUserStore = defineStore('userStore', {
       }
     },
     changePpProfil(newLink) {
-
       localStorage.setItem('pp_profil', newLink);
 
       this.pp_profil = newLink.value;
 
       newLink = '';
-
     },
     async profilload() {
       const newlogin = JSON.parse(localStorage.getItem('profil'));

@@ -41,7 +41,7 @@
           label="Envoyer"
           @click="isAvailable(newLink)"
         />
-        <div v-if="ismodified == true">
+        <div v-if="ismodified == false">
           Vous avez changé votre photo d'écran
         </div>
       </div>
@@ -59,6 +59,7 @@ const CommentStore = useCommentStore();
 //permet d'accéder au store
 
 const UserStore = useUserStore();
+UserStore.profilload();
 const ismodified = ref(true);
 const newLink = ref('');
 function isAvailable(newLink) {
@@ -67,17 +68,12 @@ function isAvailable(newLink) {
     img.src = newLink;
 
     img.onload = function () {
-      // The photo is available, do something here
-      alert('Votre photo a été modifié');
       UserStore.changePpProfil(newLink);
-      alert('Votre photo a été modifié');
-      console.log('Photo is available!');
+      ismodified.value = true;
     };
 
     img.onerror = function () {
-      alert("Votre Url n'est pas une photo");
-      // The photo is not available, do something here
-      console.log('Photo is not available!');
+      ismodified.value = false;
     };
   }
 }
