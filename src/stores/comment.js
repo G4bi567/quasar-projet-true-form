@@ -109,9 +109,9 @@ export const useCommentStore = defineStore('commentStore', {
       } else {
         this.commentstomodify = this.commentsList;
       }
-      // trouver l'index max du commentaire dans la liste des publications
+      // trouver l'index max du commentaire/publication dans la liste des publications
       var maxId = 0;
-      comment2.id = maxId;
+      comment.id = maxId;
       if (this.commentstomodify.length !== 0) {
         let maxId = -1;
         for (let i = 0; i < this.commentstomodify.length; i++) {
