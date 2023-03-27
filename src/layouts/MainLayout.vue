@@ -36,7 +36,7 @@
             color="primary"
             to="/settings"
             icon="settings"
-            label="Paramètres"
+            label="Paramètre"
             @click="ResetMode()"
           />
         </q-fab>
