@@ -107,8 +107,6 @@ const CommentStore = useCommentStore();
 
 const UserStore = useUserStore();
 
-
-
 const fabVar = ref(false);
 
 const branches = [
@@ -161,11 +159,6 @@ const liensUtiles = [
   },
 ];
 localStorage.setItem('Branches', JSON.stringify(branches));
-
-localStorage.setItem(
-  'pp_profil',
-  'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg'
-);
 
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);

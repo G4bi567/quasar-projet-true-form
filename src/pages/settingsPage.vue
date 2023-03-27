@@ -39,8 +39,11 @@
           icon="profi"
           icon-right="send"
           label="Envoyer"
-          @click="changePpProfil()"
+          @click="isAvailable(newLink)"
         />
+        <div v-if="ismodified == true">
+          Vous avez changé votre photo d'écran
+        </div>
       </div>
     </div>
   </div>
@@ -56,10 +59,27 @@ const CommentStore = useCommentStore();
 //permet d'accéder au store
 
 const UserStore = useUserStore();
-
+const ismodified = ref(true);
 const newLink = ref('');
-function changePpProfil() {
-  localStorage.setItem('pp_profil', newLink.value);
+function isAvailable(newLink) {
+  if (newLink) {
+    const img = new Image();
+    img.src = newLink;
+
+    img.onload = function () {
+      // The photo is available, do something here
+      alert('Votre photo a été modifié');
+      UserStore.changePpProfil(newLink);
+      alert('Votre photo a été modifié');
+      console.log('Photo is available!');
+    };
+
+    img.onerror = function () {
+      alert("Votre Url n'est pas une photo");
+      // The photo is not available, do something here
+      console.log('Photo is not available!');
+    };
+  }
 }
 </script>
 <style>

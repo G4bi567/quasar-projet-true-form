@@ -28,8 +28,19 @@ export const useUserStore = defineStore('userStore', {
           password: '',
         };
         this.isLogVar = false;
+        this.pp_profil =
+          'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg';
         localStorage.setItem('profil', null);
       }
+    },
+    changePpProfil(newLink) {
+
+      localStorage.setItem('pp_profil', newLink);
+
+      this.pp_profil = newLink.value;
+
+      newLink = '';
+
     },
     async profilload() {
       const newlogin = JSON.parse(localStorage.getItem('profil'));
@@ -37,7 +48,7 @@ export const useUserStore = defineStore('userStore', {
         this.isLogVar = false;
       } else {
         this.isLogVar = true;
-
+        this.pp_profil = localStorage.getItem('pp_profil');
         this.NewLogin = newlogin;
       }
     },

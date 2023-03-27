@@ -94,17 +94,13 @@ export const useCommentStore = defineStore('commentStore', {
       }
     },
 
-    async addPost(comment, nameprofil, location) {
+    async addPost(comment, nameprofil, pp_profil, location) {
       // Mise à jour état local (il ne faudra plus utiliser le localStorage pour la photo de profi et le profil mais il faudra créer un autre store 'user')
       comment.name = nameprofil;
       comment.date = date.formatDate(Date.now(), 'DD-MM-YYYY');
-      comment.pp_profil = localStorage.getItem('pp_profil');
+      comment.pp_profil = pp_profil;
       comment.comment = [];
 
-      // comment.id = Math.max.apply(Math, this.commentsList.map(function(object) { return object.id; }))+1;
-      // if (!comment.id){
-      //   comment.id = 0;
-      // }
       var maxId = 0;
       comment.id = maxId;
       if (this.commentsList.length !== 0) {

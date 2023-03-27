@@ -147,7 +147,12 @@ function isAvailable(NewPost) {
   ) {
     CommentStore.isAvailableVar = true;
 
-    CommentStore.addPost(NewPost, UserStore.NewLogin.name, 'localStorage');
+    CommentStore.addPost(
+      NewPost,
+      UserStore.NewLogin.name,
+      UserStore.pp_profil,
+      'localStorage'
+    );
     resetNewPost();
   }
 }
