@@ -18,6 +18,9 @@ export const useUserStore = defineStore('userStore', {
       if (location === 'localStorage') {
         this.isLogVar = true;
         localStorage.setItem('profil', JSON.stringify(this.NewLogin));
+        this.pp_profil =
+          'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg';
+        localStorage.setItem('pp_profil', this.pp_profil);
       }
     },
     logOut(location) {
@@ -28,8 +31,7 @@ export const useUserStore = defineStore('userStore', {
           password: '',
         };
         this.isLogVar = false;
-        this.pp_profil =
-          'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg';
+
         localStorage.setItem('profil', null);
       }
     },

@@ -163,10 +163,11 @@
             icon-right="send"
             label="Répondre"
             @click="
-              CommentStore.addComment(id, NewComment,UserStore.NewLogin.name,UserStore.pp_profil, 'localStorage');
+              isAvailable(NewComment, id);
               ResetNewComment();
             "
           />
+          <div v-if="completed == false">Il n'y a pas de commentaire</div>
         </div>
         <div v-if="comment.length" class="positionInputButtonComments">
           <LayerPostComment v-for="co in comment" :key="co.id" v-bind="co" />
@@ -192,7 +193,7 @@ const CommentStore = useCommentStore();
 // je ne peux pas ajouter/supprimer les commentaires dans les comemntaires
 // mais avec une base de données, ceci sera possible
 const commentView = ref(false);
-
+const completed = ref(true);
 function commentOn() {
   commentView.value = !commentView.value;
 }
@@ -226,6 +227,20 @@ function listFollowMake(id) {
     UserStore.followed.shift(id);
   } else {
     UserStore.followed.push(id);
+  }
+}
+function isAvailable(NewPost, id) {
+  completed.value = false;
+  if (NewPost.description !== '') {
+    completed.value = true;
+    CommentStore.addComment(
+      'comment',
+      id,
+      NewComment,
+      UserStore.NewLogin.name,
+      UserStore.pp_profil,
+      'localStorage'
+    );
   }
 }
 </script>

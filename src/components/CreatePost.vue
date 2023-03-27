@@ -128,7 +128,6 @@ const NewPost = reactive({
   name: '',
   id: '',
   date: '',
-  pp_profil: '',
   comment: [],
 });
 
@@ -146,8 +145,9 @@ function isAvailable(NewPost) {
     NewPost.description !== ''
   ) {
     CommentStore.isAvailableVar = true;
-
-    CommentStore.addPost(
+    CommentStore.addComment(
+      'post',
+      NewPost.id,
       NewPost,
       UserStore.NewLogin.name,
       UserStore.pp_profil,

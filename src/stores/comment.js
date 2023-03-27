@@ -94,56 +94,31 @@ export const useCommentStore = defineStore('commentStore', {
       }
     },
 
-    async addPost(comment, nameprofil, pp_profil, location) {
-      // Mise à jour état local (il ne faudra plus utiliser le localStorage pour la photo de profi et le profil mais il faudra créer un autre store 'user')
-      comment.name = nameprofil;
-      comment.date = date.formatDate(Date.now(), 'DD-MM-YYYY');
-      comment.pp_profil = pp_profil;
-      comment.comment = [];
+    async addComment(type, id, comment2, nameprofil, pp_profil, location) {
+      // enregistrer les informations personnelles et ajouter des nouvelles informations
+      comment2.name = nameprofil;
+      comment2.date = date.formatDate(Date.now(), 'DD-MM-YYYY');
+      comment2.pp_profil = pp_profil;
+      comment2.comment = [];
 
-      var maxId = 0;
-      comment.id = maxId;
-      if (this.commentsList.length !== 0) {
-        let maxId = -1;
-        for (let i = 0; i < this.commentsList.length; i++) {
-          console.log(this.commentsList[i].id);
-          if (this.commentsList[i].id === null) {
-            this.commentsList[i].id = 0;
-          }
-          if (this.commentsList[i].id >= maxId) {
-            maxId = parseInt(this.commentsList[i].id);
-            comment.id = maxId + 1;
-          }
-        }
-      }
-
-      this.commentsList.unshift({ ...comment });
-      if (location === 'localStorage') {
-        localStorage.setItem('data', JSON.stringify(this.commentsList));
+      // trouver l'index max du commentaire dans la liste des publications
+      if (type == 'comment') {
+        this.commentstomodify = this.commentsList.filter(
+          (post) => post.id == id
+        )[0].comment;
+        localStorage.setItem(
+          'profilffdjf',
+          JSON.stringify(this.commentstomodify)
+        );
       } else {
-        // Sauvegarder dans le backend
-        // Utilisation de fetch pour aller récupérer les données du backend à l'aide d'une API
-        // try {
-        //     await fetch('https://your-backend-url.com/comments', {
-        //         method: 'POST',
-        //         headers: { 'Content-Type': 'application/json' },
-        //         body: JSON.stringify(comment),
-        //     })
-        // } catch (error) {
-        //     console.error(error)
-        // }
+        this.commentstomodify = this.commentsList;
+        localStorage.setItem(
+          'profilffdjf',
+          JSON.stringify(this.commentstomodify)
+        );
       }
-    },
-    async addComment(id, comment, nameprofil, pp_profil, location) {
-      // Mise à jour état local (il ne faudra plus utiliser le localStorage pour la photo de profi et le profil mais il faudra créer un autre store 'user')
-      comment.name = nameprofil;
-      comment.date = date.formatDate(Date.now(), 'DD-MM-YYYY');
-      comment.pp_profil = pp_profil;
-      comment.comment = [];
-      localStorage.setItem('d', JSON.stringify(this.commentsList[id - 1]));
-      this.commentstomodify = this.commentsList[id - 1].comment;
       var maxId = 0;
-      comment.id = maxId;
+      comment2.id = maxId;
       if (this.commentstomodify.length !== 0) {
         let maxId = -1;
         for (let i = 0; i < this.commentstomodify.length; i++) {
@@ -153,12 +128,22 @@ export const useCommentStore = defineStore('commentStore', {
           }
           if (this.commentstomodify[i].id >= maxId) {
             maxId = parseInt(this.commentstomodify[i].id);
-            comment.id = maxId + 1;
+            comment2.id = maxId + 1;
           }
         }
       }
-      this.commentsList[id - 1].comment.unshift({ ...comment });
+
+      //enregistrer la liste dans la variable commentsList
+      if (type == 'comment') {
+        this.commentsList
+          .filter((post) => post.id == id)[0]
+          .comment.unshift({ ...comment2 });
+      } else {
+        this.commentsList.unshift({ ...comment2 });
+      }
+
       if (location === 'localStorage') {
+        //enregistrer la liste dans le local Storage
         localStorage.setItem('data', JSON.stringify(this.commentsList));
       } else {
         // Sauvegarder dans le backend
