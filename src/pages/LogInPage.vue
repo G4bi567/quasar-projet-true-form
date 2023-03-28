@@ -6,6 +6,10 @@
         outlined
         dark
         v-model="UserStore.NewLogin.name"
+        @keydown.enter="
+          controlTheValues();
+          $emit(`logInFinished`);
+        "
         label="name "
       />
       <q-input
@@ -13,13 +17,20 @@
         outlined
         dark
         v-model="UserStore.NewLogin.mail"
+        @keydown.enter="
+          controlTheValues();
+          $emit(`logInFinished`);
+        "
         label="email"
       />
       <q-input
         style="margin: 10px"
         outlined
         dark
-        @keyup.enter="controlTheValues()"
+        @keydown.enter="
+          controlTheValues();
+          $emit(`logInFinished`);
+        "
         v-model="UserStore.NewLogin.password"
         label="password"
         type="password"
@@ -28,7 +39,7 @@
 
     <div class="flex flex-center" style="margin: 10px">
       <q-btn
-        @click="
+        @keydown.enter="
           controlTheValues();
           $emit(`logInFinished`);
         "
