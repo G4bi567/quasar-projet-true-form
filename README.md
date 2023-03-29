@@ -80,7 +80,7 @@ Node.js est un environnement d’exécution JavaScript côté serveur. Grâce à
 
 4. Installer yarn avec le terminal en écrivant le code suivant et en appuyant sur enter:
 
-  ```bash
+````bash
 
 	npm install --global yarn
 
