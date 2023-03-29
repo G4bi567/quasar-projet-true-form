@@ -95,7 +95,6 @@ Yarn est un gestionnaire de paquets pour JavaScript, créé par Facebook, et est
 	```
 
 6.	Installer les indépendances avec le terminal en écrivant:
-   
    ```bash
 	yarn install
 	```
