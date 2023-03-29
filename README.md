@@ -91,21 +91,19 @@ Yarn est un gestionnaire de paquets pour JavaScript, créé par Facebook, et est
 5. Télécharger et extraire le code du projet sur https://github.com/G4bi567/quasar-projet-true-form. Il faut ensuite ouvrir le dossier en le glissant dans Visual Studio Code ou en allant dans Fichier > Ouvrir le dossier > ... et en choisissant le dossier du travail. Ce projet est stocké sur GitHub, si Git est installé sur la machine utilisée, il est aussi possible d'utiliser la commande suivante dans le terminal dans le but d'installer le projet :
 
 	```bash
-
 	git clone https://github.com/G4bi567/quasar-projet-true-form
-
 	```
 
 6.	Installer les indépendances avec le terminal en écrivant:
+   
    ```bash
-
 	yarn install
 	```
 
 
 7.	Pour accéder au projet, il faut exécuter dans le terminal:
+   
    ```bash
-
 	quasar dev
 	```
 
