@@ -53,7 +53,7 @@ Voici les étapes à suivre:
 
 Afin de pouvoir lancer le projet sur un ordinateur, il faut respecter une série d’étapes. Si Visual Studio Code est déjà installé, le numéro 1 n’a pas besoin d’être fait. Si Node.Js l’est aussi, le numéro 2 n’a non plus besoin d’être fait.
 
-1. Télécharger et installer {index}`Visual Studio code`. Le fichier .exe peut être retrouvé sur le site officiel : https://code.visualstudio.com/ ; il faut choisir la version adaptée au système d’exploitation de l'ordinateur, comme Windows, MacOs, Linux.
+1. Télécharger et installer Visual Studio code. Le fichier .exe peut être retrouvé sur le site officiel : https://code.visualstudio.com/ ; il faut choisir la version adaptée au système d’exploitation de l'ordinateur, comme Windows, MacOs, Linux.
 
 Visual Studio Code, souvent abrégé en VSCode, est un logiciel libre de Microsoft pour Windows, Linux et MacOS. Il est conçu pour aider les développeurs à créer, déboguer et déployer des applications logicielles. VSCode offre des fonctionnalités telles que la complétion de code, la prise en charge du débogage, la refactorisation du code, l’intégration de systèmes de contrôle tel que Git, la prise en charge des extensions, etc. Il prend également en charge de nombreux langages de programmation, notamment C++, Python, HTML, CSS, JavaScript, TypeScript, etc. Un des points les plus avantageux est le grand nombre d’extensions, qui permet aux développeurs de personnaliser leur environnement de travail et d’améliorer leurs productivités.
 
@@ -94,7 +94,8 @@ Yarn est un gestionnaire de paquets pour JavaScript, créé par Facebook, et est
 	git clone https://github.com/G4bi567/quasar-projet-true-form
 	```
 
-6.	Installer les indépendances avec le terminal en écrivant:
+6. Installer les indépendances avec le terminal en écrivant:
+
    ```bash
 	yarn install
 	```
