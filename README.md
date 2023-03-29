@@ -114,4 +114,3 @@ Cela démarre le serveur de développement. Finalement, un nouvel onglet s’ouv
 ## Contributing
 
 Ceci est un projet pour un travail de maturité.
-````
