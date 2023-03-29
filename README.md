@@ -26,7 +26,7 @@ quasar dev
 Le plus simple, pour démarrer, est de forker ce dépôt dans votre propre compte
 GitHub et cloner ce dernier sur votre machine locale ou dans un IDE en ligne tel que Gitpod.
 
-## Installation sur Gitpod
+### Installation sur Gitpod
 
 Voici les étapes à suivre:
 
@@ -49,7 +49,7 @@ Voici les étapes à suivre:
    quasar dev
    ```
 
-## Installation sur un VSC
+### Installation sur VSC
 
 Afin de pouvoir lancer le projet sur un ordinateur, il faut respecter une série d’étapes. Si Visual Studio Code est déjà installé, le numéro 1 n’a pas besoin d’être fait. Si Node.Js l’est aussi, le numéro 2 n’a non plus besoin d’être fait.
 
@@ -82,33 +82,28 @@ Node.js est un environnement d’exécution JavaScript côté serveur. Grâce à
 
    ```bash
 
-	npm install --global yarn
+   npm install --global yarn
 
-	```
+   ```
 
 Yarn est un gestionnaire de paquets pour JavaScript, créé par Facebook, et est compatible avec NPM et Node.js. Un des avantages par rapport à NPM est le fait qu’il arrive à installer les dépendances et les paquets plus rapidement.
 
 5. Télécharger et extraire le code du projet sur https://github.com/G4bi567/quasar-projet-true-form. Il faut ensuite ouvrir le dossier en le glissant dans Visual Studio Code ou en allant dans Fichier > Ouvrir le dossier > ... et en choisissant le dossier du travail. Ce projet est stocké sur GitHub, si Git est installé sur la machine utilisée, il est aussi possible d'utiliser la commande suivante dans le terminal dans le but d'installer le projet :
 
-	```bash
-	git clone https://github.com/G4bi567/quasar-projet-true-form
-	```
+   ```bash
+   git clone https://github.com/G4bi567/quasar-projet-true-form
+   ```
 
 6. Installer les indépendances avec le terminal en écrivant:
 
    ```bash
-	yarn install
-	```
-
+   yarn install
+   ```
 
 7. Pour accéder au projet, il faut exécuter dans le terminal:
-   
+
    ```bash
-	quasar dev
-	```
+   quasar dev
+   ```
 
 Cela démarre le serveur de développement. Finalement, un nouvel onglet s’ouvre. Cependant si rien ne s’ouvre, il faut appuyer sur « ctrl +click » dans le terminal sur http://localhost... .
-
-## Contributing
-
-Ceci est un projet pour un travail de maturité.
