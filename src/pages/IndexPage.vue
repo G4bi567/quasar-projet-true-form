@@ -85,7 +85,7 @@ function pagination(current) {
       Math.floor(
         CommentStore.commentsList.filter(
           (post) => UserStore.followed.indexOf(post.id) >= 0
-        ).length / 6
+        ).length / 5
       );
   }
 }
