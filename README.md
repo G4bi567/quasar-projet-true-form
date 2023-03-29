@@ -101,7 +101,7 @@ Yarn est un gestionnaire de paquets pour JavaScript, créé par Facebook, et est
 	```
 
 
-7.	Pour accéder au projet, il faut exécuter dans le terminal:
+7. Pour accéder au projet, il faut exécuter dans le terminal:
    
    ```bash
 	quasar dev
