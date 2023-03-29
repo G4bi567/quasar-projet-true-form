@@ -138,16 +138,12 @@ const liensUtiles = [
     link: 'https://www.deepl.com/translator',
   },
   {
-    title: 'SlideGo',
+    title: 'SlidesGo',
     link: 'https://slidesgo.com/',
   },
   {
     title: 'CNRTL',
     link: 'https://www.cnrtl.fr/',
-  },
-  {
-    title: 'DeepL',
-    link: 'https://www.deepl.com/translator',
   },
   {
     title: 'Wolfram|Alpha',
