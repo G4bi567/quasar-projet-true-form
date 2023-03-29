@@ -21,7 +21,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item-section side v-if="title !== undefined">
+        <q-item-section side v-if="title !== undefined ">
           <q-btn-dropdown color="secondary">
             <q-list>
               <q-item

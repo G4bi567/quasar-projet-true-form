@@ -39,7 +39,7 @@
 
     <div class="flex flex-center" style="margin: 10px">
       <q-btn
-        @keydown.enter="
+        @click="
           controlTheValues();
           $emit(`logInFinished`);
         "

@@ -1,10 +1,10 @@
 <template>
   <div>
     <div v-show="CommentStore.filteroptiontype === null">
-      <h1 class="row justify-center text-center align-center">Récents</h1>
+      <h1 class="test row justify-center text-center align-center">Récents</h1>
     </div>
     <div v-show="CommentStore.filteroptiontype !== null">
-      <h1 class="row justify-center text-center align-center">
+      <h1 class="test row justify-center text-center align-center">
         {{ CommentStore.filteroption }}
       </h1>
     </div>
@@ -92,10 +92,10 @@ function pagination(current) {
 </script>
 
 <style>
-h1 {
+.test {
   margin: 50px auto;
-  width: 350px;
   border-radius: 20px;
+  width: 350px;
   background-color: #1e252b;
   color: white;
   padding: 5px 10px;
