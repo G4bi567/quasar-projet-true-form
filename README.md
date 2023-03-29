@@ -73,21 +73,36 @@ Node.js est un environnement d’exécution JavaScript côté serveur. Grâce à
 	```
 	Ces deux commandes permettent de donner la version de Node.js et NPM.
 
-4.	Installer yarn avec le terminal en écrivant « npm install --global yarn » et en appuyant sur enter.
+4.	Installer yarn avec le terminal en écrivant le code suivant et en appuyant sur enter:
+  ```bash
+
+	npm install --global yarn
+	```
 
 Yarn est un gestionnaire de paquets pour JavaScript, créé par Facebook, et est compatible avec NPM et Node.js. Un des avantages par rapport à NPM est le fait qu’il arrive à installer les dépendances et les paquets plus rapidement. 
 
 5. Télécharger et extraire le code du projet sur https://github.com/G4bi567/quasar-projet-true-form. Il faut ensuite ouvrir le dossier en le glissant dans Visual Studio Code ou en allant dans Fichier > Ouvrir le dossier > ... et en choisissant le dossier du travail. Ce projet est stocké sur GitHub, si Git est installé sur la machine utilisée, il est aussi possible d'utiliser la commande suivante dans le terminal dans le but d'installer le projet :
+
 	```bash
 
 	git clone https://github.com/G4bi567/quasar-projet-true-form
 
 	```
 
-6.	Installer les indépendances avec le terminal en écrivant « yarn install ».
+6.	Installer les indépendances avec le terminal en écrivant:
+  ```bash
+
+	yarn install
+	```
 
 
-7.	Pour accéder au projet, il faut exécuter « quasar dev » dans le terminal. Cela démarre le serveur de développement. Finalement, un nouvel onglet s’ouvre. Cependant si rien ne s’ouvre, il faut appuyer sur « ctrl +click » dans le terminal sur http://localhost... .
+7.	Pour accéder au projet, il faut exécuter dans le terminal:
+  ```bash
+
+	quasar dev
+	```
+
+Cela démarre le serveur de développement. Finalement, un nouvel onglet s’ouvre. Cependant si rien ne s’ouvre, il faut appuyer sur « ctrl +click » dans le terminal sur http://localhost... .
 
 ## Contributing
 
