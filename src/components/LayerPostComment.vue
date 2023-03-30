@@ -21,7 +21,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item-section side v-if="title !== undefined ">
+        <q-item-section side v-if="title !== undefined">
           <q-btn-dropdown color="secondary">
             <q-list>
               <q-item
@@ -214,7 +214,7 @@ const NewComment = reactive({
   description: '',
 });
 function filterVariable(variable) {
-  CommentStore.filteroption = variable;
+  CommentStore.filteroption = variable.slice(0, 10);
 }
 function definetypefilterbr() {
   CommentStore.filteroptiontype = 'branche';

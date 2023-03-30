@@ -223,9 +223,7 @@ function getTo(title) {
 .centerText {
   text-align: center;
 }
-.verticalAlign {
-  vertical-align: middle;
-}
+c
 .title {
   margin-left: 5px;
 }

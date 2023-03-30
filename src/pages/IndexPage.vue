@@ -1,12 +1,14 @@
 <template>
   <div>
-    <div v-show="CommentStore.filteroptiontype === null">
-      <h1 class="test row justify-center text-center align-center">Récents</h1>
-    </div>
-    <div v-show="CommentStore.filteroptiontype !== null">
-      <h1 class="test row justify-center text-center align-center">
-        {{ CommentStore.filteroption.slice(0, 10) }}
-      </h1>
+    <div class="row justify-center text-center align-center">
+      <div class="test" v-show="CommentStore.filteroptiontype === null">
+        <h1 class="white-text">Récents</h1>
+      </div>
+      <div class="test" v-show="CommentStore.filteroptiontype !== null">
+        <h1 class="white-text">
+          {{ CommentStore.filteroption }}
+        </h1>
+      </div>
     </div>
     <div>
       <layerPostComment
@@ -93,11 +95,12 @@ function pagination(current) {
 
 <style>
 .test {
-  margin: 50px auto;
-  border-radius: 20px;
-  width: 350px;
-  background-color: #1e252b;
+  margin-top: 40px;
+}
+.white-text {
   color: white;
-  padding: 5px 10px;
+  border-radius: 20px;
+  background-color: #1e252b;
+  padding: 30px 40px;
 }
 </style>
