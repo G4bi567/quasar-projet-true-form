@@ -5,7 +5,7 @@
     </div>
     <div v-show="CommentStore.filteroptiontype !== null">
       <h1 class="test row justify-center text-center align-center">
-        {{ CommentStore.filteroption }}
+        {{ CommentStore.filteroption.slice(0, 10) }}
       </h1>
     </div>
     <div>
