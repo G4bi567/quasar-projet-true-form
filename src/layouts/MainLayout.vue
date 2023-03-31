@@ -3,12 +3,28 @@
     <q-header reveal elevated class="bg-primary text-white paddHeader">
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
-
-        <q-tabs align="left">
-          <q-route-tab to="/" @click="ResetMode()" label="Home Page" />
-          <q-route-tab to="/" @click="followedComments()" label="Suivis" />
-        </q-tabs>
-
+        <div
+          v-if="
+            (CommentStore.filteroptiontype == 'name',
+            CommentStore.filteroptiontype == 'branche')
+          "
+        >
+          <q-tabs indicator-class="no-underline" align="left">
+            <q-route-tab to="/" @click="ResetMode()" label="Home Page" />
+            <q-route-tab to="/" @click="followedComments()" label="Suivis" />
+          </q-tabs>
+        </div>
+        <div
+          v-if="
+            (CommentStore.filteroptiontype !== 'name',
+            CommentStore.filteroptiontype !== 'branche')
+          "
+        >
+          <q-tabs align="left">
+            <q-route-tab to="/" @click="ResetMode()" label="Home Page" />
+            <q-route-tab to="/" @click="followedComments()" label="Suivis" />
+          </q-tabs>
+        </div>
         <q-toolbar-title class="centerText">
           <img
             class="verticalAlign imgOptions"
@@ -115,7 +131,6 @@ const branches = [
   'Anglais ',
   'Latin',
   'Italien ',
-  'Latin ',
   'Grec',
   'Mathématiques',
   'Physique',
@@ -206,6 +221,7 @@ function followedComments() {
   CommentStore.filteroption = 'Suivis';
 }
 function getTo(title) {
+  CommentStore.filteroptiontitle = title;
   CommentStore.filteroption = title;
   CommentStore.filteroptiontype = 'branche';
 }
@@ -223,7 +239,10 @@ function getTo(title) {
 .centerText {
   text-align: center;
 }
-c .title {
+.verticalAlign {
+  vertical-align: middle;
+}
+.title {
   margin-left: 5px;
 }
 .imgOptions {

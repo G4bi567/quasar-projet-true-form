@@ -6,7 +6,7 @@
       </div>
       <div class="test" v-show="CommentStore.filteroptiontype !== null">
         <h1 class="white-text">
-          {{ CommentStore.filteroption }}
+          {{ CommentStore.filteroptiontitle }}
         </h1>
       </div>
     </div>
@@ -44,6 +44,7 @@ const CommentStore = useCommentStore();
 //importer la liste des commentaires
 CommentStore.loadComments('localStorage');
 UserStore.profilload();
+
 //permet de savoir le nombre de pages disponible
 const paginationnumber = reactive({
   index: Math.ceil(CommentStore.commentsList.length / 5),
@@ -98,9 +99,10 @@ function pagination(current) {
   margin-top: 40px;
 }
 .white-text {
+  font-size: 62px;
   color: white;
   border-radius: 20px;
   background-color: #1e252b;
-  padding: 30px 40px;
+  padding: 10px 20px;
 }
 </style>

@@ -6,6 +6,7 @@ export const useCommentStore = defineStore('commentStore', {
     commentsList: [],
     commentstomodify: [],
     filteroption: null,
+    filteroptiontitle: null,
     filteroptiontype: null,
     isAvailableVar: true,
     homePage: true,
