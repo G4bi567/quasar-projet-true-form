@@ -3,28 +3,20 @@
     <q-header reveal elevated class="bg-primary text-white paddHeader">
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
-        <div
-          v-if="
-            (CommentStore.filteroptiontype == 'name',
-            CommentStore.filteroptiontype == 'branche')
-          "
+        <q-tabs
+          v-model="CommentStore.tab"
+          indicator-class="no-underline"
+          align="left"
         >
-          <q-tabs indicator-class="no-underline" align="left">
-            <q-route-tab to="/" @click="ResetMode()" label="Home Page" />
-            <q-route-tab to="/" @click="followedComments()" label="Suivis" />
-          </q-tabs>
-        </div>
-        <div
-          v-if="
-            (CommentStore.filteroptiontype !== 'name',
-            CommentStore.filteroptiontype !== 'branche')
-          "
-        >
-          <q-tabs align="left">
-            <q-route-tab to="/" @click="ResetMode()" label="Home Page" />
-            <q-route-tab to="/" @click="followedComments()" label="Suivis" />
-          </q-tabs>
-        </div>
+          <q-route-tab
+            to="/"
+            @click="ResetMode()"
+            name="Home Page"
+            label="Home Page"
+          />
+          <q-route-tab to="/" @click="followedComments()" label="Suivis" />
+        </q-tabs>
+
         <q-toolbar-title class="centerText">
           <img
             class="verticalAlign imgOptions"
@@ -219,11 +211,13 @@ function TurnoffLogInPage() {
 function followedComments() {
   CommentStore.filteroptiontype = 'follow';
   CommentStore.filteroption = 'Suivis';
+  CommentStore.filteroptiontitle = 'Suivis';
 }
 function getTo(title) {
   CommentStore.filteroptiontitle = title;
   CommentStore.filteroption = title;
   CommentStore.filteroptiontype = 'branche';
+  CommentStore.tab = '';
 }
 </script>
 <style>

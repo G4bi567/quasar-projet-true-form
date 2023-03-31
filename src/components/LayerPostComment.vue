@@ -17,11 +17,14 @@
             </q-avatar>
           </q-item-section>
           <q-item-section>
-            <q-item-label class="text-white">{{ name }}</q-item-label>
+            <q-item-label class="profilname">{{ name }}</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item-section side v-if="title !== undefined">
+        <q-item-section
+          side
+          v-if="(title !== undefined, UserStore.NewLogin.name == name)"
+        >
           <q-btn-dropdown color="secondary">
             <q-list>
               <q-item
@@ -216,6 +219,7 @@ const NewComment = reactive({
 function filterVariable(variable) {
   CommentStore.filteroption = variable;
   CommentStore.filteroptiontitle = variable.slice(0, 20);
+  CommentStore.tab = '';
 }
 function definetypefilterbr() {
   CommentStore.filteroptiontype = 'branche';
@@ -255,6 +259,10 @@ function isAvailable(NewPost, id) {
 }
 .paddLayer {
   padding: 5px 10px;
+}
+.profilname {
+  word-wrap: break-word;
+  width: 450px;
 }
 .positionBranche {
   margin: 7px 0px 10px 10px;

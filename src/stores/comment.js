@@ -9,7 +9,8 @@ export const useCommentStore = defineStore('commentStore', {
     filteroptiontitle: null,
     filteroptiontype: null,
     isAvailableVar: true,
-    homePage: true,
+    tab: "Home Page",
+
   }),
 
   actions: {
@@ -152,17 +153,20 @@ export const useCommentStore = defineStore('commentStore', {
     },
     deleteComment(id, location) {
       // Suppression locale
-      let index = this.commentsList
-        .map((x) => {
-          return x.id;
-        })
-        .indexOf(id);
-      this.commentsList.splice(index, 1);
+      if (confirm('Êtes-vous sûr de voulour supprimer ? ')) {
+        let index = this.commentsList
+          .map((x) => {
+            return x.id;
+          })
+          .indexOf(id);
+        this.commentsList.splice(index, 1);
 
-      // Suppression db/localStorage
-      if (location === 'localStorage') {
-      } else {
-        //Suppression dans le backend en utilisant une API
+        // Suppression db/localStorage
+        if (location === 'localStorage') {
+          localStorage.setItem('data', JSON.stringify(this.commentsList));
+        } else {
+          //Suppression dans le backend en utilisant une API
+        }
       }
     },
     resetComment(location) {
