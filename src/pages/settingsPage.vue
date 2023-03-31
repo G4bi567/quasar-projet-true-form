@@ -51,15 +51,17 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useUserStore } from 'stores/utilisateur.js';
+import { useUserStore } from 'stores/user.js';
 import { useCommentStore } from 'stores/comment.js';
 
 //permet d'accéder au store
 const CommentStore = useCommentStore();
-//permet d'accéder au store
 
+//permet d'accéder au store
 const UserStore = useUserStore();
-UserStore.profilload();
+
+
+UserStore.profileload();
 const ismodified = ref(true);
 const newLink = ref('');
 function isAvailable(newLink) {
@@ -68,7 +70,7 @@ function isAvailable(newLink) {
     img.src = newLink;
 
     img.onload = function () {
-      UserStore.changePpProfil(newLink);
+      UserStore.changePpProfile(newLink);
       ismodified.value = true;
     };
 

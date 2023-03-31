@@ -110,19 +110,21 @@
 
 <script setup>
 import { reactive } from 'vue';
-import { useUserStore } from 'stores/utilisateur.js';
+import { useUserStore } from 'stores/user.js';
 import { useCommentStore } from 'stores/comment.js';
 
-//permet d'accéder au store
+//setting of variables/objects
+
+//allows you to access the store
 const CommentStore = useCommentStore();
 
-//permet d'accéder au store
+//allows you to access the store
 const UserStore = useUserStore();
 
-//permet de récuper la liste des branches
+//retrieve the list of branches
 const branches = JSON.parse(localStorage.getItem('Branches'));
 
-//permet de créer l'object de la nouvelle publication/ nouveau commentaire
+//allows you to create the object of the new publication/new comment
 const NewPost = reactive({
   title: '',
   branche: '',
@@ -133,15 +135,10 @@ const NewPost = reactive({
   comment: [],
 });
 
-//permet de remettre à zéro les champs
-function resetNewPost() {
-  NewPost.title = '';
-  NewPost.branche = '';
-  NewPost.description = '';
-}
+// setting of functions
 
-//permet de contrôler si tous les champs sont remplis
-//affiche message indiquant qu'il n'y a tous les champs qui sont remplis
+//allows you to check if all the fields are filled in
+//displays a message indicating that not all fields are filled in
 function isAvailable(NewPost) {
   CommentStore.isAvailableVar = false;
   if (
@@ -155,10 +152,17 @@ function isAvailable(NewPost) {
       NewPost.id,
       NewPost,
       UserStore.NewLogin.name,
-      UserStore.pp_profil,
+      UserStore.pp_profile,
       'localStorage'
     );
     resetNewPost();
   }
+}
+
+//allows you to reset the fields
+function resetNewPost() {
+  NewPost.title = '';
+  NewPost.branche = '';
+  NewPost.description = '';
 }
 </script>

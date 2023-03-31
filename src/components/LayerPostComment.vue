@@ -1,5 +1,4 @@
 <template>
-  <head> </head>
   <div class="generalLayer">
     <div class="paddLayer">
       <div class="row justify-between">
@@ -13,11 +12,11 @@
         >
           <q-item-section side>
             <q-avatar rounded size="30px">
-              <img :src="pp_profil" />
+              <img :src="pp_profile" />
             </q-avatar>
           </q-item-section>
           <q-item-section>
-            <q-item-label class="profilname">{{ name }}</q-item-label>
+            <q-item-label class="profilename">{{ name }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -49,7 +48,7 @@
           rounded
           @click="
             filterVariable(branche);
-            definetypefilterbr();
+            definetypefilterbranche();
           "
           :label="branche"
         />
@@ -185,48 +184,66 @@ import { defineProps, reactive, ref } from 'vue';
 import LayerPostComment from 'components/LayerPostComment.vue';
 import { useCommentStore } from 'stores/comment.js';
 import { fasHeartCirclePlus } from '@quasar/extras/fontawesome-v6';
-import { useUserStore } from 'stores/utilisateur.js';
+import { useUserStore } from 'stores/user.js';
 
-//permet d'accéder au store
+//allows access to the User store
 const UserStore = useUserStore();
-//permet d'accéder au store
+//allows access to the User store
 const CommentStore = useCommentStore();
 
-// pour l'instant avec les outils utilisés
-// je ne peux pas ajouter/supprimer les commentaires dans les comemntaires
-// mais avec une base de données, ceci sera possible
-const commentView = ref(false);
-const completed = ref(true);
-function commentOn() {
-  commentView.value = !commentView.value;
-}
-function ResetNewComment() {
-  NewComment.description = '';
-}
+//allows you to import data
 const props = defineProps({
   title: String,
   name: String,
   date: String,
   description: String,
-  pp_profil: String,
+  pp_profile: String,
   id: Number,
   comment: Object,
   branche: String,
 });
+
+//setting of variables/objects
+
+//variable for the display of the comment area
+const commentView = ref(false);
+
+//variable to know if the comment is filled
+const completed = ref(true);
+
+//object that stores the comment
 const NewComment = reactive({
   description: '',
 });
+
+// setting of functions 
+
+//function that allows to activate or deactivate
+function commentOn() {
+  commentView.value = !commentView.value;
+}
+
+//fonction qui permet de remettre le champ à zéro
+function ResetNewComment() {
+  NewComment.description = '';
+}
+
+//function that allows to set the variables of the dedicated pages
 function filterVariable(variable) {
   CommentStore.filteroption = variable;
   CommentStore.filteroptiontitle = variable.slice(0, 20);
   CommentStore.tab = '';
 }
-function definetypefilterbr() {
+
+//functions that establish the type of filtering
+function definetypefilterbranche() {
   CommentStore.filteroptiontype = 'branche';
 }
 function definetypefiltername() {
   CommentStore.filteroptiontype = 'name';
 }
+
+//function allows you to add publications to the list of favorites
 function listFollowMake(id) {
   if (UserStore.followed.indexOf(id) >= 0) {
     UserStore.followed.shift(id);
@@ -234,6 +251,8 @@ function listFollowMake(id) {
     UserStore.followed.push(id);
   }
 }
+
+//function that allows to check if the comment is filled
 function isAvailable(NewPost, id) {
   completed.value = false;
   if (NewPost.description !== '') {
@@ -243,7 +262,7 @@ function isAvailable(NewPost, id) {
       id,
       NewComment,
       UserStore.NewLogin.name,
-      UserStore.pp_profil,
+      UserStore.pp_profile,
       'localStorage'
     );
   }
@@ -260,9 +279,8 @@ function isAvailable(NewPost, id) {
 .paddLayer {
   padding: 5px 10px;
 }
-.profilname {
-  word-wrap: break-word;
-  width: 450px;
+.profilename {
+  color: white;
 }
 .positionBranche {
   margin: 7px 0px 10px 10px;

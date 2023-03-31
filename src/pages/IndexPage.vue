@@ -31,37 +31,44 @@
 </template>
 
 <script setup>
-import { defineComponent, reactive, ref } from 'vue';
+import { reactive, ref } from 'vue';
 import layerPostComment from 'components/LayerPostComment.vue';
 import { useCommentStore } from 'stores/comment.js';
-import { useUserStore } from 'stores/utilisateur.js';
+import { useUserStore } from 'stores/user.js';
 
-//permet d'accéder au store
+//allows you to access the store
 const UserStore = useUserStore();
-//permet d'accéder au store
+
+//allows you to access the store
 const CommentStore = useCommentStore();
 
-//importer la liste des commentaires
+//loads the list of comments and the profile
 CommentStore.loadComments('localStorage');
-UserStore.profilload();
+UserStore.profileload();
 
-//permet de savoir le nombre de pages disponible
+//allows you to know the number of pages needed
 const paginationnumber = reactive({
   index: Math.ceil(CommentStore.commentsList.length / 5),
 });
 
-//création de variable des
+//creation of the variable to store the publications
 const UpdatedList = ref();
+
+//creation of the variable to know in which page you are
 const current = ref(1);
 
+//function that filters publications
 function pagination(current) {
   if (CommentStore.filteroptiontype == null) {
+    //take all publications
     UpdatedList.value = CommentStore.commentsList.slice(
       (current - 1) * 5,
       current * 5
     );
     paginationnumber.index = Math.ceil(CommentStore.commentsList.length / 5);
+    //generates the number of pages needed
   } else if (CommentStore.filteroptiontype == 'branche') {
+    //take all publications that have the same branch as the one chosen
     UpdatedList.value = CommentStore.commentsList
       .filter((post) => post.branche == CommentStore.filteroption)
       .slice((current - 1) * 5, current * 5);
@@ -70,7 +77,9 @@ function pagination(current) {
         (post) => post.branche == CommentStore.filteroption
       ).length / 5
     );
+    //generates the number of pages needed
   } else if (CommentStore.filteroptiontype == 'name') {
+    //take all publications that have the same name as the one chosen
     UpdatedList.value = CommentStore.commentsList
       .filter((post) => post.name == CommentStore.filteroption)
       .slice((current - 1) * 5, current * 5);
@@ -79,7 +88,9 @@ function pagination(current) {
         (post) => post.name == CommentStore.filteroption
       ).length / 5
     );
+    //generates the number of pages needed
   } else if (CommentStore.filteroptiontype == 'follow') {
+    //take all publications that have been followed by the user
     UpdatedList.value = CommentStore.commentsList
       .filter((post) => UserStore.followed.indexOf(post.id) >= 0)
       .slice((current - 1) * 5, current * 5);
@@ -90,6 +101,7 @@ function pagination(current) {
           (post) => UserStore.followed.indexOf(post.id) >= 0
         ).length / 5
       );
+      //generates the number of pages needed
   }
 }
 </script>

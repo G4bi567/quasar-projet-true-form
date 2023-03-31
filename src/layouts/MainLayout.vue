@@ -87,58 +87,65 @@
       </q-item-label>
     </q-drawer>
     <q-page-container class="bgColor" v-show="UserStore.isLogVar == false">
-      <Login @logInFinished="TurnoffLogInPage()" />
+      <Login />
     </q-page-container>
     <!--first part, if login is false, (login is a variable that is false if there is no data about the user), then if it is false, it displays a page in order to provide the data-->
     <q-page-container class="bgColor" v-show="writeComment == false">
-      <router-view @logout="logoutaccount()" />
+      <router-view />
     </q-page-container>
-    <!-- second part, if writeComment is false, (writeComment is a variable that is false if there is no request to write a publication), as it is false it displays the page of recent publications, that means  the main page of the site-->
+    <!-- second part, if writeComment is false, (writeComment is a variable that is false if there is no request to write a publication), as it is false it displays the recent publications page, that is the main page of the site-->
     <q-page-container class="bgColor" v-show="writeComment == true">
-      <createPost @finished="isAvailable()" />
+      <createPostComment @finished="isAvailable()" />
     </q-page-container>
-    <!-- third part, if writeComment is true, (writeComment is a variable that is true if there is a request to write a publication), as it is true it displays a page in order to give the data about the problem-->
+    <!-- third part, if writeComment is true, (writeComment is a variable that is true if there is a request to write a publication), as it is true, it displays a page to give the data about the problem-->
   </q-layout>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
-import createPost from 'components/CreatePost.vue';
+import { ref } from 'vue';
+import createPostComment from 'components/CreatePostComment.vue';
 import Login from 'pages/LogInPage.vue';
 import { date } from 'quasar';
-import { useUserStore } from 'stores/utilisateur.js';
+import { useUserStore } from 'stores/user.js';
 import { useCommentStore } from 'stores/comment.js';
 
-//permet d'accéder au store
+//allows access to the blind
 const CommentStore = useCommentStore();
-//permet d'accéder au store
 
+//allows access to the blind
 const UserStore = useUserStore();
 
+// setting of variables/objects
+
+//allows you to set the variable for the menu
 const fabVar = ref(false);
 
 const branches = [
-  'Français ',
   'Allemand',
   'Anglais ',
-  'Latin',
-  'Italien ',
-  'Grec',
-  'Mathématiques',
-  'Physique',
-  'Chimie ',
-  'Biologie ',
-  'Histoire ',
-  'Géographie',
-  'Philisophie ',
-  'Arts visuels',
-  'Musique ',
   'Appl. des math. ',
+  'Arts visuels',
+  'Biologie ',
+  'Chimie ',
   'Economie et droit',
-  'Informatique ',
-  'Sciences religieuses ',
   'Education physique ',
+  'Français ',
+  'Géographie',
+  'Grec',
+  'Histoire ',
+  'Informatique ',
+  'Italien ',
+  'Latin',
+  'Mathématiques',
+  'Musique ',
+  'Philisophie ',
+  'Physique',
+  'Sciences religieuses ',
 ];
+
+//Save the list of branches in the Storage location
+localStorage.setItem('Branches', JSON.stringify(branches));
+
 const liensUtiles = [
   {
     title: 'Deepl',
@@ -161,58 +168,50 @@ const liensUtiles = [
     link: 'https://quizlet.com',
   },
 ];
-localStorage.setItem('Branches', JSON.stringify(branches));
 
+//allows you to set drawers variables
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
+
+//sets the variable to display the "CreatePostComment
 const writeComment = ref(false);
 
+// setting of functions
+
+//functions allow to close or open the drawers
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
 function toggleRightDrawer() {
   rightDrawerOpen.value = !rightDrawerOpen.value;
 }
+
+//function that checks if the "writeCommentMode" function can be executed
 function isAvailable() {
   if (CommentStore.isAvailableVar == true) {
     writeCommentMode();
   }
 }
 
+//function that closes the "CreatePostComment" component
 function writeCommentMode() {
   writeComment.value = !writeComment.value;
 }
 
+//function that resets the variables
 function ResetMode() {
   writeComment.value = false;
   CommentStore.filteroptiontype = null;
 }
 
-function logoutaccount() {
-  localStorage.setItem('profil', null);
-  localStorage.setItem(
-    'pp_profil',
-    'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg'
-  );
-  CommentStore.NewLogin = {
-    name: '',
-    mail: '',
-    password: '',
-  };
-  login.value = false;
-}
-
-function TurnoffLogInPage() {
-  if (localStorage.getItem('profil') !== 'null') {
-    login.value = true;
-  }
-}
-
+//function allows to open the page "Suivis"
 function followedComments() {
   CommentStore.filteroptiontype = 'follow';
   CommentStore.filteroption = 'Suivis';
   CommentStore.filteroptiontitle = 'Suivis';
 }
+
+//function to open the branches
 function getTo(title) {
   CommentStore.filteroptiontitle = title;
   CommentStore.filteroption = title;

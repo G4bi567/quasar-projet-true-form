@@ -17,20 +17,14 @@
         outlined
         dark
         v-model="UserStore.NewLogin.mail"
-        @keydown.enter="
-          controlTheValues();
-          $emit(`logInFinished`);
-        "
+        @keydown.enter="controlTheValues()"
         label="email"
       />
       <q-input
         style="margin: 10px"
         outlined
         dark
-        @keydown.enter="
-          controlTheValues();
-          $emit(`logInFinished`);
-        "
+        @keydown.enter="controlTheValues()"
         v-model="UserStore.NewLogin.password"
         label="password"
         type="password"
@@ -39,10 +33,7 @@
 
     <div class="flex flex-center" style="margin: 10px">
       <q-btn
-        @click="
-          controlTheValues();
-          $emit(`logInFinished`);
-        "
+        @click="controlTheValues()"
         unelevated
         rounded
         color="primary"
@@ -52,28 +43,44 @@
     <div v-show="notcompleted == true" class="text-white">
       Il manque une entrée
     </div>
+    <div v-show="toolong == true" class="text-white">
+      Le nom de profil est trop long
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { useUserStore } from 'stores/utilisateur.js';
+import { useUserStore } from 'stores/user.js';
 
-//permet d'accéder au store
+//allows you to access the store
 const UserStore = useUserStore();
+
+//variable to display a message if all fields are not filled
 const notcompleted = ref(false);
 
-function controlTheValues() {
-  notcompleted.value = true;
+//variable to display a message if the username is too long
+const toolong = ref(false);
 
+//function that checks if the fields are correctly filled in
+function controlTheValues() {
+  //the variables display the message that at least one of the fields has not been filled in
+  notcompleted.value = true;
+  toolong.value = false;
   if (
     UserStore.NewLogin.name !== '' &&
     UserStore.NewLogin.mail !== '' &&
     UserStore.NewLogin.password !== ''
   ) {
+    //the variables display the message that the profile name is too long 
+    toolong.value = true;
     notcompleted.value = false;
+    if (UserStore.NewLogin.name.length < 20) {
+      //the login is made
+      toolong.value = false;
 
-    UserStore.loginVariable('localStorage');
+      UserStore.loginVariable('localStorage');
+    }
   }
 }
 </script>

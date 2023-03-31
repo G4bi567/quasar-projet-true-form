@@ -10,17 +10,17 @@ export const useUserStore = defineStore('userStore', {
     },
     isLogVar: false,
     followed: [],
-    pp_profil: '',
+    pp_profile: '',
   }),
 
   actions: {
     loginVariable(location) {
       if (location === 'localStorage') {
         this.isLogVar = true;
-        localStorage.setItem('profil', JSON.stringify(this.NewLogin));
-        this.pp_profil =
+        localStorage.setItem('profile', JSON.stringify(this.NewLogin));
+        this.pp_profile =
           'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg';
-        localStorage.setItem('pp_profil', this.pp_profil);
+        localStorage.setItem('pp_profile', this.pp_profile);
       }
     },
     logOut(location) {
@@ -32,23 +32,23 @@ export const useUserStore = defineStore('userStore', {
         };
         this.isLogVar = false;
 
-        localStorage.setItem('profil', null);
+        localStorage.setItem('profile', null);
       }
     },
-    changePpProfil(newLink) {
-      localStorage.setItem('pp_profil', newLink);
+    changePpProfile(newLink) {
+      localStorage.setItem('pp_profile', newLink);
 
       this.pp_profil = newLink.value;
 
       newLink = '';
     },
-    async profilload() {
-      const newlogin = JSON.parse(localStorage.getItem('profil'));
+    async profileload() {
+      const newlogin = JSON.parse(localStorage.getItem('profile'));
       if (newlogin == null) {
         this.isLogVar = false;
       } else {
         this.isLogVar = true;
-        this.pp_profil = localStorage.getItem('pp_profil');
+        this.pp_profile = localStorage.getItem('pp_profile');
         this.NewLogin = newlogin;
       }
     },
