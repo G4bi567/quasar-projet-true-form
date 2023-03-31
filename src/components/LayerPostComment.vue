@@ -214,7 +214,7 @@ const NewComment = reactive({
   description: '',
 });
 function filterVariable(variable) {
-  CommentStore.filteroption = variable.slice(0, 10);
+  CommentStore.filteroption = variable;
 }
 function definetypefilterbr() {
   CommentStore.filteroptiontype = 'branche';

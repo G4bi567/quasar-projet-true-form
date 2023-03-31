@@ -8,6 +8,7 @@ export const useCommentStore = defineStore('commentStore', {
     filteroption: null,
     filteroptiontype: null,
     isAvailableVar: true,
+    homePage: true,
   }),
 
   actions: {

@@ -223,8 +223,7 @@ function getTo(title) {
 .centerText {
   text-align: center;
 }
-c
-.title {
+c .title {
   margin-left: 5px;
 }
 .imgOptions {
