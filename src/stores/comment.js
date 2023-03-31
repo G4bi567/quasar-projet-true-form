@@ -9,18 +9,16 @@ export const useCommentStore = defineStore('commentStore', {
     filteroptiontitle: null,
     filteroptiontype: null,
     isAvailableVar: true,
-    tab: "Home Page",
-    nametoslice: ""
-
+    tab: 'Home Page',
   }),
 
   actions: {
     async loadComments(location) {
       if (location === 'localStorage') {
-        // On récupère les données du localStorage
+        // We get the data from the localStorage
         this.commentsList = JSON.parse(localStorage.getItem('data'));
 
-        // Si le localStorage ne contient pas de commentaire, on charge des commentaires fictifs
+        // If the localStorage does not contain any comments, we load fictitious comments
         if (JSON.parse(localStorage.getItem('data')) === null) {
           this.commentsList = [
             {
@@ -84,7 +82,7 @@ export const useCommentStore = defineStore('commentStore', {
           localStorage.setItem('data', JSON.stringify(this.commentsList));
         }
       } else {
-        // Utilisation de fetch pour aller récupérer les données du backend à l'aide d'une API
+        // Use of fetch to retrieve data from the backend using an API
         // try {
         //     await fetch('https://your-backend-url.com/comments', {
         //         method: 'GET',
@@ -99,13 +97,13 @@ export const useCommentStore = defineStore('commentStore', {
     },
 
     async addComment(type, id, comment, nameprofile, pp_profile, location) {
-      // enregistrer les informations personnelles et ajouter des nouvelles informations
+      // save personal information and add new information
       comment.name = nameprofile;
       comment.date = date.formatDate(Date.now(), 'DD-MM-YYYY');
       comment.pp_profile = pp_profile;
       comment.comment = [];
 
-      //définir la liste sur laquelle on veut ajouter quelquechose
+      //define the list on which you want to add something
       if (type == 'comment') {
         this.commentstomodify = this.commentsList.filter(
           (post) => post.id == id
@@ -113,7 +111,7 @@ export const useCommentStore = defineStore('commentStore', {
       } else {
         this.commentstomodify = this.commentsList;
       }
-      // trouver l'index max du commentaire/publication dans la liste des publications
+      // find the max index of the comment/publication in the list of publications
       var maxId = 0;
       comment.id = maxId;
       if (this.commentstomodify.length !== 0) {
@@ -126,7 +124,7 @@ export const useCommentStore = defineStore('commentStore', {
         }
       }
 
-      //enregistrer la liste dans la variable commentsList
+      //save the list in the variable commentsList
       if (type == 'comment') {
         this.commentsList
           .filter((post) => post.id == id)[0]
@@ -136,10 +134,10 @@ export const useCommentStore = defineStore('commentStore', {
       }
 
       if (location === 'localStorage') {
-        //enregistrer la liste dans le local Storage
+        //save the list in the localStorage
         localStorage.setItem('data', JSON.stringify(this.commentsList));
       } else {
-        // Sauvegarder dans le backend
+        // Save in the backend
         // Utilisation de fetch pour aller récupérer les données du backend à l'aide d'une API
         // try {
         //     await fetch('https://your-backend-url.com/comments', {
@@ -153,7 +151,7 @@ export const useCommentStore = defineStore('commentStore', {
       }
     },
     deleteComment(id, location) {
-      // Suppression locale
+      // Local deletion
       if (confirm('Êtes-vous sûr de voulour supprimer ? ')) {
         let index = this.commentsList
           .map((x) => {
@@ -162,16 +160,16 @@ export const useCommentStore = defineStore('commentStore', {
           .indexOf(id);
         this.commentsList.splice(index, 1);
 
-        // Suppression db/localStorage
+        // Delete db/localStorage
         if (location === 'localStorage') {
           localStorage.setItem('data', JSON.stringify(this.commentsList));
         } else {
-          //Suppression dans le backend en utilisant une API
+          //Deletion in the backend using an API
         }
       }
     },
     resetComment(location) {
-      // Suppression db/localStorage
+      // Delete db/localStorage
       if (location === 'localStorage') {
         localStorage.removeItem('data');
       }

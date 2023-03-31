@@ -5,7 +5,7 @@
         style="margin: 10px"
         outlined
         dark
-        v-model="UserStore.NewLogin.name"
+        v-model="UserStore.Profile.name"
         @keydown.enter="
           controlTheValues();
         "
@@ -15,7 +15,7 @@
         style="margin: 10px"
         outlined
         dark
-        v-model="UserStore.NewLogin.mail"
+        v-model="UserStore.Profile.mail"
         @keydown.enter="controlTheValues()"
         label="email"
       />
@@ -24,7 +24,7 @@
         outlined
         dark
         @keydown.enter="controlTheValues()"
-        v-model="UserStore.NewLogin.password"
+        v-model="UserStore.Profile.password"
         label="password"
         type="password"
       />
@@ -67,14 +67,14 @@ function controlTheValues() {
   notcompleted.value = true;
   toolong.value = false;
   if (
-    UserStore.NewLogin.name !== '' &&
-    UserStore.NewLogin.mail !== '' &&
-    UserStore.NewLogin.password !== ''
+    UserStore.Profile.name !== '' &&
+    UserStore.Profile.mail !== '' &&
+    UserStore.Profile.password !== ''
   ) {
     //the variables display the message that the profile name is too long 
     toolong.value = true;
     notcompleted.value = false;
-    if (UserStore.NewLogin.name.length < 20) {
+    if (UserStore.Profile.name.length < 20) {
       //the login is made
       toolong.value = false;
 

@@ -22,7 +22,7 @@
 
         <q-item-section
           side
-          v-if="(title !== undefined, UserStore.NewLogin.name == name)"
+          v-if="(title !== undefined, UserStore.Profile.name == name)"
         >
           <q-btn-dropdown color="secondary">
             <q-list>
@@ -261,7 +261,7 @@ function isAvailable(NewPost, id) {
       'comment',
       id,
       NewComment,
-      UserStore.NewLogin.name,
+      UserStore.Profile.name,
       UserStore.pp_profile,
       'localStorage'
     );

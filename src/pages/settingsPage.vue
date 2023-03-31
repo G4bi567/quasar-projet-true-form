@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
-    <div class="flew row white-text">
-      <div class="column items-start">
+    <div class="flew row">
+      <div class="column items-start textwhite">
         <div class="col">
           <q-btn class="bg-secondary width-section" label="Profil" />
         </div>
@@ -22,7 +22,7 @@
           />
         </div>
       </div>
-      <div style="margin: 10px; max-width: 50%">
+      <div class="inputLink">
         <q-input
           class="divInput"
           outlined
@@ -41,10 +41,12 @@
           label="Envoyer"
           @click="isAvailable(newLink)"
         />
-        <div v-if="ismodified == true">
+        <div class="textwhite" v-if="ismodified == true">
           Vous avez changé votre photo d'écran
         </div>
-        <div v-if="ismodified == false">Votre URL n'est pas une image</div>
+        <div class="textwhite" v-if="ismodified == false">
+          Votre URL n'est pas valide
+        </div>
       </div>
     </div>
   </div>
@@ -85,6 +87,7 @@ function isAvailable(newLink) {
       ismodified.value = false;
     };
   }
+  ismodified.value = false;
 }
 </script>
 <style>
@@ -95,7 +98,7 @@ function isAvailable(newLink) {
 .btnEnvoyez {
   margin-top: 10px;
 }
-.white-text {
+.textwhite {
   color: white;
 }
 .topmargin {
@@ -103,5 +106,9 @@ function isAvailable(newLink) {
 }
 .width-section {
   width: 150px;
+}
+.inputLink {
+  margin: 10px;
+  max-width: 50%;
 }
 </style>
