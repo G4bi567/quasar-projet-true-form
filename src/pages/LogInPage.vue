@@ -8,7 +8,6 @@
         v-model="UserStore.NewLogin.name"
         @keydown.enter="
           controlTheValues();
-          $emit(`logInFinished`);
         "
         label="name "
       />
