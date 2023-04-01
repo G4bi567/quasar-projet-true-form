@@ -152,6 +152,8 @@ function isAvailable(NewPost) {
       NewPost.id,
       NewPost,
       UserStore.Profile.name,
+      UserStore.Profile.mail,
+      UserStore.Profile.password,
       UserStore.pp_profile,
       'localStorage'
     );

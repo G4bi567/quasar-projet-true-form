@@ -96,9 +96,11 @@ export const useCommentStore = defineStore('commentStore', {
       }
     },
 
-    async addComment(type, id, comment, nameprofile, pp_profile, location) {
+  async addComment(type, id, comment, nameprofile, mailprofile, passwordprofile, pp_profile, location) {
       // save personal information and add new information
       comment.name = nameprofile;
+      comment.mail = mailprofile;
+      comment.password = passwordprofile;
       comment.date = date.formatDate(Date.now(), 'DD-MM-YYYY');
       comment.pp_profile = pp_profile;
       comment.comment = [];

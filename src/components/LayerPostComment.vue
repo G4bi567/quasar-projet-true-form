@@ -22,7 +22,12 @@
 
         <q-item-section
           side
-          v-if="(title !== undefined, UserStore.Profile.name == name)"
+          v-if="
+            (title !== undefined,
+            UserStore.Profile.name == name,
+            UserStore.Profile.mail == mail,
+            UserStore.Profile.password == password)
+          "
         >
           <q-btn-dropdown color="secondary">
             <q-list>
@@ -195,6 +200,8 @@ const CommentStore = useCommentStore();
 const props = defineProps({
   title: String,
   name: String,
+  mail: String,
+  password: String,
   date: String,
   description: String,
   pp_profile: String,
@@ -216,7 +223,7 @@ const NewComment = reactive({
   description: '',
 });
 
-// setting of functions 
+// setting of functions
 
 //function that allows to activate or deactivate
 function commentOn() {
@@ -262,6 +269,8 @@ function isAvailable(NewPost, id) {
       id,
       NewComment,
       UserStore.Profile.name,
+      UserStore.Profile.mail,
+      UserStore.Profile.password,
       UserStore.pp_profile,
       'localStorage'
     );
