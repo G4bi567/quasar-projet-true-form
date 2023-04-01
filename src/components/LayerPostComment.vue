@@ -23,10 +23,10 @@
         <q-item-section
           side
           v-if="
-            (title !== undefined,
-            UserStore.Profile.name == name,
-            UserStore.Profile.mail == mail,
-            UserStore.Profile.password == password)
+            title !== undefined &&
+            UserStore.Profile.name == name &&
+            UserStore.Profile.mail == mail &&
+            UserStore.Profile.password == password
           "
         >
           <q-btn-dropdown color="secondary">
