@@ -1,12 +1,17 @@
 <template>
   <div>
     <q-card-section>
-      <q-form @submit="onSignup">
-        <q-input outlined v-model="username" label="Username" />
-        <q-input outlined v-model="email" label="Email" type="email" />
+      <q-form @submit="onSubmit(variables)">
+        <q-input outlined v-model="variables.username" label="Username" />
         <q-input
           outlined
-          v-model="password_hash"
+          v-model="variables.email"
+          label="Email"
+          type="email"
+        />
+        <q-input
+          outlined
+          v-model="variables.password_hash"
           label="Password"
           type="password"
         />
