@@ -1,17 +1,53 @@
 <template>
   <div>
-    <div v-if="data">
-      <p>User created: {{ data.createUser.username }}</p>
-    </div>
-    <button @click="onSubmit('jojaja', 'gagag@fdhsfsdahj.com', 'here')">
-      Submit
-    </button>
+    <q-card-section>
+      <q-form @submit="onSignup">
+        <q-input outlined v-model="username" label="Username" />
+        <q-input outlined v-model="email" label="Email" type="email" />
+        <q-input
+          outlined
+          v-model="password_hash"
+          label="Password"
+          type="password"
+        />
+        <q-btn
+          label="Sign Up"
+          type="submit"
+          color="primary"
+          class="q-mt-md"
+          :loading="loading"
+        />
+      </q-form>
+    </q-card-section>
+
+    <ul v-if="data">
+      <li v-for="user in data.user" :key="user.id">
+        {{ user.username }} | {{ user.email }} | {{ user.password_hash }}
+      </li>
+    </ul>
+    <button @click="onSubmit(variables)">Submit</button>
   </div>
 </template>
 
 <script setup>
 import { useQuery, useMutation } from 'villus';
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
+import { gql } from 'graphql-tag';
+import { watch, defineExpose, toRaw } from 'vue';
+
+const GetUsers = gql`
+  query GetAllUsers {
+    user {
+      id
+      username
+      email
+      password_hash
+    }
+  }
+`;
+const { data } = useQuery({
+  query: GetUsers,
+});
 
 const CreateUserAndInsertReview = `
   mutation CreateUserAndInsertReview(
@@ -28,22 +64,24 @@ const CreateUserAndInsertReview = `
     }
   }
 `;
-const { data, execute } = useMutation(CreateUserAndInsertReview);
-const variables = {
+
+const { data_modify, execute } = useMutation(CreateUserAndInsertReview);
+
+const variables = reactive({
   username: '',
   email: '',
   password_hash: '',
-};
+});
 
-function onSubmit(username, email, password_hash) {
-  variables.username = username;
-  variables.email = email;
-  variables.password_hash = password_hash;
+function onSubmit(variables) {
   alert(1);
   execute(variables).then((result) => {
     if (result.error) {
       alert(2);
       alert(`${result.error}`);
+    } else {
+      alert(3);
+      alert(`User created successfully!`);
     }
   });
 }
