@@ -5,9 +5,6 @@ import { ref, reactive } from 'vue';
 import { gql } from 'graphql-tag';
 import { watch, defineExpose, toRaw } from 'vue';
 
-
-
-
 export const useUserStore = defineStore('userStore', {
   state: () => ({
     Profile: {
@@ -18,37 +15,51 @@ export const useUserStore = defineStore('userStore', {
     isLogVar: false,
     followed: [],
     pp_profile: '',
+    isAuth: false,
   }),
 
   actions: {
-    loginVariable(location) {
+    async loginVariable(location) {
       // Delete db/localStorage
       if (location === 'localStorage') {
+        alert(2);
         this.isLogVar = true;
         localStorage.setItem('profile', JSON.stringify(this.Profile));
         this.pp_profile =
           'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg';
         localStorage.setItem('pp_profile', this.pp_profile);
-      }else{
-        const GetUsers = gql`
-          query GetAllUsers {
-            user {
-              id
+      } else {
+        alert(3);
+        const GetUserByEmailAndPassword = gql`
+          query GetUserByEmailAndPassword($email: String!, $password: String!) {
+            user(where: { email: { _eq: $email }, password_hash: { _eq: $password } }) {
               username
-              email
-              password_hash
+              profil_photo
             }
           }
         `;
 
         const { data } = useQuery({
-          query: GetUsers,
+          query: GetUserByEmailAndPassword,
+          variables: {
+            email: 'asdfasdfs@gmail.com', // Replace with the actual email
+            password: 'fdasfdsafasfasdf', // Replace with the actual password
+          },
         });
-        this.isLogVar = true;
-        localStorage.setItem('profile', JSON.stringify(this.Profile));
-        this.pp_profile =
-          'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg';
-        localStorage.setItem('pp_profile', this.pp_profile);
+        console.log(data);
+        if (data.user) {
+          this.isAuth = true;
+          alert('attention');
+        } else {
+          this.isLogVar = true;
+          this.Profile.name = data.user.username;
+          this.Profile.mail = '';
+          this.Profile.password = '';
+          localStorage.setItem('profile', JSON.stringify(this.Profile));
+          this.pp_profile =
+            'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg';
+          localStorage.setItem('pp_profile', this.pp_profile);
+        }
       }
     },
     logOut(location) {

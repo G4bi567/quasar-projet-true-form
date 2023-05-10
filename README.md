@@ -1,6 +1,7 @@
 # Création d'un forum d'entraide pour les étudiants du Collège du Sud
 
 Dans ce forum d'aide aux étudiants, les membres peuvent poser des questions relatives à un sujet, une matière ou un cours particulier, et d'autres étudiants peuvent fournir des réponses ou des conseils basés sur leurs propres expériences ou connaissances. Les membres peuvent également publier des liens vers des ressources utiles, telles que des articles, des vidéos ou des sites Web universitaires, qui peuvent être utiles aux autres étudiants.
+2276b42f-c850-4a76-93a3-0bc6d53c30e8
 
 ## Installation pour un connaisseur
 

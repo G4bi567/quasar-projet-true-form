@@ -6,9 +6,7 @@
         outlined
         dark
         v-model="UserStore.Profile.name"
-        @keydown.enter="
-          controlTheValues();
-        "
+        @keydown.enter="controlTheValues()"
         label="name "
       />
       <q-input
@@ -71,14 +69,14 @@ function controlTheValues() {
     UserStore.Profile.mail !== '' &&
     UserStore.Profile.password !== ''
   ) {
-    //the variables display the message that the profile name is too long 
+    //the variables display the message that the profile name is too long
     toolong.value = true;
     notcompleted.value = false;
     if (UserStore.Profile.name.length < 20) {
       //the login is made
       toolong.value = false;
-
-      UserStore.loginVariable('localStorage');
+      alert(1);
+      UserStore.loginVariable('db');
     }
   }
 }
