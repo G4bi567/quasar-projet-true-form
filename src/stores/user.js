@@ -4,7 +4,7 @@ import { useQuery, useMutation } from 'villus';
 import { ref, reactive } from 'vue';
 import { gql } from 'graphql-tag';
 import { watch, defineExpose, toRaw } from 'vue';
-
+import { computed } from 'vue';
 export const useUserStore = defineStore('userStore', {
   state: () => ({
     Profile: {
@@ -31,22 +31,24 @@ export const useUserStore = defineStore('userStore', {
       } else {
         alert(3);
         const GetUserByEmailAndPassword = gql`
-          query GetUserByEmailAndPassword($email: String!, $password: String!) {
-            user(where: { email: { _eq: $email }, password_hash: { _eq: $password } }) {
-              username
-              profil_photo
-            }
+        query GetUserByEmailAndPassword($email: String!, $password: String!) {
+          user(where: { email: { _eq: $email }, password_hash: { _eq: $password } }) {
+            username
+            profil_photo
           }
+        }
         `;
-
-        const { data } = useQuery({
+        const variables = {
+          email: 'dsfasdfsad@lgflkgja.com', // Replace with the actual email
+          password: 'ddfsfasdfdfafasfdaf', // Replace with the actual password
+        };
+        alert(4);
+        const { data: login, isFetching } = useQuery({
           query: GetUserByEmailAndPassword,
-          variables: {
-            email: 'asdfasdfs@gmail.com', // Replace with the actual email
-            password: 'fdasfdsafasfasdf', // Replace with the actual password
-          },
+          variables,
         });
-        console.log(data);
+        console.log(login); // check if data is defined and not null
+        localStorage.setItem('login', JSON.stringify(login));
         if (data.user) {
           this.isAuth = true;
           alert('attention');

@@ -53,6 +53,7 @@ const GetUsers = gql`
 const { data } = useQuery({
   query: GetUsers,
 });
+console.log(data.user);
 
 const CreateUserAndInsertReview = `
   mutation CreateUserAndInsertReview(
