@@ -53,7 +53,18 @@ const GetUsers = gql`
 const { data } = useQuery({
   query: GetUsers,
 });
-console.log(data.user);
+const dataRef = reactive({});
+watch(
+  () => data.value,
+  (newData, oldData) => {
+    if (newData) {
+      dataRef.value = newData.user[0];
+      console.log(dataRef.value);
+      console.log(data);
+    }
+  },
+  { deep: true }
+);
 
 const CreateUserAndInsertReview = `
   mutation CreateUserAndInsertReview(

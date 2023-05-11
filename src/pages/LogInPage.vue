@@ -119,7 +119,7 @@ function controlTheValues() {
       //the login is made
       toolong.value = false;
       alert(1);
-      UserStore.loginVariable('db');
+      UserStore.loginVariable('localStorage');
     }
   }
 }
