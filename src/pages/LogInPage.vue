@@ -112,6 +112,9 @@ const method_log = ref(true);
 function changeLog() {
   method_log.value = !method_log.value;
   notcompleted.value = false;
+  UserStore.Profile.name !== '' 
+  UserStore.Profile.mail !== '' 
+  UserStore.Profile.password !== ''
 }
 //function that checks if the fields are correctly filled in
 function controlTheValues(method) {
@@ -130,7 +133,7 @@ function controlTheValues(method) {
     if (UserStore.Profile.name.length < 20) {
       //the login is made
       toolong.value = false;
-      UserStore.loginVariable('database');
+      UserStore.loginVariable('database',method);
     }
   }
   if (
@@ -139,7 +142,7 @@ function controlTheValues(method) {
     UserStore.Profile.password !== ''
   ) {
     notcompleted.value = false;
-    UserStore.loginVariable('database');
+    UserStore.loginVariable('database',method);
   }
 }
 </script>

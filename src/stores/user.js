@@ -19,7 +19,7 @@ export const useUserStore = defineStore('userStore', {
   }),
 
   actions: {
-    async loginVariable(location) {
+    async loginVariable(location, method) {
       // Delete db/localStorage
       if (location === 'localStorage') {
         alert(2);
@@ -83,16 +83,15 @@ export const useUserStore = defineStore('userStore', {
         localStorage.setItem('profile', null);
       }
     },
-    changePpProfile(newLink,location) {
-      if(location =="localStorage"){
-      //stocks the profile photo link in the localStorage
-      localStorage.setItem('pp_profile', newLink);
+    changePpProfile(newLink, location) {
+      if (location == 'localStorage') {
+        //stocks the profile photo link in the localStorage
+        localStorage.setItem('pp_profile', newLink);
 
-      this.pp_profil = newLink.value;
-      //resets the value
-      newLink = '';
-      }else{
-        
+        this.pp_profil = newLink.value;
+        //resets the value
+        newLink = '';
+      } else {
       }
     },
     async profileload() {
