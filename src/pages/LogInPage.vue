@@ -61,9 +61,15 @@
           @keydown.enter="controlTheValues('log')"
           label="email"
         />
-        <q-input style="margin: 10px" outlined dark
-        @keydown.enter="controlTheValues('log')"
-        v-model="UserStore.Profile.password" label="password" type="password" />
+        <q-input
+          style="margin: 10px"
+          outlined
+          dark
+          @keydown.enter="controlTheValues('log')"
+          v-model="UserStore.Profile.password"
+          label="password"
+          type="password"
+        />
         <div class="flex flex-center" style="margin: 10px">
           <q-btn
             unelevated
@@ -72,8 +78,13 @@
             label="Do you want to create a account?"
             @click="changeLog()"
           ></q-btn>
-          <q-btn @click="controlTheValues('log')" unelevated rounded
-          color="primary" label="Log In" />
+          <q-btn
+            @click="controlTheValues('log')"
+            unelevated
+            rounded
+            color="primary"
+            label="Log In"
+          />
           <div v-show="notcompleted == true" class="text-white">
             Il manque une entrée
           </div>
@@ -108,6 +119,7 @@ function controlTheValues(method) {
   notcompleted.value = true;
   toolong.value = false;
   if (
+    method == 'create' &&
     UserStore.Profile.name !== '' &&
     UserStore.Profile.mail !== '' &&
     UserStore.Profile.password !== ''
@@ -118,9 +130,16 @@ function controlTheValues(method) {
     if (UserStore.Profile.name.length < 20) {
       //the login is made
       toolong.value = false;
-      alert(1);
       UserStore.loginVariable('database');
     }
+  }
+  if (
+    method == 'log' &&
+    UserStore.Profile.mail !== '' &&
+    UserStore.Profile.password !== ''
+  ) {
+    notcompleted.value = false;
+    UserStore.loginVariable('database');
   }
 }
 </script>
