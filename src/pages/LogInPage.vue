@@ -7,7 +7,7 @@
           outlined
           dark
           v-model="UserStore.Profile.name"
-          @keydown.enter="controlTheValues()"
+          @keydown.enter="controlTheValues('create')"
           label="name "
         />
         <q-input
@@ -15,14 +15,14 @@
           outlined
           dark
           v-model="UserStore.Profile.mail"
-          @keydown.enter="controlTheValues()"
+          @keydown.enter="controlTheValues('create')"
           label="email"
         />
         <q-input
           style="margin: 10px"
           outlined
           dark
-          @keydown.enter="controlTheValues()"
+          @keydown.enter="controlTheValues('create')"
           v-model="UserStore.Profile.password"
           label="password"
           type="password"
@@ -38,7 +38,7 @@
         </div>
         <div class="flex flex-center" style="margin: 10px">
           <q-btn
-            @click="controlTheValues()"
+            @click="controlTheValues('create')"
             unelevated
             rounded
             color="primary"
@@ -58,18 +58,12 @@
           outlined
           dark
           v-model="UserStore.Profile.mail"
-          @keydown.enter="controlTheValues()"
+          @keydown.enter="controlTheValues('log')"
           label="email"
         />
-        <q-input
-          style="margin: 10px"
-          outlined
-          dark
-          @keydown.enter="controlTheValues()"
-          v-model="UserStore.Profile.password"
-          label="password"
-          type="password"
-        />
+        <q-input style="margin: 10px" outlined dark
+        @keydown.enter="controlTheValues('log')"
+        v-model="UserStore.Profile.password" label="password" type="password" />
         <div class="flex flex-center" style="margin: 10px">
           <q-btn
             unelevated
@@ -78,6 +72,11 @@
             label="Do you want to create a account?"
             @click="changeLog()"
           ></q-btn>
+          <q-btn @click="controlTheValues('log')" unelevated rounded
+          color="primary" label="Log In" />
+          <div v-show="notcompleted == true" class="text-white">
+            Il manque une entrée
+          </div>
         </div>
       </div>
     </div>
@@ -101,9 +100,10 @@ const method_log = ref(true);
 
 function changeLog() {
   method_log.value = !method_log.value;
+  notcompleted.value = false;
 }
 //function that checks if the fields are correctly filled in
-function controlTheValues() {
+function controlTheValues(method) {
   //the variables display the message that at least one of the fields has not been filled in
   notcompleted.value = true;
   toolong.value = false;
@@ -119,7 +119,7 @@ function controlTheValues() {
       //the login is made
       toolong.value = false;
       alert(1);
-      UserStore.loginVariable('localStorage');
+      UserStore.loginVariable('database');
     }
   }
 }

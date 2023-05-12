@@ -43,23 +43,27 @@ export const useUserStore = defineStore('userStore', {
           password: 'ddfsfasdfdfafasfdaf', // Replace with the actual password
         };
         alert(4);
-        const { data: login, isFetching } = useQuery({
+        const { execute } = useQuery({
           query: GetUserByEmailAndPassword,
           variables,
         });
-        console.log(login); // check if data is defined and not null
-        localStorage.setItem('login', JSON.stringify(login));
-        if (data.user) {
+
+        const { data, error } = await execute();
+        console.log(data.user[0]);
+        if (error) {
+          console.error('GraphQL Error: ', error);
+          // Handle your error here
+        }
+        if (!data.user) {
           this.isAuth = true;
           alert('attention');
         } else {
           this.isLogVar = true;
-          this.Profile.name = data.user.username;
+          this.Profile.name = data.user[0].username;
           this.Profile.mail = '';
           this.Profile.password = '';
           localStorage.setItem('profile', JSON.stringify(this.Profile));
-          this.pp_profile =
-            'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg';
+          this.pp_profile = data.user[0].profil_photo;
           localStorage.setItem('pp_profile', this.pp_profile);
         }
       }
@@ -79,13 +83,17 @@ export const useUserStore = defineStore('userStore', {
         localStorage.setItem('profile', null);
       }
     },
-    changePpProfile(newLink) {
+    changePpProfile(newLink,location) {
+      if(location =="localStorage"){
       //stocks the profile photo link in the localStorage
       localStorage.setItem('pp_profile', newLink);
 
       this.pp_profil = newLink.value;
       //resets the value
       newLink = '';
+      }else{
+        
+      }
     },
     async profileload() {
       //search for a variable in the localStorage

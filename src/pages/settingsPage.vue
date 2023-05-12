@@ -79,7 +79,7 @@ function isAvailable(newLink) {
     img.src = newLink;
 
     img.onload = function () {
-      UserStore.changePpProfile(newLink);
+      UserStore.changePpProfile(newLink, 'localStorage');
       ismodified.value = true;
     };
 

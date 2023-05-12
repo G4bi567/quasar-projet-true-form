@@ -91,13 +91,10 @@ const variables = reactive({
 });
 
 function onSubmit(variables) {
-  alert(1);
   execute(variables).then((result) => {
     if (result.error) {
-      alert(2);
       alert(`${result.error}`);
     } else {
-      alert(3);
       alert(`User created successfully!`);
     }
   });
