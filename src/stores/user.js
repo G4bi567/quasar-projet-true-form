@@ -108,49 +108,44 @@ export const useUserStore = defineStore('userStore', {
           });
 
           const { data, error } = await execute();
-          console.log( data);
-          if (error) {
-            console.error('GraphQL Error: ', error);
-            // Handle your error here
-          }
-        }
-        if (!data.user[0]) {
-          const GetUserByEmail = gql`
-        query GetUserByEmail($email: String!) {
-          user(where: { email: { _eq: $email } }) {
-            id
-          }
-        }
-        `;
-          const variables = {
-            email: this.Profile.mail, // Replace with the actual email
-          };
-          const { execute } = useQuery({
-            query: GetUserByEmail,
-            variables,
-          });
-
-          const { data, error } = await execute();
-          console.log(data);
           if (!data.user[0]) {
-            this.isAuth = false;
-            this.falsePass = false;
-          } else {
-            this.falsePass = true;
-            this.isAuth = true;
+            const GetUserByEmail = gql`
+          query GetUserByEmail($email: String!) {
+            user(where: { email: { _eq: $email } }) {
+              id
+            }
           }
-        } else {
-          this.isAuth = true;
-          this.falsePass = false;
-          this.isLogVar = true;
-          this.Profile.password = data.user[0].id;
-          console.log(this.Profile);
-          this.Profile.name = data.user[0].username;
-          this.Profile.mail = '';
-          this.Profile.password = '';
-          localStorage.setItem('profile', JSON.stringify(this.Profile));
-          this.pp_profile = data.user[0].profil_photo;
-          localStorage.setItem('pp_profile', this.pp_profile);
+          `;
+            const variables = {
+              email: this.Profile.mail, // Replace with the actual email
+            };
+            const { execute } = useQuery({
+              query: GetUserByEmail,
+              variables,
+            });
+
+            const { data, error } = await execute();
+            console.log(data.user.length);
+            if (data.user.length == 0) {
+              this.isAuth = false;
+              this.falsePass = false;
+            } else {
+              this.falsePass = true;
+              this.isAuth = true;
+            }
+          } else {
+            this.isAuth = true;
+            this.falsePass = false;
+            this.isLogVar = true;
+            this.Profile.id = data.user[0].id;
+            console.log(data);
+            this.Profile.name = data.user[0].username;
+            this.Profile.mail = '';
+            this.Profile.password = '';
+            localStorage.setItem('profile', JSON.stringify(this.Profile));
+            this.pp_profile = data.user[0].profil_photo;
+            localStorage.setItem('pp_profile', this.pp_profile);
+          }
         }
       }
     },

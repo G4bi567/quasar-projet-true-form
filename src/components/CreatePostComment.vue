@@ -109,9 +109,9 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
-import { useUserStore } from 'stores/user.js';
-import { useCommentStore } from 'stores/comment.js';
+import { reactive } from "vue";
+import { useUserStore } from "stores/user.js";
+import { useCommentStore } from "stores/comment.js";
 
 //setting of variables/objects
 
@@ -122,16 +122,16 @@ const CommentStore = useCommentStore();
 const UserStore = useUserStore();
 
 //retrieve the list of branches
-const branches = JSON.parse(localStorage.getItem('Branches'));
+const branches = JSON.parse(localStorage.getItem("Branches"));
 
 //allows you to create the object of the new publication/new comment
 const NewPost = reactive({
-  title: '',
-  branche: '',
-  description: '',
-  name: '',
-  id: '',
-  date: '',
+  title: "",
+  branche: "",
+  description: "",
+  name: "",
+  id: "",
+  date: "",
   comment: [],
 });
 
@@ -142,20 +142,20 @@ const NewPost = reactive({
 function isAvailable(NewPost) {
   CommentStore.isAvailableVar = false;
   if (
-    NewPost.title !== '' &&
-    NewPost.branche !== '' &&
-    NewPost.description !== ''
+    NewPost.title !== "" &&
+    NewPost.branche !== "" &&
+    NewPost.description !== ""
   ) {
     CommentStore.isAvailableVar = true;
-    CommentStore.addComment(
-      'post',
-      NewPost.id,
-      NewPost,
-      UserStore.Profile.name,
-      UserStore.Profile.mail,
-      UserStore.Profile.password,
-      UserStore.pp_profile,
-      'localStorage'
+    const deepth = 0;
+    const parent_id = null;
+    CommentStore.addCommentserver(
+      deepth,
+      parent_id,
+      UserStore.Profile.id,
+      NewPost.title,
+      NewPost.branche,
+      NewPost.description
     );
     resetNewPost();
   }
@@ -163,8 +163,8 @@ function isAvailable(NewPost) {
 
 //allows you to reset the fields
 function resetNewPost() {
-  NewPost.title = '';
-  NewPost.branche = '';
-  NewPost.description = '';
+  NewPost.title = "";
+  NewPost.branche = "";
+  NewPost.description = "";
 }
 </script>

@@ -64,6 +64,7 @@
           <p v-html="description"></p>
           {{ deepth }}
           {{ id }}
+          {{ parent_id }}
         </div>
       </div>
       <div class="row justify-end">
@@ -172,7 +173,7 @@
             icon-right="send"
             label="Répondre"
             @click="
-              isAvailable(NewComment, id, deepth);
+              isAvailable(NewComment, id, deepth, parent_id);
               ResetNewComment();
             "
           />
@@ -187,11 +188,11 @@
 </template>
 
 <script setup>
-import { defineProps, reactive, ref } from 'vue';
-import LayerPostComment from 'components/LayerPostComment.vue';
-import { useCommentStore } from 'stores/comment.js';
-import { fasHeartCirclePlus } from '@quasar/extras/fontawesome-v6';
-import { useUserStore } from 'stores/user.js';
+import { defineProps, reactive, ref } from "vue";
+import LayerPostComment from "components/LayerPostComment.vue";
+import { useCommentStore } from "stores/comment.js";
+import { fasHeartCirclePlus } from "@quasar/extras/fontawesome-v6";
+import { useUserStore } from "stores/user.js";
 
 //allows access to the User store
 const UserStore = useUserStore();
@@ -211,6 +212,7 @@ const props = defineProps({
   comment: Object,
   branche: String,
   deepth: Number,
+  parent_id: String,
 });
 
 //setting of variables/objects
@@ -223,7 +225,7 @@ const completed = ref(true);
 
 //object that stores the comment
 const NewComment = reactive({
-  description: '',
+  description: "",
 });
 
 // setting of functions
@@ -235,22 +237,22 @@ function commentOn() {
 
 //fonction qui permet de remettre le champ à zéro
 function ResetNewComment() {
-  NewComment.description = '';
+  NewComment.description = "";
 }
 
 //function that allows to set the variables of the dedicated pages
 function filterVariable(variable) {
   CommentStore.filteroption = variable;
   CommentStore.filteroptiontitle = variable.slice(0, 20);
-  CommentStore.tab = '';
+  CommentStore.tab = "";
 }
 
 //functions that establish the type of filtering
 function definetypefilterbranche() {
-  CommentStore.filteroptiontype = 'branche';
+  CommentStore.filteroptiontype = "branche";
 }
 function definetypefiltername() {
-  CommentStore.filteroptiontype = 'name';
+  CommentStore.filteroptiontype = "name";
 }
 
 //function allows you to add publications to the list of favorites
@@ -263,20 +265,22 @@ function listFollowMake(id) {
 }
 
 //function that allows to check if the comment is filled
-function isAvailable(NewPost, id, deepth) {
+function isAvailable(NewPost, id, deepth, parent_id) {
   completed.value = false;
-  if (NewPost.description !== '') {
+  if (NewPost.description !== "") {
     completed.value = true;
     CommentStore.addComment(
-      'comment',
+      "comment",
       id,
       deepth,
+      parent_id,
+      UserStore.Profile.id,
       NewComment,
       UserStore.Profile.name,
       UserStore.Profile.mail,
       UserStore.Profile.password,
       UserStore.pp_profile,
-      'db'
+      "db"
     );
   }
 }

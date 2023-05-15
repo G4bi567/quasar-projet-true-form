@@ -1,0 +1,23 @@
+// prettier-ignore
+const branches_id = {
+  'Allemand': 1,
+  'Anglais': 2,
+  'Appl. des math.': 3,
+  'Arts visuels': 4,
+  'Biologie': 5,
+  'Chimie': 6,
+  'Economie et droit': 7,
+  'Education physique': 8,
+  'Français': 9,
+  'Géographie': 10,
+  'Grec': 11,
+  'Histoire': 12,
+  'Informatique': 13,
+  'Italien': 14,
+  'Latin': 15,
+  'Mathématiques': 16,
+  'Musique': 17,
+  'Philosophie': 18,
+  'Physique': 19,
+  'Sciences religieuses': 20,
+};

@@ -1,13 +1,15 @@
 <template>
   <div class="fullscreen bg-black text-center q-pa-md flex flex-center">
     <div class="flex flex-center">
-      <div v-show="method_log == true">
+      <form
+        v-show="method_log == true"
+        @submit.prevent="controlTheValues('create')"
+      >
         <q-input
           style="margin: 10px"
           outlined
           dark
           v-model="UserStore.Profile.name"
-          @keydown.enter="controlTheValues('create')"
           label="name "
         />
         <q-input
@@ -15,14 +17,12 @@
           outlined
           dark
           v-model="UserStore.Profile.mail"
-          @keydown.enter="controlTheValues('create')"
           label="email"
         />
         <q-input
           style="margin: 10px"
           outlined
           dark
-          @keydown.enter="controlTheValues('create')"
           v-model="UserStore.Profile.password"
           label="password"
           type="password"
@@ -38,34 +38,35 @@
         </div>
         <div class="flex flex-center" style="margin: 10px">
           <q-btn
-            @click="controlTheValues('create')"
+            type="submit"
             unelevated
             rounded
             color="primary"
             label="Create a account"
           />
+          <div v-show="notcompleted == true" class="text-white">
+            Il manque une entrée
+          </div>
+          <div v-show="toolong == true" class="text-white">
+            Le nom de profil est trop long
+          </div>
         </div>
-        <div v-show="notcompleted == true" class="text-white">
-          Il manque une entrée
-        </div>
-        <div v-show="toolong == true" class="text-white">
-          Le nom de profil est trop long
-        </div>
-      </div>
-      <div v-show="method_log == false">
+      </form>
+      <form
+        v-show="method_log == false"
+        @submit.prevent="controlTheValues('log')"
+      >
         <q-input
           style="margin: 10px"
           outlined
           dark
           v-model="UserStore.Profile.mail"
-          @keydown.enter="controlTheValues('log')"
           label="email"
         />
         <q-input
           style="margin: 10px"
           outlined
           dark
-          @keydown.enter="controlTheValues('log')"
           v-model="UserStore.Profile.password"
           label="password"
           type="password"
@@ -78,8 +79,10 @@
             label="Do you want to create a account?"
             @click="changeLog()"
           ></q-btn>
+        </div>
+        <div class="flex flex-center" style="margin: 10px">
           <q-btn
-            @click="controlTheValues('log')"
+            type="submit"
             unelevated
             rounded
             color="primary"
@@ -95,7 +98,7 @@
             Le mot de passe est faux
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </template>
