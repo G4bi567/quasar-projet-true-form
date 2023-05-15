@@ -192,7 +192,7 @@ function controlTheValues(method) {
     UserStore.Profile.password !== ''
   ) {
     notcompleted.value = false;
-    UserStore.loginVariable('localStorage', method);
+    UserStore.loginVariable('db', method);
   }
 }
 </script>

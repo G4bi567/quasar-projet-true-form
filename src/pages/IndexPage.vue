@@ -87,7 +87,7 @@ const UserStore = useUserStore();
 const CommentStore = useCommentStore();
 
 //loads the list of comments and the profile
-CommentStore.loadComments('localStorage');
+CommentStore.loadComments('db');
 UserStore.profileload();
 
 //allows you to know the number of pages needed

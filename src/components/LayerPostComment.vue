@@ -62,6 +62,8 @@
         </h5>
         <div class="positionDescription">
           <p v-html="description"></p>
+          {{ deepth }}
+          {{ id }}
         </div>
       </div>
       <div class="row justify-end">
@@ -170,7 +172,7 @@
             icon-right="send"
             label="Répondre"
             @click="
-              isAvailable(NewComment, id);
+              isAvailable(NewComment, id, deepth);
               ResetNewComment();
             "
           />
@@ -208,6 +210,7 @@ const props = defineProps({
   id: Number,
   comment: Object,
   branche: String,
+  deepth: Number,
 });
 
 //setting of variables/objects
@@ -260,19 +263,20 @@ function listFollowMake(id) {
 }
 
 //function that allows to check if the comment is filled
-function isAvailable(NewPost, id) {
+function isAvailable(NewPost, id, deepth) {
   completed.value = false;
   if (NewPost.description !== '') {
     completed.value = true;
     CommentStore.addComment(
       'comment',
       id,
+      deepth,
       NewComment,
       UserStore.Profile.name,
       UserStore.Profile.mail,
       UserStore.Profile.password,
       UserStore.pp_profile,
-      'localStorage'
+      'db'
     );
   }
 }

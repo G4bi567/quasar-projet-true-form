@@ -33,7 +33,7 @@ export const useUserStore = defineStore('userStore', {
 
   actions: {
     async createUserAndInsertReview() {
-        const CreateUserAndInsertReview = `
+      const CreateUserAndInsertReview = `
           mutation CreateUserAndInsertReview(
             $username: String!,
             $email: String!,
@@ -48,9 +48,11 @@ export const useUserStore = defineStore('userStore', {
             }
           }
         `;
-  
-        const { execute } = useMutation(CreateUserAndInsertReview, { manualClient: client });
-  
+
+      const { execute } = useMutation(CreateUserAndInsertReview, {
+        manualClient: client,
+      });
+
       const variables = {
         username: this.Profile.name,
         email: this.Profile.mail,
@@ -106,7 +108,7 @@ export const useUserStore = defineStore('userStore', {
           });
 
           const { data, error } = await execute();
-          console.log(data);
+          console.log( data);
           if (error) {
             console.error('GraphQL Error: ', error);
             // Handle your error here
@@ -141,6 +143,8 @@ export const useUserStore = defineStore('userStore', {
           this.isAuth = true;
           this.falsePass = false;
           this.isLogVar = true;
+          this.Profile.password = data.user[0].id;
+          console.log(this.Profile);
           this.Profile.name = data.user[0].username;
           this.Profile.mail = '';
           this.Profile.password = '';
@@ -158,6 +162,7 @@ export const useUserStore = defineStore('userStore', {
           name: '',
           email: '',
           password: '',
+          id: '',
         };
         //shows the LogInPage
         this.isLogVar = false;

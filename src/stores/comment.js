@@ -1,6 +1,23 @@
 import { assertWrappingType } from 'graphql/type';
 import { defineStore } from 'pinia';
 import { date } from 'quasar';
+import { useQuery, useMutation, createClient, defaultPlugins } from 'villus';
+import { ref, reactive } from 'vue';
+import { gql } from 'graphql-tag';
+import { watch, defineExpose, toRaw } from 'vue';
+import { computed } from 'vue';
+
+function authPlugin({ opContext }) {
+  opContext.headers['Content-Type'] = 'application/json';
+  opContext.headers['x-hasura-admin-secret'] =
+    'Il0IFkTm1C3SgZPk1y1hrp4hsidxML2uNyswlzrMH3l0kRQLxQnWNfFIzE1IJ9cy';
+}
+
+// Create a new client
+const client = createClient({
+  url: 'https://pleased-spaniel-49.hasura.app/v1/graphql',
+  use: [authPlugin, ...defaultPlugins()],
+});
 
 export const useCommentStore = defineStore('commentStore', {
   state: () => ({
@@ -122,11 +139,63 @@ export const useCommentStore = defineStore('commentStore', {
         }
         `;
 
-        const { date } = await useQuery({
+        const { execute } = useQuery({
           query: GetAllQuestions,
         });
-        console.log(data);
 
+        const { data, error } = await execute();
+        console.log(data);
+        console.log(data.questions);
+
+        function processReplies(reply) {
+          if (!reply) {
+            return [];
+          }
+          let date = reply.created_at
+            ? reply.created_at.substring(0, 10)
+            : null;
+          let processedReply = {
+            date: date,
+            description: reply.description,
+            pp_profile: reply.user.profil_photo,
+            id: reply.id,
+            name: reply.user.username,
+            deepth: reply.deepth,
+            comment: [],
+          };
+
+          if (reply.replies_replies && Array.isArray(reply.replies_replies)) {
+            processedReply.comment = reply.replies_replies.map(processReplies);
+          }
+
+          return processedReply;
+        }
+
+        let transformedData = data.questions.map((question) => {
+          let date = question.created_at
+            ? question.created_at.substring(0, 10)
+            : null;
+
+          let comment = question.questions_replies
+            ? [processReplies(question.questions_replies)]
+            : [];
+
+          return {
+            title: question.title,
+            date: date,
+            description: question.description,
+            branche: question.questions_subjects.subject,
+            pp_profile: question.questions_user.profil_photo,
+            id: question.id,
+            name: question.questions_user.username,
+            deepth: question.deepth,
+            comment: comment,
+          };
+        });
+
+        console.log(transformedData);
+        this.commentsList = transformedData;
+        localStorage.setItem('data', JSON.stringify(this.commentsList));
         // Use of fetch to retrieve data from the backend using an API
         // try {
         //     await fetch('https://your-backend-url.com/comments', {
@@ -144,6 +213,7 @@ export const useCommentStore = defineStore('commentStore', {
     async addComment(
       type,
       id,
+      deepth,
       comment,
       nameprofile,
       mailprofile,
@@ -193,6 +263,34 @@ export const useCommentStore = defineStore('commentStore', {
         //save the list in the localStorage
         localStorage.setItem('data', JSON.stringify(this.commentsList));
       } else {
+        const CreateUserAndInsertReview = `
+          mutation CreateUserAndInsertReview(
+            $username: String!,
+            $email: String!,
+            $password_hash: String!,
+          ) {
+            insert_user_one(object: { username: $username, email: $email, password_hash: $password_hash}) {
+              id
+              username
+              email
+              password_hash
+              profil_photo
+            }
+          }
+        `;
+
+        const { execute } = useMutation(CreateUserAndInsertReview, {
+          manualClient: client,
+        });
+
+        const variables = {
+          username: this.Profile.name,
+          email: this.Profile.mail,
+          password_hash: this.Profile.password,
+        };
+
+        const result = await execute(variables);
+
         // Save in the backend
         // Utilisation de fetch pour aller récupérer les données du backend à l'aide d'une API
         // try {
