@@ -5,7 +5,7 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => import('pages/TableUser.vue'),
+        component: () => import('pages/IndexPage.vue'),
       },
       {
         path: 'settings',

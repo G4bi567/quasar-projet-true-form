@@ -88,6 +88,12 @@
           <div v-show="notcompleted == true" class="text-white">
             Il manque une entrée
           </div>
+          <div v-show="UserStore.isAuth == false" class="text-white">
+            Votre compte n'existe pas
+          </div>
+          <div v-show="UserStore.falsePass == true" class="text-white">
+            Le mot de passe est faux
+          </div>
         </div>
       </div>
     </div>
@@ -112,9 +118,9 @@ const method_log = ref(true);
 function changeLog() {
   method_log.value = !method_log.value;
   notcompleted.value = false;
-  UserStore.Profile.name !== '' 
-  UserStore.Profile.mail !== '' 
-  UserStore.Profile.password !== ''
+  UserStore.Profile.name !== '';
+  UserStore.Profile.mail !== '';
+  UserStore.Profile.password !== '';
 }
 //function that checks if the fields are correctly filled in
 function controlTheValues(method) {
@@ -133,7 +139,7 @@ function controlTheValues(method) {
     if (UserStore.Profile.name.length < 20) {
       //the login is made
       toolong.value = false;
-      UserStore.loginVariable('database',method);
+      UserStore.loginVariable('database', method);
     }
   }
   if (
@@ -142,7 +148,7 @@ function controlTheValues(method) {
     UserStore.Profile.password !== ''
   ) {
     notcompleted.value = false;
-    UserStore.loginVariable('database',method);
+    UserStore.loginVariable('database', method);
   }
 }
 </script>
