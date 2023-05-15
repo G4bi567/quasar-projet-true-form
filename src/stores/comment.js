@@ -1,3 +1,4 @@
+import { assertWrappingType } from 'graphql/type';
 import { defineStore } from 'pinia';
 import { date } from 'quasar';
 
@@ -82,25 +83,50 @@ export const useCommentStore = defineStore('commentStore', {
           localStorage.setItem('data', JSON.stringify(this.commentsList));
         }
       } else {
-        const GetUserByEmailAndPassword = gql`
-        query GetUserByEmailAndPassword($email: String!, $password: String!) {
-          user(where: { email: { _eq: $email }, password_hash: { _eq: $password } }) {
+        const GetAllQuestions = gql`
+        query GetAllQuestions {
+          questions {
             id
-            username
-            profil_photo
+            title
+            description
+            created_at
+            deepth
+            questions_subjects{
+              subject
+            }
+            questions_user{
+              id
+              username
+              profil_photo
+            }
+            questions_replies{
+              user{
+                username
+                profil_photo
+              }
+              id
+              description
+              deepth
+              replies_replies{
+                id
+                user{
+                  username
+                  profil_photo
+                }
+                description
+                deepth
+              }
+            }
+            
           }
         }
         `;
-          const variables = {
-            email: this.Profile.mail, // Replace with the actual email
-            password: this.Profile.password, // Replace with the actual password
-          };
-          const { execute } = useQuery({
-            query: GetUserByEmailAndPassword,
-            variables,
-          });
 
-          const { data, error } = await execute();
+        const { date } = await useQuery({
+          query: GetAllQuestions,
+        });
+        console.log(data);
+
         // Use of fetch to retrieve data from the backend using an API
         // try {
         //     await fetch('https://your-backend-url.com/comments', {
@@ -115,7 +141,16 @@ export const useCommentStore = defineStore('commentStore', {
       }
     },
 
-  async addComment(type, id, comment, nameprofile, mailprofile, passwordprofile, pp_profile, location) {
+    async addComment(
+      type,
+      id,
+      comment,
+      nameprofile,
+      mailprofile,
+      passwordprofile,
+      pp_profile,
+      location
+    ) {
       // save personal information and add new information
       comment.name = nameprofile;
       comment.mail = mailprofile;
