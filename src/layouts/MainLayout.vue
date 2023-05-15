@@ -7,14 +7,21 @@
           v-model="CommentStore.tab"
           indicator-class="no-underline"
           align="left"
+          class="smallerTabs hidden-sm hidden-xs text-sm"
         >
           <q-route-tab
+            class="smallerTab"
             to="/"
             @click="ResetMode()"
-            name="Home Page"
-            label="Home Page"
+            name="Home"
+            label="Home"
           />
-          <q-route-tab to="/" @click="followedComments()" label="Suivis" />
+          <q-route-tab
+            class="smallerTab"
+            to="/"
+            @click="followedComments()"
+            label="Suivis"
+          />
         </q-tabs>
 
         <q-toolbar-title class="centerText">
@@ -26,21 +33,21 @@
         </q-toolbar-title>
         <q-btn
           @click="writeCommentMode()"
-          class="colorTopObjects"
-          icon-right="fa-solid fa-pencil"
+          class="colorTopObjects smallerBtn"
+          icon="fa-solid fa-pencil"
           label="Une question"
         />
 
         <q-fab
           v-model="fabVar"
-          class="colorTopObjects marginMenu"
+          class="colorTopObjects marginMenu smallerFab"
           label="Menu"
-          vertical-actions-align="left"
-          icon="keyboard_arrow_down"
+          vertical-actions-align="center"
           direction="down"
         >
           <q-fab-action
             external-label
+            class="smallerFab"
             color="primary"
             to="/settings"
             icon="settings"
@@ -253,5 +260,40 @@ function getTo(title) {
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent; /* make scrollbar transparent */
+}
+@media (max-width: 870px) {
+  .imgOptions,
+  .title {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .smallerBtn {
+    font-size: 8px;
+    padding: 5px;
+    width: 110px;
+    height: 50px;
+  }
+  @media (max-width: 600px) {
+    .smallerFab {
+      font-size: 8px;
+      width: 70px;
+      height: 50px;
+      margin: 0px 0px 0px 7px;
+    }
+    .smallerTabs {
+      width: 100px;
+    }
+    .smallerTab {
+      width: 50px;
+      font-size: 1px;
+    }
+    .smallerTabs .q-tab {
+      font-size: 12px;
+    }
+    .paddHeader {
+      padding: 0px;
+    }
+  }
 }
 </style>
