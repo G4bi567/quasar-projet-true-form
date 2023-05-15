@@ -198,15 +198,15 @@ export const useUserStore = defineStore("userStore", {
             affected_rows
           }
         }
-        
         `;
         const variables = {
           username: this.Profile.name,
-          photoUrl: newLink.value, // Replace with the actual email
+          photoUrl: newLink, // Replace with the actual email
         };
-        const { data, execute } = useMutation(UpdateProfilePhoto);
-        await execute(variables);
-        console.log(data);
+        const { execute } = useMutation(UpdateProfilePhoto);
+        const result = await execute(variables);
+        alert(`${result.error}`);
+        console.log(result);
         newLink = "";
       }
     },

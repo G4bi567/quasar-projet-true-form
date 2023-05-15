@@ -190,7 +190,7 @@ function isAvailable(NewPost) {
     NewPost.description !== ""
   ) {
     CommentStore.isAvailableVar = true;
-    const deepth = 0;
+    const deepth = -1;
     const parent_id = null;
     CommentStore.addCommentserver(
       deepth,

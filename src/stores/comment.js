@@ -301,6 +301,8 @@ export const useCommentStore = defineStore("commentStore", {
       description
     ) {
       let newdata = {};
+      deepth = deepth + 1;
+      alert(parent_id);
       if (deepth > 0) {
         newdata.parent_id = parent_id;
       } else {
@@ -335,10 +337,10 @@ export const useCommentStore = defineStore("commentStore", {
           }
         `;
 
-      const { execute } = useMutation(createQuestion, {
+      const { execute: mutateCreateQuestion } = useMutation(createQuestion, {
         manualClient: client,
       });
-      const { execute: mutateCreateReply } = useMutation(createReply, {
+      const { execute } = useMutation(createReply, {
         manualClient: client,
       });
       const { execute: mutateCreateReplyReply } = useMutation(
@@ -351,10 +353,12 @@ export const useCommentStore = defineStore("commentStore", {
       let result;
 
       if (deepth == 0) {
-        result = await execute(newdata);
+        result = await mutateCreateQuestion(newdata);
       }
       if (deepth == 1) {
-        result = await mutateCreateReply(newdata);
+        alert(1);
+        result = await execute(newdata);
+        console.log(result)
       }
       if (deepth == 2) {
         result = await mutateCreateReplyReply(newdata);
@@ -379,44 +383,72 @@ export const useCommentStore = defineStore("commentStore", {
       //     console.error(error)
       // }
     },
-    deleteComment(id, deepth, location) {
+    async deleteComment(id, deepth, location) {
       // Local deletion
       if (confirm("Êtes-vous sûr de voulour supprimer ? ")) {
         if (location != "localStorage") {
+          let result;
           if (deepth == 0) {
             const DeleteQuestion = gql`
-            mutation DeleteQuestion($questionId: UUID!) {
-              deleteQuestion(id: $questionId) {
-                id
+            mutation DeleteQuestion($id: uuid!) {
+              delete_questions(where: {id: {_eq: $id}}) {
+                affected_rows
               }
             }`;
+            const { execute } = useMutation(DeleteQuestion, {
+              manualClient: client,
+            });
+            let variable = {};
+            variable.id = id;
+            result = await execute(variable);
           }
           if (deepth == 1) {
             const DeleteReply = gql`
-            mutation DeleteReply($replyId: UUID!) {
-              deleteReply(id: $replyId) {
-                id
+            mutation DeleteQuestion($id: uuid!) {
+              delete_replies(where: {id: {_eq: $id}}) {
+                affected_rows
               }
             }`;
+            const { execute } = useMutation(DeleteReply, {
+              manualClient: client,
+            });
+            let variable = {};
+            variable.id = id;
+            result = await execute(variable);
           }
           if (deepth == 2) {
             const DeleteReplyReply = gql`
-            mutation DeleteReplyReply($replyReplyId: uiid!) {
-              deleteReplyReply(id: $replyReplyId) {
-                id
+            mutation DeleteQuestion($id: uuid!) {
+              delete_replies_replies(where: {id: {_eq: $id}}) {
+                affected_rows
               }
             }`;
+            const { execute } = useMutation(DeleteReplyReply, {
+              manualClient: client,
+            });
+            let variable = {};
+            variable.id = id;
+            result = await execute(variable);
+          }
+          alert(4);
+          if (result && result.error) {
+            alert(`${result.error}`);
+            alert(5);
+          } else {
+            alert(`Post deleted successfully!`);
+            // Optionally, update the store state with the created user's data
           }
         }
-        let index = this.commentsList
-          .map((x) => {
-            return x.id;
-          })
-          .indexOf(id);
-        this.commentsList.splice(index, 1);
 
         // Delete db/localStorage
         if (location === "localStorage") {
+          let index = this.commentsList
+            .map((x) => {
+              return x.id;
+            })
+            .indexOf(id);
+          this.commentsList.splice(index, 1);
+
           localStorage.setItem("data", JSON.stringify(this.commentsList));
         } else {
           //Deletion in the backend using an API

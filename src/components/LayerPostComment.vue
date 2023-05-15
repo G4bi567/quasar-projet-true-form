@@ -20,21 +20,13 @@
           </q-item-section>
         </q-item>
 
-        <q-item-section
-          side
-          v-if="
-            title !== undefined &&
-            UserStore.Profile.name == name &&
-            UserStore.Profile.mail == mail &&
-            UserStore.Profile.password == password
-          "
-        >
+        <q-item-section side v-if="UserStore.Profile.name == name">
           <q-btn-dropdown color="secondary">
             <q-list>
               <q-item
                 clickable
                 v-close-popup
-                @click="CommentStore.deleteComment(id, deepth, 'localStorage')"
+                @click="CommentStore.deleteComment(id, deepth, 'db')"
               >
                 <q-item-section>
                   <q-item-label>Supprimer</q-item-label>
@@ -62,16 +54,13 @@
         </h5>
         <div class="positionDescription">
           <p v-html="description"></p>
-          {{ deepth }}
-          {{ id }}
-          {{ parent_id }}
         </div>
       </div>
       <div class="row justify-end">
         {{ date }}
       </div>
     </div>
-    <div v-if="title !== undefined" class="bottomBar">
+    <div v-if="deepth < 3" class="bottomBar">
       <q-btn @click="commentOn" icon="fa-regular fa-comment" />
       <q-btn
         v-if="UserStore.followed.indexOf(id) < 0"
@@ -269,18 +258,15 @@ function isAvailable(NewPost, id, deepth, parent_id) {
   completed.value = false;
   if (NewPost.description !== "") {
     completed.value = true;
-    CommentStore.addComment(
-      "comment",
-      id,
+    NewComment.title = "";
+    NewComment.branche = "";
+    CommentStore.addCommentserver(
       deepth,
-      parent_id,
+      id,
       UserStore.Profile.id,
-      NewComment,
-      UserStore.Profile.name,
-      UserStore.Profile.mail,
-      UserStore.Profile.password,
-      UserStore.pp_profile,
-      "db"
+      NewComment.title,
+      NewComment.branche,
+      NewComment.description
     );
   }
 }
