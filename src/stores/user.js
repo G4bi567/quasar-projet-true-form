@@ -1,10 +1,22 @@
 import { defineStore } from 'pinia';
 import { date } from 'quasar';
-import { useQuery, useMutation } from 'villus';
+import { useQuery, useMutation, createClient, defaultPlugins } from 'villus';
 import { ref, reactive } from 'vue';
 import { gql } from 'graphql-tag';
 import { watch, defineExpose, toRaw } from 'vue';
 import { computed } from 'vue';
+
+function authPlugin({ opContext }) {
+  opContext.headers['Content-Type'] = 'application/json';
+  opContext.headers['x-hasura-admin-secret'] =
+    'Il0IFkTm1C3SgZPk1y1hrp4hsidxML2uNyswlzrMH3l0kRQLxQnWNfFIzE1IJ9cy';
+}
+
+// Create a new client
+const client = createClient({
+  url: 'https://pleased-spaniel-49.hasura.app/v1/graphql',
+  use: [authPlugin, ...defaultPlugins()],
+});
 export const useUserStore = defineStore('userStore', {
   state: () => ({
     Profile: {
@@ -21,24 +33,24 @@ export const useUserStore = defineStore('userStore', {
 
   actions: {
     async createUserAndInsertReview() {
-      const CreateUserAndInsertReview = `
-        mutation CreateUserAndInsertReview(
-          $username: String!,
-          $email: String!,
-          $password_hash: String!,
-        ) {
-          insert_user_one(object: { username: $username, email: $email, password_hash: $password_hash}) {
-            id
-            username
-            email
-            password_hash
-            profil_photo
+        const CreateUserAndInsertReview = `
+          mutation CreateUserAndInsertReview(
+            $username: String!,
+            $email: String!,
+            $password_hash: String!,
+          ) {
+            insert_user_one(object: { username: $username, email: $email, password_hash: $password_hash}) {
+              id
+              username
+              email
+              password_hash
+              profil_photo
+            }
           }
-        }
-      `;
-
-      const { execute } = useMutation(CreateUserAndInsertReview);
-
+        `;
+  
+        const { execute } = useMutation(CreateUserAndInsertReview, { manualClient: client });
+  
       const variables = {
         username: this.Profile.name,
         email: this.Profile.mail,
