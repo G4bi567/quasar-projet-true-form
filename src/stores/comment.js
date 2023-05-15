@@ -300,7 +300,7 @@ export const useCommentStore = defineStore("commentStore", {
       branche,
       description
     ) {
-      const newdata = reactive();
+      let newdata = {};
       if (deepth > 0) {
         newdata.parent_id = parent_id;
       } else {
@@ -310,8 +310,9 @@ export const useCommentStore = defineStore("commentStore", {
       }
       newdata.user_id = user_id;
       newdata.description = description;
+      console.log(newdata);
       const createQuestion = gql`
-          mutation createQuestion($title: String!, $description: String!, $subject_id: Int!, $user_id: Int!) {
+          mutation createQuestion($title: String!, $description: String!, $subject_id: Int!, $user_id: uuid!) {
             insert_questions(objects: {title: $title, description: $description, subject_id: $subject_id, user_id: $user_id}) {
               affected_rows
             }
@@ -319,7 +320,7 @@ export const useCommentStore = defineStore("commentStore", {
         `;
 
       const createReply = gql`
-          mutation createReply($user_id: Int!, $parent_id: UUID!, $description: String!) {
+          mutation createReply($user_id: uuid!, $parent_id: uuid!, $description: String!) {
             insert_replies(objects: {user_id: $user_id, parent_id: $parent_id, description: $description}) {
               affected_rows
             }
@@ -327,40 +328,45 @@ export const useCommentStore = defineStore("commentStore", {
         `;
 
       const createReplyReply = gql`
-          mutation createReplyReply($user_id: Int!, $parent_id: UUID!, $description: String!) {
+          mutation createReplyReply($user_id: uuid!, $parent_id: uuid!, $description: String!) {
             insert_replies_replies(objects: {user_id: $user_id, parent_id: $parent_id, description: $description}) {
               affected_rows
             }
           }
         `;
-      const { mutate: mutateCreateQuestion } = useMutation(createQuestion);
-      const { mutate: mutateCreateReply } = useMutation(createReply);
-      const { mutate: mutateCreateReplyReply } = useMutation(createReplyReply);
 
-      function handleMutation(deepth, data) {
-        alert(8);
-        switch (deepth) {
-          case 0:
-            alert(9);
-            mutateCreateQuestion(data);
-            alert(1);
-            break;
-          case 1:
-            alert(2);
-            mutateCreateReply(data);
-            alert(3);
-            break;
-          case 2:
-            alert(4);
-            mutateCreateReplyReply(data);
-            alert(5);
-            break;
-          default:
-            console.log("Invalid deepth");
+      const { execute } = useMutation(createQuestion, {
+        manualClient: client,
+      });
+      const { execute: mutateCreateReply } = useMutation(createReply, {
+        manualClient: client,
+      });
+      const { execute: mutateCreateReplyReply } = useMutation(
+        createReplyReply,
+        {
+          manualClient: client,
         }
+      );
+
+      let result;
+
+      if (deepth == 0) {
+        result = await execute(newdata);
+      }
+      if (deepth == 1) {
+        result = await mutateCreateReply(newdata);
+      }
+      if (deepth == 2) {
+        result = await mutateCreateReplyReply(newdata);
       }
 
-      handleMutation(deepth, newdata);
+      if (result && result.error) {
+        alert(`${result.error}`);
+      } else {
+        alert(`User created successfully!`);
+        // Optionally, update the store state with the created user's data
+      }
+
       // Save in the backend
       // Utilisation de fetch pour aller récupérer les données du backend à l'aide d'une API
       // try {
@@ -373,9 +379,35 @@ export const useCommentStore = defineStore("commentStore", {
       //     console.error(error)
       // }
     },
-    deleteComment(id, location) {
+    deleteComment(id, deepth, location) {
       // Local deletion
       if (confirm("Êtes-vous sûr de voulour supprimer ? ")) {
+        if (location != "localStorage") {
+          if (deepth == 0) {
+            const DeleteQuestion = gql`
+            mutation DeleteQuestion($questionId: UUID!) {
+              deleteQuestion(id: $questionId) {
+                id
+              }
+            }`;
+          }
+          if (deepth == 1) {
+            const DeleteReply = gql`
+            mutation DeleteReply($replyId: UUID!) {
+              deleteReply(id: $replyId) {
+                id
+              }
+            }`;
+          }
+          if (deepth == 2) {
+            const DeleteReplyReply = gql`
+            mutation DeleteReplyReply($replyReplyId: uiid!) {
+              deleteReplyReply(id: $replyReplyId) {
+                id
+              }
+            }`;
+          }
+        }
         let index = this.commentsList
           .map((x) => {
             return x.id;

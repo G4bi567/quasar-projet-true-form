@@ -34,7 +34,7 @@
               <q-item
                 clickable
                 v-close-popup
-                @click="CommentStore.deleteComment(id, 'localStorage')"
+                @click="CommentStore.deleteComment(id, deepth, 'localStorage')"
               >
                 <q-item-section>
                   <q-item-label>Supprimer</q-item-label>
