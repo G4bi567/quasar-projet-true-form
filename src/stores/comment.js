@@ -82,6 +82,25 @@ export const useCommentStore = defineStore('commentStore', {
           localStorage.setItem('data', JSON.stringify(this.commentsList));
         }
       } else {
+        const GetUserByEmailAndPassword = gql`
+        query GetUserByEmailAndPassword($email: String!, $password: String!) {
+          user(where: { email: { _eq: $email }, password_hash: { _eq: $password } }) {
+            id
+            username
+            profil_photo
+          }
+        }
+        `;
+          const variables = {
+            email: this.Profile.mail, // Replace with the actual email
+            password: this.Profile.password, // Replace with the actual password
+          };
+          const { execute } = useQuery({
+            query: GetUserByEmailAndPassword,
+            variables,
+          });
+
+          const { data, error } = await execute();
         // Use of fetch to retrieve data from the backend using an API
         // try {
         //     await fetch('https://your-backend-url.com/comments', {

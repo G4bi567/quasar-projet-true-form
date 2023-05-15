@@ -35,7 +35,51 @@ import { reactive, ref } from 'vue';
 import layerPostComment from 'components/LayerPostComment.vue';
 import { useCommentStore } from 'stores/comment.js';
 import { useUserStore } from 'stores/user.js';
-
+import { useQuery, useMutation } from 'villus';
+import { gql } from 'graphql-tag';
+import { watch, defineExpose, toRaw } from 'vue';
+const GetQuestions = gql`
+  query GetAllQuestions {
+  questions {
+    id
+    title
+    description
+    created_at
+    deepth
+    questions_subjects{
+      subject
+    }
+    questions_user{
+      id
+      username
+      profil_photo
+    }
+    questions_replies{
+      user{
+        username
+        profil_photo
+      }
+      id
+      description
+      deepth
+      replies_replies{
+        id
+        user{
+          username
+          profil_photo
+        }
+        description
+        deepth
+      }
+    }
+    
+  }
+}
+`;
+const { data } = useQuery({
+  query: GetQuestions,
+});
+console.log(data);
 //allows you to access the store
 const UserStore = useUserStore();
 
@@ -101,7 +145,7 @@ function pagination(current) {
           (post) => UserStore.followed.indexOf(post.id) >= 0
         ).length / 5
       );
-      //generates the number of pages needed
+    //generates the number of pages needed
   }
 }
 </script>
