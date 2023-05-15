@@ -20,6 +20,51 @@ export const useUserStore = defineStore('userStore', {
   }),
 
   actions: {
+    async createUserAndInsertReview() {
+      const CreateUserAndInsertReview = `
+        mutation CreateUserAndInsertReview(
+          $username: String!,
+          $email: String!,
+          $password_hash: String!,
+        ) {
+          insert_user_one(object: { username: $username, email: $email, password_hash: $password_hash}) {
+            id
+            username
+            email
+            password_hash
+            profil_photo
+          }
+        }
+      `;
+
+      const { execute } = useMutation(CreateUserAndInsertReview);
+
+      const variables = {
+        username: this.Profile.name,
+        email: this.Profile.mail,
+        password_hash: this.Profile.password,
+      };
+
+      const result = await execute(variables);
+
+      if (result.error) {
+        alert(`${result.error}`);
+      } else {
+        alert(`User created successfully!`);
+        // Optionally, update the store state with the created user's data
+        this.id = result.data.insert_user_one.id;
+        this.profil_photo = result.data.insert_user_one.profil_photo;
+      }
+      this.isAuth = true;
+      this.falsePass = false;
+      this.isLogVar = true;
+      this.Profile.mail = '';
+      this.Profile.password = '';
+      localStorage.setItem('profile', JSON.stringify(this.Profile));
+      this.pp_profile =
+        'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg';
+      localStorage.setItem('pp_profile', this.pp_profile);
+    },
     async loginVariable(location, method) {
       // Delete db/localStorage
       if (location === 'localStorage') {
@@ -29,7 +74,8 @@ export const useUserStore = defineStore('userStore', {
           'https://www.floridaorthosurgeons.com/wp-content/uploads/2016/09/no-image.jpg';
         localStorage.setItem('pp_profile', this.pp_profile);
       } else {
-        const GetUserByEmailAndPassword = gql`
+        if (method == 'log') {
+          const GetUserByEmailAndPassword = gql`
         query GetUserByEmailAndPassword($email: String!, $password: String!) {
           user(where: { email: { _eq: $email }, password_hash: { _eq: $password } }) {
             id
@@ -38,20 +84,21 @@ export const useUserStore = defineStore('userStore', {
           }
         }
         `;
-        const variables = {
-          email: this.Profile.mail, // Replace with the actual email
-          password: this.Profile.password, // Replace with the actual password
-        };
-        const { execute } = useQuery({
-          query: GetUserByEmailAndPassword,
-          variables,
-        });
+          const variables = {
+            email: this.Profile.mail, // Replace with the actual email
+            password: this.Profile.password, // Replace with the actual password
+          };
+          const { execute } = useQuery({
+            query: GetUserByEmailAndPassword,
+            variables,
+          });
 
-        const { data, error } = await execute();
-        console.log(data);
-        if (error) {
-          console.error('GraphQL Error: ', error);
-          // Handle your error here
+          const { data, error } = await execute();
+          console.log(data);
+          if (error) {
+            console.error('GraphQL Error: ', error);
+            // Handle your error here
+          }
         }
         if (!data.user[0]) {
           const GetUserByEmail = gql`
@@ -64,7 +111,7 @@ export const useUserStore = defineStore('userStore', {
           const variables = {
             email: this.Profile.mail, // Replace with the actual email
           };
-          const { execute } = useMutation({
+          const { execute } = useQuery({
             query: GetUserByEmail,
             variables,
           });
@@ -117,7 +164,7 @@ export const useUserStore = defineStore('userStore', {
       } else {
         alert(1);
         localStorage.setItem('pp_profile', newLink);
-        const UpdateProfilePhoto = gql`
+        const UpdateProfilePhoto = `
         mutation UpdateProfilePhoto($username: String!, $photoUrl: String!) {
           update_user(where: { username: { _eq: $username } }, _set: { profil_photo: $photoUrl }) {
             affected_rows

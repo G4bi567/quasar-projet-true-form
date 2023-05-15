@@ -139,7 +139,7 @@ function controlTheValues(method) {
     if (UserStore.Profile.name.length < 20) {
       //the login is made
       toolong.value = false;
-      UserStore.loginVariable('database', method);
+      UserStore.createUserAndInsertReview();
     }
   }
   if (
