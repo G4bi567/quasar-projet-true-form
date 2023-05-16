@@ -123,44 +123,43 @@ export const useCommentStore = defineStore("commentStore", {
         }
       } else {
         const GetAllQuestions = gql`
-        query GetAllQuestions {
+        query GetAllQuestions  {
           questions {
             id
             title
             description
             created_at
             deepth
-            questions_subjects{
+            questions_subjects {
               subject
             }
-            questions_user{
+            questions_user {
               id
               username
               profil_photo
             }
-            questions_replies{
-              parent_id
-              user{
-                username
-                profil_photo
-              }
-              id
-              description
-              deepth
-              replies_replies{
-                id
-                parent_id
-                user{
+            replies {
+                user {
                   username
                   profil_photo
                 }
+                id
+                parent_id
                 description
                 deepth
+                replies_replies {
+                    id
+                    parent_id
+                    user {
+                      username
+                      profil_photo
+                    }
+                    description
+                    deepth
+                  }
+                }
               }
             }
-            
-          }
-        }
         `;
 
         const { execute } = useQuery({
@@ -201,8 +200,8 @@ export const useCommentStore = defineStore("commentStore", {
             ? question.created_at.substring(0, 10)
             : null;
 
-          let comment = question.questions_replies
-            ? [processReplies(question.questions_replies)]
+          let comment = question.replies
+            ? question.replies.map(processReplies)
             : [];
 
           return {
