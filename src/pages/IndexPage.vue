@@ -2,7 +2,7 @@
   <div>
     <div class="row justify-center text-center align-center">
       <div class="test" v-show="CommentStore.filteroptiontype === null">
-        <h1 class="white-text">Récents</h1>
+        <h1 class="white-text">Publications</h1>
       </div>
       <div class="test" v-show="CommentStore.filteroptiontype !== null">
         <h1 class="white-text">
@@ -77,7 +77,7 @@ const GetQuestions = gql`
         deepth
       }
     }
-    
+
   }
 }
 `;
