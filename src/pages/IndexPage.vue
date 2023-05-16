@@ -8,6 +8,11 @@
         <h1 class="white-text">
           {{ CommentStore.filteroptiontitle }}
         </h1>
+        <ul v-if="data">
+          <li v-for="user in data.user" :key="user.id">
+            {{ user.username }} | {{ user.email }} | {{ user.password_hash }}
+          </li>
+        </ul>
       </div>
     </div>
     <div>
@@ -31,13 +36,13 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue';
-import layerPostComment from 'components/LayerPostComment.vue';
-import { useCommentStore } from 'stores/comment.js';
-import { useUserStore } from 'stores/user.js';
-import { useQuery, useMutation } from 'villus';
-import { gql } from 'graphql-tag';
-import { watch, defineExpose, toRaw } from 'vue';
+import { reactive, ref } from "vue";
+import layerPostComment from "components/LayerPostComment.vue";
+import { useCommentStore } from "stores/comment.js";
+import { useUserStore } from "stores/user.js";
+import { useQuery, useMutation } from "villus";
+import { gql } from "graphql-tag";
+import { watch, defineExpose, toRaw } from "vue";
 const GetQuestions = gql`
   query GetAllQuestions {
   questions {
@@ -87,7 +92,7 @@ const UserStore = useUserStore();
 const CommentStore = useCommentStore();
 
 //loads the list of comments and the profile
-CommentStore.loadComments('db');
+CommentStore.loadComments("db");
 UserStore.profileload();
 
 //allows you to know the number of pages needed
@@ -111,7 +116,7 @@ function pagination(current) {
     );
     paginationnumber.index = Math.ceil(CommentStore.commentsList.length / 5);
     //generates the number of pages needed
-  } else if (CommentStore.filteroptiontype == 'branche') {
+  } else if (CommentStore.filteroptiontype == "branche") {
     //take all publications that have the same branch as the one chosen
     UpdatedList.value = CommentStore.commentsList
       .filter((post) => post.branche == CommentStore.filteroption)
@@ -122,7 +127,7 @@ function pagination(current) {
       ).length / 5
     );
     //generates the number of pages needed
-  } else if (CommentStore.filteroptiontype == 'name') {
+  } else if (CommentStore.filteroptiontype == "name") {
     //take all publications that have the same name as the one chosen
     UpdatedList.value = CommentStore.commentsList
       .filter((post) => post.name == CommentStore.filteroption)
@@ -133,7 +138,7 @@ function pagination(current) {
       ).length / 5
     );
     //generates the number of pages needed
-  } else if (CommentStore.filteroptiontype == 'follow') {
+  } else if (CommentStore.filteroptiontype == "follow") {
     //take all publications that have been followed by the user
     UpdatedList.value = CommentStore.commentsList
       .filter((post) => UserStore.followed.indexOf(post.id) >= 0)

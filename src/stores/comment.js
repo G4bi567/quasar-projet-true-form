@@ -322,7 +322,7 @@ export const useCommentStore = defineStore("commentStore", {
         `;
 
       const createReply = gql`
-          mutation createReply($user_id: uuid!, $parent_id: uuid!, $description: String!) {
+          mutation createReplies($user_id: uuid!, $parent_id: uuid!, $description: String!) {
             insert_replies(objects: {user_id: $user_id, parent_id: $parent_id, description: $description}) {
               affected_rows
             }
@@ -357,8 +357,10 @@ export const useCommentStore = defineStore("commentStore", {
       }
       if (deepth == 1) {
         alert(1);
+        alert(newdata);
+        console.log(newdata);
         result = await execute(newdata);
-        console.log(result)
+        console.log(result);
       }
       if (deepth == 2) {
         result = await mutateCreateReplyReply(newdata);
