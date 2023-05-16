@@ -60,7 +60,7 @@
         {{ date }}
       </div>
     </div>
-    <div v-if="deepth < 3" class="bottomBar">
+    <div v-if="deepth < 2" class="bottomBar">
       <q-btn @click="commentOn" icon="fa-regular fa-comment" />
       <q-btn
         v-if="UserStore.followed.indexOf(id) < 0"
@@ -154,7 +154,7 @@
           }"
         />
 
-        <div v-if="title !== undefined">
+        <div v-if="deepth < 2">
           <q-btn
             class="positionInputButtonComments"
             color="primary"
