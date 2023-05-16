@@ -190,7 +190,6 @@ export const useUserStore = defineStore("userStore", {
         //resets the value
         newLink = "";
       } else {
-        alert(1);
         localStorage.setItem("pp_profile", newLink);
         const UpdateProfilePhoto = `
         mutation UpdateProfilePhoto($username: String!, $photoUrl: String!) {

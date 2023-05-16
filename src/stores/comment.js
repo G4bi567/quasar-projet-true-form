@@ -301,11 +301,9 @@ export const useCommentStore = defineStore("commentStore", {
     ) {
       let newdata = {};
       deepth = deepth + 1;
-      alert(parent_id);
       if (deepth > 0) {
         newdata.parent_id = parent_id;
       } else {
-        alert(branche);
         newdata.subject_id = this.branches_id[branche];
         newdata.title = title;
       }
@@ -355,8 +353,6 @@ export const useCommentStore = defineStore("commentStore", {
         result = await mutateCreateQuestion(newdata);
       }
       if (deepth == 1) {
-        alert(1);
-        alert(newdata);
         console.log(newdata);
         result = await execute(newdata);
         console.log(result);
@@ -368,7 +364,7 @@ export const useCommentStore = defineStore("commentStore", {
       if (result && result.error) {
         alert(`${result.error}`);
       } else {
-        alert(`User created successfully!`);
+        alert(`Post created successfully!`);
         // Optionally, update the store state with the created user's data
       }
 
@@ -431,10 +427,8 @@ export const useCommentStore = defineStore("commentStore", {
             variable.id = id;
             result = await execute(variable);
           }
-          alert(4);
           if (result && result.error) {
             alert(`${result.error}`);
-            alert(5);
           } else {
             alert(`Post deleted successfully!`);
             // Optionally, update the store state with the created user's data
